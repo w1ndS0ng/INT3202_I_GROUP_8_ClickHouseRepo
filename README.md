@@ -25,13 +25,13 @@ python3 -m unittest discover -s tests -v
 ## Cấu hình kết nối ClickHouse
 
 `client.xml` là **file đăng nhập/kết nối**, khác với file cấu hình thí nghiệm
-`configs/protocol.json`. Trên máy Tài, file đã có tại:
+`configs/protocol.json`. Đặt file kết nối riêng ngoài repo, ví dụ:
 
 ```text
-/home/anhtai06/clickhouse-project/config/client.xml
+~/.config/mergetree-study/client.xml
 ```
 
-Các thông tin kết nối đã xác minh trên máy Tài:
+Các thông số kết nối cho môi trường local:
 
 | Thành phần | Giá trị | Ý nghĩa |
 |---|---|---|
@@ -39,13 +39,12 @@ Các thông tin kết nối đã xác minh trên máy Tài:
 | Host trong XML | `127.0.0.1` | ClickHouse trên cùng máy |
 | User trong XML | `default` | Tài khoản ClickHouse, không phải user Ubuntu |
 | Password trong XML | Mật khẩu riêng đã lưu tại máy | Script đọc trực tiếp từ file |
-| Quyền file | `0600`, chủ sở hữu `anhtai06` | Chỉ chủ file được đọc/ghi |
+| Quyền file | `0600`, thuộc tài khoản Ubuntu đang sử dụng | Chỉ chủ file được đọc/ghi |
 | Cổng native của `clickhouse-client` | `9000` mặc định | XML hiện tại không khai báo riêng trường `port` |
 | Cổng HTTP của script Python | `8123` mặc định | Runner dùng HTTP, điều chỉnh bằng `CH_HTTP_PORT` |
-| Thư mục repo chạy trên máy Tài | `/home/anhtai06/mergetree-study-v1` | Chứa script và kết quả nghiên cứu mới |
 
 Cấu trúc tối thiểu của file như sau; `YOUR_LOCAL_PASSWORD` chỉ là chỗ giữ chỗ,
-không phải mật khẩu của máy Tài:
+cần thay bằng mật khẩu ClickHouse trên máy đang sử dụng:
 
 ```xml
 <config>
@@ -55,11 +54,11 @@ không phải mật khẩu của máy Tài:
 </config>
 ```
 
-Máy Tài dùng file hiện có, không cần tạo lại:
+Nếu đã có file cấu hình, trỏ `CH_CONFIG` đến đúng đường dẫn của file đó.
+Chạy các lệnh sau từ thư mục repo; điều chỉnh đường dẫn nếu lưu file ở vị trí khác:
 
 ```bash
-cd /home/anhtai06/mergetree-study-v1
-export CH_CONFIG=/home/anhtai06/clickhouse-project/config/client.xml
+export CH_CONFIG="$HOME/.config/mergetree-study/client.xml"
 export CH_HOST=127.0.0.1
 export CH_HTTP_PORT=8123
 python3 scripts/study.py status
@@ -76,7 +75,7 @@ Có thể kiểm tra native client bằng cùng file, không cần viết mật 
 clickhouse-client --config-file="$CH_CONFIG" --query "SELECT version(), timezone()"
 ```
 
-Hà/Tuấn dùng thông tin đăng nhập trên máy của mình. Nếu chưa có file, sao chép
+Sử dụng thông tin đăng nhập trên máy của mình. Nếu chưa có file, sao chép
 [mẫu không chứa mật khẩu thật](configs/client.example.xml) ra ngoài repo, chỉnh
 trực tiếp bằng editor và đặt quyền file:
 
@@ -123,7 +122,7 @@ benchmark dưới đây vào file đăng nhập `client.xml`.
 | Seed đảo thứ tự query | `20261116` |
 | Lưu thời gian sự kiện | `EventTime DateTime('UTC')` trong schema |
 
-Hà/Tuấn/Tài giữ chung protocol nhưng mỗi máy có host, tài khoản và đường dẫn riêng.
+Các thành viên giữ chung protocol nhưng mỗi máy có host, tài khoản và đường dẫn riêng.
 Kết quả luôn tách theo thành viên/máy/run; mọi đối chứng và speedup được tính trên
 cùng máy. Đây là thiết lập nghiên cứu có kiểm soát; thay đổi sau pilot phải được
 ghi vào protocol chung trước khi bắt đầu run chính mới.
