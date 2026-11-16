@@ -258,7 +258,7 @@ def plot(run):
                 axes[0].errorbar(positions,med,
                     yerr=[[v-float(r['client_ms_q1']) for r,v in zip(group,med)],
                           [float(r['client_ms_q3'])-v for r,v in zip(group,med)]],
-                    marker=marker,markerfacecolor='white',linestyle=linestyle,
+                    marker=marker,markerfacecolor='white',linestyle='none',
                     color='black',capsize=3,label=case.upper())
                 pruning=[100*float(r['pruning_ratio']) for r in group]
                 target=axes[2] if case=='w2' else axes[1]
@@ -271,13 +271,14 @@ def plot(run):
             axes[0].set(title='(a) Latency (ms, log)',yscale='log',yticks=[3,10,40])
             axes[0].set_yticklabels(['3','10','40'])
             axes[0].minorticks_off()
-            # ErrorbarContainer's default legend adds stems/caps around the
-            # marker. Show clean line/marker keys; retain intervals in the plot.
+            # Use marker-only keys for the discrete point/interval plot. Close
+            # latency series no longer cross each other's markers or intervals.
+            workload_labels={'w1':'W1 (tròn)','w2':'W2 (vuông)','w3':'W3 (tam giác)'}
             legend_keys=[Line2D([],[],color='black',marker=marker,
-                markerfacecolor='white',linestyle=linestyle,label=case.upper())
+                markerfacecolor='white',linestyle='none',label=workload_labels[case])
                 for case,marker,linestyle in case_styles]
             axes[0].legend(handles=legend_keys,loc='center left',frameon=False,
-                           numpoints=1,handlelength=2.2,handletextpad=.7)
+                           numpoints=1,handlelength=1.2,handletextpad=.5)
             axes[1].set(title='(b) Pruning W1/W3 (%)',ylim=(99.6,100.02),yticks=[99.6,99.8,100])
             axes[1].set_yticklabels(['99,6','99,8','100,0'])
             axes[1].legend(loc='lower left',frameon=False)
@@ -295,7 +296,7 @@ def plot(run):
                 ax.set_xlim(-.5,len(variants)-.5)
                 ax.grid(axis='y',alpha=.2)
                 ax.set_xlabel('g (cấu hình)')
-            export(fig,'e2_granularity_tradeoff_v3')
+            export(fig,'e2_granularity_tradeoff_v4')
     ep=run.path('summary','estimated_vs_actual.csv')
     if ep.exists():
         rows=[r for r in csv_read(ep) if r['predicted_client_ms']]
