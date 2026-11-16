@@ -266,6 +266,8 @@ def package(run):
             for disk in value['disks']:
                 disk['path']='<local ClickHouse disk>'
         save(destination/name,value)
+    if (run.out/'SMOKE_ONLY.json').exists():
+        save(destination/'SMOKE_ONLY.json',read(run.out/'SMOKE_ONLY.json'))
     for name in ['ddl','sql','explain','checks','queries','ingest','model','summary','figures','setup']:
         source=run.out/name
         if source.exists():
