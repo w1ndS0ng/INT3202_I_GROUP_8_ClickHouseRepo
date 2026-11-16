@@ -193,8 +193,8 @@ def plot(run):
     folder=run.path('figures')
     folder.mkdir(parents=True,exist_ok=True)
     save(folder/'plot_environment.json',dict(matplotlib=matplotlib.__version__,font='Times New Roman',font_size=13))
-    def export(fig,name):
-        fig.tight_layout()
+    def export(fig,name,rect=None):
+        fig.tight_layout(rect=rect)
         for suffix in ['png','svg']:
             fig.savefig(folder/(name+'.'+suffix),dpi=180,bbox_inches='tight')
         plt.close(fig)
@@ -239,7 +239,9 @@ def plot(run):
         costs=[r for r in csv_read(cost_path) if r['scale']=='30m']
         query_rows=[r for r in csv_read(qpath) if r['experiment']=='granularity' and r['scale']=='30m']
         if costs and query_rows:
-            fig,axes=plt.subplots(1,3,figsize=(15,4.8))
+            # Match the report's usable A4 width so 13 pt labels remain legible
+            # when the image is inserted without shrinking its typography.
+            fig,axes=plt.subplots(1,3,figsize=(6.5,3.1))
             variants=[r['variant'] for r in costs]
             for case,marker,linestyle in [('w1','o','-'),('w2','s','--'),('w3','^',':')]:
                 group=[next(r for r in query_rows if r['variant']==variant and r['case']==case)
@@ -251,22 +253,27 @@ def plot(run):
                     marker=marker,linestyle=linestyle,color='black',capsize=3,label=case.upper())
                 axes[1].plot(variants,[100*float(r['pruning_ratio']) for r in group],
                              marker=marker,linestyle=linestyle,color='black',label=case.upper())
-            axes[0].set(title='Thời gian client: trung vị / IQR',ylabel='ms (thang log)',yscale='log')
-            axes[1].set(title='Marks được loại',ylabel='% tổng số marks')
+            axes[0].set(title='Client (ms, log)',yscale='log',yticks=[3,10,40])
+            axes[0].set_yticklabels(['3','10','40'])
+            axes[0].minorticks_off()
+            axes[1].set(title='Pruning (%)',yticks=[40,70,100])
             x=list(range(len(costs)))
             axes[2].bar([v-.18 for v in x],
                 [float(r['primary_key_bytes_in_memory'])/1024 for r in costs],
-                width=.36,color='white',edgecolor='black',hatch='///',label='Primary key')
+                width=.36,color='white',edgecolor='black',hatch='///',label='PK')
             axes[2].bar([v+.18 for v in x],
                 [float(r['marks_bytes'])/1024 for r in costs],
-                width=.36,color='white',edgecolor='black',hatch='...',label='Marks các cột')
-            axes[2].set(title='Chi phí index và marks',ylabel='KiB',xticks=x,xticklabels=variants)
+                width=.36,color='white',edgecolor='black',hatch='...',label='Marks')
+            axes[2].set(title='Chi phí (KiB)',yticks=[0,125,250])
             for ax in axes:
+                ax.set_xticks(x,[str(int(v[1:])//1024) for v in variants])
                 ax.grid(axis='y',alpha=.2)
-                ax.legend()
-                ax.set_xlabel('Index granularity (g)')
-            fig.suptitle('E2 / 30M / K1 / LZ4 / một Wide part cho mỗi biến thể')
-            export(fig,'e2_granularity_tradeoff')
+                ax.set_xlabel('g / 1024')
+            handles,labels=axes[0].get_legend_handles_labels()
+            bars,bar_labels=axes[2].get_legend_handles_labels()
+            fig.legend(handles+bars,labels+bar_labels,loc='lower center',ncol=5,
+                       columnspacing=.7,handlelength=1.1,handletextpad=.3)
+            export(fig,'e2_granularity_tradeoff',rect=(0,.14,1,1))
     ep=run.path('summary','estimated_vs_actual.csv')
     if ep.exists():
         rows=[r for r in csv_read(ep) if r['predicted_client_ms']]
