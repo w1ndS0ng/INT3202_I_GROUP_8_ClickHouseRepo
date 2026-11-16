@@ -1,0 +1,6 @@
+<!-- Template only. Copy outside the repository and edit your local password. -->
+<config>
+    <host>127.0.0.1</host>
+    <user>default</user>
+    <password>YOUR_LOCAL_PASSWORD</password>
+</config>

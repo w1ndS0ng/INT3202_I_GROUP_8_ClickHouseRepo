@@ -22,8 +22,111 @@ python3 scripts/study.py status
 python3 -m unittest discover -s tests -v
 ```
 
-Máy Tài đã có cấu hình tại `/home/anhtai06/clickhouse-project/config/client.xml`.
-Không đưa mật khẩu vào lệnh, GitHub, Docs hay file kết quả.
+## Cấu hình kết nối ClickHouse
+
+`client.xml` là **file đăng nhập/kết nối**, khác với file cấu hình thí nghiệm
+`configs/protocol.json`. Trên máy Tài, file đã có tại:
+
+```text
+/home/anhtai06/clickhouse-project/config/client.xml
+```
+
+Các thông tin kết nối đã xác minh trên máy Tài:
+
+| Thành phần | Giá trị | Ý nghĩa |
+|---|---|---|
+| Môi trường | Ubuntu trên WSL2 | Chạy lệnh trong terminal Ubuntu |
+| Host trong XML | `127.0.0.1` | ClickHouse trên cùng máy |
+| User trong XML | `default` | Tài khoản ClickHouse, không phải user Ubuntu |
+| Password trong XML | Mật khẩu riêng đã lưu tại máy | Script đọc trực tiếp từ file |
+| Quyền file | `0600`, chủ sở hữu `anhtai06` | Chỉ chủ file được đọc/ghi |
+| Cổng native của `clickhouse-client` | `9000` mặc định | XML hiện tại không khai báo riêng trường `port` |
+| Cổng HTTP của script Python | `8123` mặc định | Runner dùng HTTP, điều chỉnh bằng `CH_HTTP_PORT` |
+| Thư mục repo chạy trên máy Tài | `/home/anhtai06/mergetree-study-v1` | Chứa script và kết quả nghiên cứu mới |
+
+Cấu trúc tối thiểu của file như sau; `YOUR_LOCAL_PASSWORD` chỉ là chỗ giữ chỗ,
+không phải mật khẩu của máy Tài:
+
+```xml
+<config>
+    <host>127.0.0.1</host>
+    <user>default</user>
+    <password>YOUR_LOCAL_PASSWORD</password>
+</config>
+```
+
+Máy Tài dùng file hiện có, không cần tạo lại:
+
+```bash
+cd /home/anhtai06/mergetree-study-v1
+export CH_CONFIG=/home/anhtai06/clickhouse-project/config/client.xml
+export CH_HOST=127.0.0.1
+export CH_HTTP_PORT=8123
+python3 scripts/study.py status
+```
+
+Trong phiên bản runner hiện tại, `CH_CONFIG` cung cấp **user/password** từ XML;
+host/port HTTP lấy từ `CH_HOST`/`CH_HTTP_PORT`, mặc định `127.0.0.1:8123`.
+Trường `host` hoặc `port` trong XML dành cho native client không tự thay host/port
+của runner. Cổng `9000` và `8123` thuộc hai giao thức khác nhau.
+
+Có thể kiểm tra native client bằng cùng file, không cần viết mật khẩu vào lệnh:
+
+```bash
+clickhouse-client --config-file="$CH_CONFIG" --query "SELECT version(), timezone()"
+```
+
+Hà/Tuấn dùng thông tin đăng nhập trên máy của mình. Nếu chưa có file, sao chép
+[mẫu không chứa mật khẩu thật](configs/client.example.xml) ra ngoài repo, chỉnh
+trực tiếp bằng editor và đặt quyền file:
+
+```bash
+mkdir -p ~/.config/mergetree-study
+cp configs/client.example.xml ~/.config/mergetree-study/client.xml
+chmod 600 ~/.config/mergetree-study/client.xml
+nano ~/.config/mergetree-study/client.xml
+export CH_CONFIG="$HOME/.config/mergetree-study/client.xml"
+python3 scripts/study.py status
+```
+
+Thay `YOUR_LOCAL_PASSWORD` trong editor bằng mật khẩu ClickHouse của chính máy đó.
+Mật khẩu không cần giống nhau giữa ba thành viên. Không đưa mật khẩu thật vào
+lệnh, GitHub, Docs hay file kết quả; chỉ file mẫu ở trên được đưa vào repo.
+
+## Cấu hình thực nghiệm dùng chung
+
+Nguồn cấu hình là [`configs/protocol.json`](configs/protocol.json); runner lưu
+bản chụp vào `results/<member>/<machine>/<run>/config.json`. Không đặt các tham số
+benchmark dưới đây vào file đăng nhập `client.xml`.
+
+| Tham số | Giá trị trong protocol hiện tại |
+|---|---|
+| ClickHouse server/client/local | `26.10.3.7` |
+| Dataset chính | `30.000.000` sự kiện, `12` cột, RowBinary `44` byte/dòng |
+| Tập hiệu chỉnh | `1M`, `3M`, `10M`; mẫu lồng nhau trên toàn bộ 30 shard |
+| Engine / codec / part type | `MergeTree` / `LZ4` / `Wide` |
+| Partition | Không khai báo `PARTITION BY` |
+| Primary key | Mặc định theo `ORDER BY`, không phải ràng buộc duy nhất |
+| Khóa E1 | `tuple()`, `(CounterID, EventDate)`, `(EventDate, CounterID)` |
+| `max_threads` | `4` luồng truy vấn |
+| `max_insert_threads` | `1` luồng nạp |
+| `max_memory_usage` | `2.000.000.000` byte cho mỗi query, khoảng `1,86 GiB` |
+| `index_granularity` | E1/E3: `8192`; E2: `2048`, `8192`, `32768` |
+| `index_granularity_bytes` / `write_final_mark` | `0` / `0`, đặt trong DDL |
+| `async_insert` / `fsync_after_insert` | `0` / `1`; `fsync_after_insert` đặt trong DDL |
+| Query cache / query condition cache | Tắt: `use_query_cache=0`, `use_query_condition_cache=0` |
+| Tối ưu đọc bổ sung | Tắt skip indexes, tự động PREWHERE, read/aggregation-in-order trong đối chứng |
+| Batch E3 | `10.000`, `100.000`, `1.000.000` dòng/request |
+| Lặp query | `2` warmups + `10` lượt đo/cell |
+| Lặp ingestion | `3` vòng cho mỗi batch, luân phiên thứ tự |
+| Kiểm tra ổn định | `3` quan sát, cách `10s`, tối đa `1200s` |
+| Seed đảo thứ tự query | `20261116` |
+| Lưu thời gian sự kiện | `EventTime DateTime('UTC')` trong schema |
+
+Hà/Tuấn/Tài giữ chung protocol nhưng mỗi máy có host, tài khoản và đường dẫn riêng.
+Kết quả luôn tách theo thành viên/máy/run; mọi đối chứng và speedup được tính trên
+cùng máy. Đây là thiết lập nghiên cứu có kiểm soát; thay đổi sau pilot phải được
+ghi vào protocol chung trước khi bắt đầu run chính mới.
 
 ## Dữ liệu chung
 
