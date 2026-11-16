@@ -1,0 +1,5 @@
+# Preserve evidence bytes so SHA-256 remains valid after checkout on any OS.
+** -text
+# Preserve the original whitespace emitted by Matplotlib.
+figures/*.svg -whitespace
+*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

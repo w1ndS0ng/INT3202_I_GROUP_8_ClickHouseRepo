@@ -1,0 +1,16 @@
+Output: count(), sum(ResolutionWidth)
+
+Aggregating
+│  Keys:
+│  Aggregates: count(), sum(ResolutionWidth)
+│  Skip merging: 0
+└──ReadFromMergeTree (mtr_tuan_wsl_xeon_e2main_v2_20261117.granularity_30m_g8192)
+      Read type: Default
+      Parts: 1 | Granules: 3663
+      Output: ResolutionWidth
+      Indexes:
+        PrimaryKey
+          Condition: true
+          Parts: 1/1
+          Granules: 3663/3663
+        Ranges: 1

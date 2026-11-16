@@ -1,0 +1,21 @@
+Output: count(), sum(ResolutionWidth)
+
+Aggregating
+│  Keys:
+│  Aggregates: count(), sum(ResolutionWidth)
+│  Skip merging: 0
+└──Filter ((WHERE + Change column names to column identifiers))
+   │  Filter column: CounterID = 3258
+   └──ReadFromMergeTree (mtr_tuan_wsl_xeon_e2main_v2_20261117.granularity_30m_g2048)
+         Read type: Default
+         Parts: 1 | Granules: 20
+         Output: ResolutionWidth, CounterID
+         Indexes:
+           PrimaryKey
+             Keys:
+               CounterID
+             Condition: (CounterID in [3258, 3258])
+             Parts: 1/1
+             Granules: 20/14649
+             Search Algorithm: binary search
+           Ranges: 1

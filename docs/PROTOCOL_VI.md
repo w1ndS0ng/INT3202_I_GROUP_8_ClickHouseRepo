@@ -50,8 +50,8 @@ không pruning ở mọi phiên bản; phải đọc EXPLAIN, không suy đoán 
 
 ## 3. Dữ liệu và môi trường
 
-- Tuấn tải 30 shard được kê trong config; 10 shard đầu là bộ cũ, tiếp 10 shard dư1,
-  rồi 10 shard dư2 theo modulo10. Tập30M giữ toàn bộ. Các mẫu1M/3M/10M giữ các dòng
+- Tuấn tải đủ 30 shard được kê trong config theo thứ tự 0,10,…,90;
+  1,11,…,91; 2,12,…,92. Tập30M giữ toàn bộ. Các mẫu1M/3M/10M giữ các dòng
   có vị trí toàn cục modulo30 <1/<3/<10, nên rải trên mọi file và lồng nhau. Đây là
   systematic sample xác định; có thể lệch nếu dữ liệu có tính chu kỳ theo vị trí dòng.
 - Script chuẩn hóa Date theo ngày epoch, DateTime theo epoch giây UTC; các số giữ kiểu
@@ -80,7 +80,9 @@ chuẩn bị riêng. Đây là cách loại biến số part count trên dataset
 Chờ 3 lần quan sát cách10s, không merge/mutation và parts không đổi. Đây chỉ là trạng thái
 ổn định quan sát được, không bảo đảm mọi merge tương lai hoàn tất. 20s tối thiểu xác nhận
 không được gọi là CPU time hay chi phí merge thực tế. Không xóa cache OS; phép đo là warm
-repeat sau2 warmups, có thể vẫn đọc đĩa nếu working set lớn. Máy không chạy tác vụ nặng khác.
+repeat sau2 warmups, có thể vẫn đọc đĩa nếu working set lớn. Cần hạn chế tác vụ nặng khác;
+kiểm tra quiet của runner chỉ quan sát instance ClickHouse được kết nối, không giám sát
+toàn bộ ứng dụng Windows/WSL2 hoặc các instance khác.
 
 ## 4. Metrics và ý nghĩa
 

@@ -1,0 +1,25 @@
+{
+  "table": "mtr_tuan_wsl_xeon_e2main_v2_20261117.granularity_30m_g32768",
+  "n": 30000000,
+  "fingerprint": {
+    "n": 30000000,
+    "hash_sum": 10197594264499699438,
+    "hash_xor": 11747036748708005924
+  },
+  "parts": [
+    {
+      "name": "all_1_30_2",
+      "rows": 30000000,
+      "marks": 916,
+      "bytes_on_disk": 512120167,
+      "data_compressed_bytes": 512084530,
+      "data_uncompressed_bytes": 1205650456,
+      "marks_bytes": 33161,
+      "primary_key_bytes_in_memory": 5496,
+      "part_type": "Wide"
+    }
+  ],
+  "optimize_setup_ms": 7245.0687769996875,
+  "observed_stable_wait_s": 20.055997940000452,
+  "created_at": "2026-11-16T18:41:10.434525+00:00"
+}
