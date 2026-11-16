@@ -43,6 +43,24 @@ def summarize(run):
         storage.append(item)
     if storage:
         csv_write(run.path('summary','storage.csv'),storage)
+        granularity_cost=[]
+        for item in storage:
+            label=item['table'].split('.')[-1]
+            experiment,scale,variant=label.split('_')
+            if experiment!='granularity':
+                continue
+            g=int(variant[1:])
+            expected_marks=(item['rows']+g-1)//g
+            granularity_cost.append(dict(scale=scale,variant=variant,rows=item['rows'],
+                expected_marks=expected_marks,actual_marks=sum(int(p['marks']) for p in
+                    read(run.path('checks',f'{label}_built.json'))['parts']),
+                estimated_primary_key_bytes=expected_marks*6,
+                primary_key_bytes_in_memory=item['primary_key_bytes_in_memory'],
+                marks_bytes=item['marks_bytes'],data_compressed_bytes=item['data_compressed_bytes'],
+                bytes_on_disk=item['bytes_on_disk']))
+        if granularity_cost:
+            csv_write(run.path('summary','granularity_cost.csv'),
+                      sorted(granularity_cost,key=lambda r:int(r['variant'][1:])))
     for path in run.path('ingest').glob('*.csv'):
         complete=run.path('ingest',path.stem+'_complete.json')
         if not complete.exists():
@@ -216,6 +234,39 @@ def plot(run):
                 ax.bar([r['variant'] for r in group],[float(r[metric])/factor for r in group])
                 ax.set(title=label)
             export(fig,f'{experiment}_{scale}_storage')
+    cost_path=run.path('summary','granularity_cost.csv')
+    if cost_path.exists() and qpath.exists():
+        costs=[r for r in csv_read(cost_path) if r['scale']=='30m']
+        query_rows=[r for r in csv_read(qpath) if r['experiment']=='granularity' and r['scale']=='30m']
+        if costs and query_rows:
+            fig,axes=plt.subplots(1,3,figsize=(15,4.8))
+            variants=[r['variant'] for r in costs]
+            for case,marker,linestyle in [('w1','o','-'),('w2','s','--'),('w3','^',':')]:
+                group=[next(r for r in query_rows if r['variant']==variant and r['case']==case)
+                       for variant in variants]
+                med=[float(r['client_ms_median']) for r in group]
+                axes[0].errorbar(variants,med,
+                    yerr=[[v-float(r['client_ms_q1']) for r,v in zip(group,med)],
+                          [float(r['client_ms_q3'])-v for r,v in zip(group,med)]],
+                    marker=marker,linestyle=linestyle,color='black',capsize=3,label=case.upper())
+                axes[1].plot(variants,[100*float(r['pruning_ratio']) for r in group],
+                             marker=marker,linestyle=linestyle,color='black',label=case.upper())
+            axes[0].set(title='Thời gian client: trung vị / IQR',ylabel='ms (thang log)',yscale='log')
+            axes[1].set(title='Marks được loại',ylabel='% tổng số marks')
+            x=list(range(len(costs)))
+            axes[2].bar([v-.18 for v in x],
+                [float(r['primary_key_bytes_in_memory'])/1024 for r in costs],
+                width=.36,color='white',edgecolor='black',hatch='///',label='Primary key')
+            axes[2].bar([v+.18 for v in x],
+                [float(r['marks_bytes'])/1024 for r in costs],
+                width=.36,color='white',edgecolor='black',hatch='...',label='Marks các cột')
+            axes[2].set(title='Chi phí index và marks',ylabel='KiB',xticks=x,xticklabels=variants)
+            for ax in axes:
+                ax.grid(axis='y',alpha=.2)
+                ax.legend()
+                ax.set_xlabel('Index granularity (g)')
+            fig.suptitle('E2 / 30M / K1 / LZ4 / một Wide part cho mỗi biến thể')
+            export(fig,'e2_granularity_tradeoff')
     ep=run.path('summary','estimated_vs_actual.csv')
     if ep.exists():
         rows=[r for r in csv_read(ep) if r['predicted_client_ms']]
@@ -266,6 +317,10 @@ def package(run):
             for disk in value['disks']:
                 disk['path']='<local ClickHouse disk>'
         save(destination/name,value)
+    for name in ['errors.jsonl','reproducibility.json']:
+        source=run.out/name
+        if source.exists():
+            shutil.copy2(source,destination/name)
     for name in ['ddl','sql','explain','checks','queries','ingest','model','summary','figures','setup']:
         source=run.out/name
         if source.exists():
