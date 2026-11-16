@@ -177,6 +177,7 @@ def plot(run):
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     from matplotlib import font_manager
+    from matplotlib.lines import Line2D
     # Use the user's installed Windows font under WSL; font files are never
     # copied into this repository or redistributed with experiment outputs.
     windows_fonts=Path('/mnt/c/Windows/Fonts')
@@ -245,7 +246,8 @@ def plot(run):
             axes=list(grid_axes.flat)
             variants=[r['variant'] for r in costs]
             x=list(range(len(variants)))
-            for case,marker,linestyle in [('w1','o','-'),('w2','s','--'),('w3','^',':')]:
+            case_styles=[('w1','o','-'),('w2','s','--'),('w3','^',':')]
+            for case,marker,linestyle in case_styles:
                 group=[next(r for r in query_rows if r['variant']==variant and r['case']==case)
                        for variant in variants]
                 med=[float(r['client_ms_median']) for r in group]
@@ -269,7 +271,13 @@ def plot(run):
             axes[0].set(title='(a) Latency (ms, log)',yscale='log',yticks=[3,10,40])
             axes[0].set_yticklabels(['3','10','40'])
             axes[0].minorticks_off()
-            axes[0].legend(loc='center left',frameon=False)
+            # ErrorbarContainer's default legend adds stems/caps around the
+            # marker. Show clean line/marker keys; retain intervals in the plot.
+            legend_keys=[Line2D([],[],color='black',marker=marker,
+                markerfacecolor='white',linestyle=linestyle,label=case.upper())
+                for case,marker,linestyle in case_styles]
+            axes[0].legend(handles=legend_keys,loc='center left',frameon=False,
+                           numpoints=1,handlelength=2.2,handletextpad=.7)
             axes[1].set(title='(b) Pruning W1/W3 (%)',ylim=(99.6,100.02),yticks=[99.6,99.8,100])
             axes[1].set_yticklabels(['99,6','99,8','100,0'])
             axes[1].legend(loc='lower left',frameon=False)
@@ -287,7 +295,7 @@ def plot(run):
                 ax.set_xlim(-.5,len(variants)-.5)
                 ax.grid(axis='y',alpha=.2)
                 ax.set_xlabel('g (cấu hình)')
-            export(fig,'e2_granularity_tradeoff_v2')
+            export(fig,'e2_granularity_tradeoff_v3')
     ep=run.path('summary','estimated_vs_actual.csv')
     if ep.exists():
         rows=[r for r in csv_read(ep) if r['predicted_client_ms']]
