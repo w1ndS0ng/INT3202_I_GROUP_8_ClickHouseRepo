@@ -171,7 +171,8 @@ class Run:
         sql=ddl(table,self.p,key,granularity)
         self.path('ddl',table.split('.')[1]+'.sql').write_text(sql+';\n')
         self.client.execute(sql)
-        self.path('ddl',table.split('.')[1]+'.actual.sql').write_text(self.client.scalar(f'SHOW CREATE TABLE {table}')+';\n')
+        actual_ddl, _ = self.client.execute(f'SHOW CREATE TABLE {table} FORMAT TSVRaw')
+        self.path('ddl',table.split('.')[1]+'.actual.sql').write_text(actual_ddl.strip()+';\n')
 
     def load(self,table,paths,batch_rows,limit_rows=None):
         count=0
