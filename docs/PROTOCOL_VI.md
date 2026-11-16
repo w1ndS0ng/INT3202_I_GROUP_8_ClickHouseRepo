@@ -1,4 +1,4 @@
-# Protocol MergeTree v1
+# Protocol MergeTree v2
 
 ## 1. Phạm vi và giả thuyết
 
@@ -32,9 +32,16 @@ Workload dùng cùng `SELECT count(), sum(ResolutionWidth)` để buộc đọc 
 |---|---|---|
 | W0 | Không lọc | Full-scan đối chứng |
 | W1 | CounterID=3258 | Phù hợp cột đầu K1 |
-| W2 | EventDate trong [15/07,22/07/2013) | Phù hợp cột đầu K2 |
+| W2 | EventDate trong [15/07,23/07/2013) | Phù hợp cột đầu K2 |
 | W3 | Kết hợp W1 và W2 | Key-prefix và lọc kết hợp |
-| W4 | RegionID=225 | Đối chứng cột ngoài sorting key |
+| W4 | RegionID=229 | Đối chứng cột ngoài sorting key |
+
+Pilot 1M trên snapshot 30 shard phát hiện W3 của v1 rỗng và RegionID=225 không xuất hiện.
+V2 giữ CounterID=3258, mở rộng cận trên ngày đến 23/07 (loại trừ) để bao gồm ngày 22/07,
+là ngày có dữ liệu đầu tiên của website này từ mốc 15/07. W4 chọn RegionID=229,
+mã khác 0 có tần suất lớn nhất trong profile pilot. Lựa chọn chỉ dựa trên số dòng và
+phân bố, không dựa trên latency. Dùng nguyên literals v2 cho mọi cấu hình/quy mô và
+tạo run mới; không gộp kết quả từ v1. Nhật ký kiểm tra literals được giữ trong hồ sơ chuẩn bị.
 
 Kiểm tra số dòng thỏa điều kiện trên pilot. Nếu rỗng hoặc độ chọn lọc không phù hợp,
 chọn lại theo profile trước khi đóng băng protocol, ghi lý do và dùng cùng literal cho
