@@ -1,0 +1,3 @@
+# Benchmark runner and dataset preparation use Python's standard library.
+# Install only for plots; record the actual resolved version in each run.
+matplotlib>=3.8,<4
