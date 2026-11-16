@@ -306,7 +306,15 @@ class Run:
                     self.quiet()
                     qid='mtr_query_'+uuid.uuid4().hex
                     stamp=utc()
-                    _,elapsed=self.client.execute(sql+' FORMAT Null',qid)
+                    try:
+                        _,elapsed=self.client.execute(sql+' FORMAT Null',qid)
+                    except Exception as exc:
+                        failed=dict(experiment=experiment,scale=scale,variant=variant,case=case,
+                                    round=round_id,position=position,query_id=qid,started_at=stamp,
+                                    warmup=round_id<0,status='error',error=str(exc))
+                        out.write(json.dumps(failed)+'\n')
+                        out.flush()
+                        raise
                     record=dict(experiment=experiment,scale=scale,variant=variant,case=case,
                                 round=round_id,position=position,query_id=qid,started_at=stamp,
                                 warmup=round_id<0,client_ms=elapsed)
