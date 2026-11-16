@@ -241,39 +241,53 @@ def plot(run):
         if costs and query_rows:
             # Match the report's usable A4 width so 13 pt labels remain legible
             # when the image is inserted without shrinking its typography.
-            fig,axes=plt.subplots(1,3,figsize=(6.5,3.1))
+            fig,grid_axes=plt.subplots(2,2,figsize=(6.5,5.8))
+            axes=list(grid_axes.flat)
             variants=[r['variant'] for r in costs]
+            x=list(range(len(variants)))
             for case,marker,linestyle in [('w1','o','-'),('w2','s','--'),('w3','^',':')]:
                 group=[next(r for r in query_rows if r['variant']==variant and r['case']==case)
                        for variant in variants]
                 med=[float(r['client_ms_median']) for r in group]
-                axes[0].errorbar(variants,med,
+                # Dodge the three series within each discrete configuration so
+                # overlapping quartile intervals remain individually visible.
+                offset={'w1':-.10,'w2':0,'w3':.10}[case]
+                positions=[position+offset for position in x]
+                axes[0].errorbar(positions,med,
                     yerr=[[v-float(r['client_ms_q1']) for r,v in zip(group,med)],
                           [float(r['client_ms_q3'])-v for r,v in zip(group,med)]],
-                    marker=marker,linestyle=linestyle,color='black',capsize=3,label=case.upper())
-                axes[1].plot(variants,[100*float(r['pruning_ratio']) for r in group],
-                             marker=marker,linestyle=linestyle,color='black',label=case.upper())
-            axes[0].set(title='Client (ms, log)',yscale='log',yticks=[3,10,40])
+                    marker=marker,markerfacecolor='white',linestyle=linestyle,
+                    color='black',capsize=3,label=case.upper())
+                pruning=[100*float(r['pruning_ratio']) for r in group]
+                target=axes[2] if case=='w2' else axes[1]
+                target.plot(x,pruning,marker=marker,markerfacecolor='white',
+                            linestyle=linestyle,color='black',label=case.upper())
+                if case=='w2':
+                    for position,value in zip(x,pruning):
+                        target.annotate(f'{value:.1f}'.replace('.',','),(position,value),
+                                        xytext=(0,8),textcoords='offset points',ha='center')
+            axes[0].set(title='(a) Latency (ms, log)',yscale='log',yticks=[3,10,40])
             axes[0].set_yticklabels(['3','10','40'])
             axes[0].minorticks_off()
-            axes[1].set(title='Pruning (%)',yticks=[40,70,100])
-            x=list(range(len(costs)))
-            axes[2].bar([v-.18 for v in x],
+            axes[0].legend(loc='center left',frameon=False)
+            axes[1].set(title='(b) Pruning W1/W3 (%)',ylim=(99.6,100.02),yticks=[99.6,99.8,100])
+            axes[1].set_yticklabels(['99,6','99,8','100,0'])
+            axes[1].legend(loc='lower left',frameon=False)
+            axes[2].set(title='(c) Pruning W2 (%)',ylim=(0,100),yticks=[0,50,100])
+            axes[3].bar([v-.18 for v in x],
                 [float(r['primary_key_bytes_in_memory'])/1024 for r in costs],
-                width=.36,color='white',edgecolor='black',hatch='///',label='PK')
-            axes[2].bar([v+.18 for v in x],
+                width=.36,color='white',edgecolor='black',hatch='///',label='PK (RAM)')
+            axes[3].bar([v+.18 for v in x],
                 [float(r['marks_bytes'])/1024 for r in costs],
-                width=.36,color='white',edgecolor='black',hatch='...',label='Marks')
-            axes[2].set(title='Chi phí (KiB)',yticks=[0,125,250])
+                width=.36,color='white',edgecolor='black',hatch='...',label='Marks (đĩa)')
+            axes[3].set(title='(d) Dung lượng (KiB)',yticks=[0,125,250])
+            axes[3].legend(loc='upper right')
             for ax in axes:
-                ax.set_xticks(x,[str(int(v[1:])//1024) for v in variants])
+                ax.set_xticks(x,[v[1:] for v in variants])
+                ax.set_xlim(-.5,len(variants)-.5)
                 ax.grid(axis='y',alpha=.2)
-                ax.set_xlabel('g / 1024')
-            handles,labels=axes[0].get_legend_handles_labels()
-            bars,bar_labels=axes[2].get_legend_handles_labels()
-            fig.legend(handles+bars,labels+bar_labels,loc='lower center',ncol=5,
-                       columnspacing=.7,handlelength=1.1,handletextpad=.3)
-            export(fig,'e2_granularity_tradeoff',rect=(0,.14,1,1))
+                ax.set_xlabel('g (cấu hình)')
+            export(fig,'e2_granularity_tradeoff_v2')
     ep=run.path('summary','estimated_vs_actual.csv')
     if ep.exists():
         rows=[r for r in csv_read(ep) if r['predicted_client_ms']]
