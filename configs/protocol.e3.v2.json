@@ -153,10 +153,11 @@
     "max_insert_block_size": 1000000
   },
   "e3_measurement": {
-    "source": "Adopted from shared report Tuấn 3.2/3.4 on 2026-11-17; unavailable Tuấn commits are not claimed as this run source",
+    "source": "Adopted from shared report Tuáº¥n 3.2/3.4 on 2026-11-17; unavailable Tuáº¥n commits are not claimed as this run source",
     "ack": "first HTTP request start to last complete HTTP response; intervening local input/journal work included",
     "snapshot": "taken immediately after ACK; completion delay recorded",
     "merge_window": "fresh table UUID through server observation-end timestamp after stable snapshot",
-    "source_fingerprint": "independent Parquet-to-RowBinary and global source audits required"
+    "source_fingerprint": "independent Parquet-to-RowBinary and global source audits required",
+    "pilot_sample": "Own frozen systematic 1M sample; some profile counts differ from reported E2 pilot; no exact identity with curator sample claimed"
   }
 }
