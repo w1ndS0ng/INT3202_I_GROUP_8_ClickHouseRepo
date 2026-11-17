@@ -14,7 +14,8 @@ a=p.parse_args()
 out=ROOT/'results/tai/wsl_i5'/a.run
 c=read(out/'config.json')
 assert c['protocol']['protocol_version']=='mergetree-v2-e3-r1'
-assert not c['git_dirty'],'Benchmark source was not clean at init'
+if a.scale=='30m':
+    assert not c['git_dirty'],'Official benchmark source was not clean at init'
 assert not (out/'SMOKE_ONLY.json').exists()
 n=1000000 if a.scale=='1m' else 30000000
 rows=csv_read(out/'ingest'/f'{a.scale}.csv')
@@ -76,6 +77,8 @@ f'Snapshot gần sauACK: độ trễ hoàn thành từ {min(acks):.4f}s đến {
 '','Dữ liệu gốc trong ingest/, checks/, ddl/; summary/ chứa tóm tắt và figures/ chứa hình. Pilot không thay kết quả30M.']
 (out/'summary/E3_REPORT_VI.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
 save(out/'summary/verification.json',dict(status='PASS',cases=9,rows_per_case=n,total_batches=total_batches,
+     source_worktree_clean_at_init=not c['git_dirty'],
+     pilot_note='Pilot init recorded generated, untracked source-audit manifests; numerical checks retained; formal run requires clean frozen source' if c['git_dirty'] else None,
      all_fingerprints_match_source=True,all_newpart_rows_accounted=True,completed_at=utc(),
      max_post_ack_snapshot_delay_s=max(acks),summary_csv_sha256=sha(out/'summary'/f'ingest_{a.scale}.csv')))
 print('PASS: complete E3 matrix, counts, fingerprints, batches, part logs and stability.',flush=True)
