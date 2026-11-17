@@ -1,0 +1,21 @@
+Output: sum(ResolutionWidth)
+
+Aggregating
+│  Keys:
+│  Aggregates: sum(ResolutionWidth)
+│  Skip merging: 0
+└──Filter ((WHERE + Change column names to column identifiers))
+   │  Filter column: CounterID = 3258
+   └──ReadFromMergeTree (mtr_tai_wsl_i5_e3main_v2_20261117.ingest_30m_b1000000_r0)
+         Read type: Default
+         Parts: 4 | Granules: 9
+         Output: ResolutionWidth, CounterID
+         Indexes:
+           PrimaryKey
+             Keys:
+               CounterID
+             Condition: (CounterID in [3258, 3258])
+             Parts: 4/5
+             Granules: 9/3665
+             Search Algorithm: binary search
+           Ranges: 4

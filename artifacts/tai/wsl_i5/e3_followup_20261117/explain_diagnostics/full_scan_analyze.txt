@@ -1,0 +1,42 @@
+Query summary:
+  Time:        58.37 ms (planning 1.28 ms · execution 57.09 ms)
+  Execution:   in steps 56.34 ms (98.70%) · outside steps 55.48 us (0.10%) · idle 688.98 us (1.21%)
+  Read:        30.00 million rows, 60.00 MB (525.49 million rows/s., 1.05 GB/s.)
+  Peak memory: 558.43 KiB
+
+Output: sum(ResolutionWidth)
+
+Expression ((Project names + Projection))
+│  I/O: rows 1 → 1 · 8 B → 8 B
+│  Time: step 2.81 us (0.00%) · branch 56.34 ms (98.70%)
+│  Concurrency: step 1.00/3 · branch 2.89/3
+│    time 2.85 us (0.00%) · parallelism 0.98/1
+└──Aggregating
+   │  Keys:
+   │  Aggregates: sum(ResolutionWidth)
+   │  Skip merging: 0
+   │  Memory: bytes 12.31 KB
+   │  I/O: rows 30.00 million → 1 (0.00%) · 60.00 MB → 8 B
+   │  Time: step 4.89 ms (8.57%) · branch 56.34 ms (98.69%)
+   │  Concurrency: step 2.88/3 · branch 2.89/3
+   │    Stage (partial aggregation): time 5.00 ms (8.76%) · parallelism 1.02/3
+   │    Stage (final aggregation): time 11.32 us (0.02%) · parallelism 0.99/1
+   └──Expression ((Before GROUP BY + Change column names to column identifiers))
+      │  I/O: rows 30.00 million → 30.00 million · 60.00 MB → 60.00 MB
+      │  Time: step 1.95 ms (3.42%) · branch 56.26 ms (98.55%)
+      │  Concurrency: step 2.89/3 · branch 2.89/3
+      │    time 2.06 ms (3.61%) · parallelism 0.96/3
+      └──ReadFromMergeTree (mtr_tai_wsl_i5_e3main_v2_20261117.ingest_30m_b1000000_r0)
+            Read type: Default
+            Parts: 5 | Granules: 3665
+            Output: ResolutionWidth
+            Indexes:
+              PrimaryKey
+                Condition: true
+                Parts: 5/5
+                Granules: 3665/3665
+              Ranges: 5
+            I/O: rows 0 → 30.00 million · 0 B → 60.00 MB
+            Time: step 56.25 ms (98.53%) · branch 56.25 ms (98.53%)
+            Concurrency: step 2.89/3 · branch 2.89/3
+              time 56.25 ms (98.54%) · parallelism 2.76/3
