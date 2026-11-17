@@ -71,7 +71,7 @@ f'Snapshot gần sauACK: độ trễ hoàn thành từ {min(acks):.4f}s đến {
 'Merge events được tính theo UUID bảng đến mốc server observation_end sau snapshot ổn định; tổngduration có thể chồng thời gian.',
 'Ổn định được quan sát3lần cách10s, không có merge/mutation; không bảo đảm không phát sinh merge tương lai.',
 'Active storage không gồm mọi inactive/tạm; merge row amplification là proxy đọc lại, không phải physical SSD write amplification.',
-'Nguồn đã kiểm độc lập đủ30file và mẫu; các workload counts khớp báo cáo Tuấn. Chưa có curator hash-lock/code2e65b9d để khẳng định cùng chính xác bản khóa của máy E2.',
+'Nguồn đã kiểm độc lập đủ30file; các workload counts30M khớp báo cáo Tuấn. Mẫu1M tự tạo có một số thống kê khác pilot trong Docs; chỉ dùng để kiểm tra pipeline E3. Chưa có curator hash-lock/code2e65b9d để khẳng định cùng chính xác bản khóa của máy E2.',
 'Phầncứng/memory/kernel/Python thực tế trong environment.json; không dùng thời gian tuyệt đối đối chiếu máy Xeon.',
 '','Dữ liệu gốc trong ingest/, checks/, ddl/; summary/ chứa tóm tắt và figures/ chứa hình. Pilot không thay kết quả30M.']
 (out/'summary/E3_REPORT_VI.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')

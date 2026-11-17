@@ -66,16 +66,19 @@ for scale in ['1m','3m','10m','30m']:
         if int(profile[case])==0:
             raise RuntimeError('Empty v2 workload')
     print(f'PROFILE {scale}: {profile}',flush=True)
+reported_counts={}
 for scale,expected in [('1m',[1294,382135,134,205725]),('30m',[38841,11464429,4012,6185519])]:
     actual=[int(profiles[scale][k]) for k in ['w1','w2','w3','w4']]
-    assert actual==expected,(scale,actual,expected)
+    reported_counts[scale]=dict(actual=actual,reported=expected,match=actual==expected)
+    if scale=='30m':
+        assert actual==expected,(scale,actual,expected)
 assert sum(f['parquet_bytes'] for f in manifest['files'])==4711867682
 manifest['fingerprints']=fingerprints
-manifest['source_audit']='independent full 30-shard audit; matches aggregate workload counts in shared report; curator hash-lock comparison pending'
+manifest['source_audit']='independent full 30-shard audit; 30M aggregate workload counts match shared report; 1M own systematic sample differs from reported pilot; curator hash-lock comparison pending'
 save(data/'manifest.json',manifest)
 save(ROOT/'manifests/hits30m.e3.lock.json',manifest)
 save(ROOT/'manifests/hits30m.e3.schema-audit.json',dict(complete=True,files=audits))
 save(ROOT/'manifests/hits30m.e3.profile.json',dict(profiles=profiles,fingerprints=fingerprints,
      source_parquet_bytes=sum(f['parquet_bytes'] for f in manifest['files']),
-     matched_reported_workload_counts=True,completed_at=utc()))
+     reported_counts_comparison=reported_counts,completed_at=utc()))
 print('PASS: source audits, samples, counts and fingerprints frozen before benchmark.',flush=True)
