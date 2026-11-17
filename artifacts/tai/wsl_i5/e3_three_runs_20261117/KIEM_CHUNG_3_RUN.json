@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "runs": [
+    "e3main_v2_20261117",
+    "e3repeat2_v2_20261117",
+    "e3repeat3_v2_20261117"
+  ],
+  "cases": 27,
+  "unique_query_ids": 29970,
+  "unique_table_uuids": 27,
+  "same_protocol": true,
+  "same_input_manifest": true,
+  "source_commit": "0c360382b07c584f11957782079b144cee13cb75"
+}
