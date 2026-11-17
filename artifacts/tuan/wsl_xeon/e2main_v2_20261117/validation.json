@@ -3,7 +3,7 @@
   "status": "internal_consistency_checked_independent_review_pending",
   "document_id": "1eA1XSvGx-8YbP02ilUgHmPeRKYKhRwCHg_8KZZysm3o",
   "tab_id": "t.rbdlbanesg5d",
-  "document_revision": "AHj4eMTVkoOsFtNz3n_T5mSk0EyJ9ZIjh2DCSaj_GearZ1ptkDS3jyp8LhuUE9X-LmdPl2wM79M-ixlcnoP18mkbvjwfcNlBC86OF-7WqQ",
+  "document_revision": "AHj4eMToPGvFgxFh_wShsmktZcq0GuJY5glk6BgTLGnhOfQy4gDsDge3HAYdZ01Y5w8Se3PmkTtiOwiQCM-9ufU5l_0NJHEZIrkEHT9BHw",
   "measurement_commit": "2e65b9d32fdb610a83a1d7ada14cc0d9d2e4fe98",
   "figure_processing_commit": "c47338aef5cf8c1790b69d3e4bdaf084fe97f37a",
   "protocol_hash": "5127ff92b278bfbc3534ce91fe6a54616d36ee35dfcddae31d04bcdf2e94cc1d",
@@ -233,9 +233,12 @@
     "font": "Times New Roman",
     "body_pt": 13,
     "subsection_pt": 14,
-    "section_pt": 15,
+    "section_pt": 14,
     "text_color": "black",
-    "resolved_text_runs": 172
+    "resolved_text_runs": 237,
+    "body_line_spacing_percent": 115,
+    "table_pt": 12,
+    "body_paragraph_space_below_pt": 4
   },
   "unit_tests": {
     "command": "python -m unittest discover -s tests -v",
@@ -274,25 +277,27 @@
   "experimental_data_modified": false,
   "pdf_review": {
     "export_scope": "Only the report tab is committed; other tabs excluded",
-    "native_report_pages": 8,
+    "native_report_pages": 9,
     "rendered_pages_inspected": true,
     "table_header_rows_repeat": true,
     "row_splitting_disabled": true,
     "source_export_pages_included": [
-      62,
-      63,
-      64,
-      65,
       66,
       67,
       68,
-      69
+      69,
+      70,
+      71,
+      72,
+      73,
+      74
     ],
-    "pages": 8
+    "pages": 9,
+    "own_tables_fit_on_single_pages": true
   },
   "page_budget": {
     "outline_suggestion_pages_for_3_2_and_3_4": 2.75,
-    "current_report_tab_pages": 8,
+    "current_report_tab_pages": 9,
     "status": "exceeds_outline_suggestion; final merged 30-page report not assessed"
   },
   "copied_evidence": {
@@ -548,5 +553,213 @@
   "redactions": [
     "Server data directory in the live audit; config/environment copied from the already sanitized package"
   ],
-  "artifact_integrity": "Scoped .gitattributes preserves original evidence bytes across operating systems; generated SVG whitespace retained."
+  "artifact_integrity": "Scoped .gitattributes preserves original evidence bytes across operating systems; generated SVG whitespace retained.",
+  "section_3_2_2_edit": {
+    "edited_at": "2026-11-17T14:35:21.749365+00:00",
+    "scope": "Prose editing and two native tables for hardware/software and fixed E2 settings",
+    "table_rows_including_headers": [
+      9,
+      9
+    ],
+    "table_cells_verified_against_markdown": 36,
+    "outside_section_text_unchanged": true,
+    "blank_structural_paragraphs": "1 pt spacing only; all visible text retains 13/14/15 pt",
+    "concurrent_edit_preserved": "Disk free value retained; detailed timestamp removed in native table by concurrent edit",
+    "verification": "Native readback and rendered PDF reviewed; raw experiment files and figure unchanged",
+    "benchmark_rerun": false
+  },
+  "academic_edit": {
+    "edited_at": "2026-11-17T14:53:38.049164+00:00",
+    "scope": "Only tab t.rbdlbanesg5d, sections 3.2.1-3.2.4 and 3.4.1-3.4.4",
+    "edited_paragraphs": 33,
+    "sections_checked_in_order": [
+      "3.2.1",
+      "3.2.2",
+      "3.2.3",
+      "3.2.4",
+      "3.4.1",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4"
+    ],
+    "checks": {
+      "edited_paragraphs": 33,
+      "result_tables_unchanged": true,
+      "figure_unchanged": true,
+      "other_tabs_unchanged": true
+    },
+    "provenance_table_cells": 22,
+    "original_reference_urls_preserved": true,
+    "technical_formulas_and_measurements_preserved": true,
+    "independent_review": "pending_deferred_by_user",
+    "raw_files_unchanged": 63,
+    "benchmark_rerun": false
+  },
+  "technical_editorial_review": {
+    "edited_at": "2026-11-17T15:39:55.876683+00:00",
+    "native_doc_scope": [
+      "Only tab t.rbdlbanesg5d, sections 3.2 and 3.4"
+    ],
+    "local_artifact_scope": "Only existing Tuan report and validation artifacts; other members report files not generated",
+    "sql_exclusive_end": "2013-07-23",
+    "clickbench_commit": "b0b7dd8f11a2a719211cc41d8c7ebbada267df66",
+    "write_final_mark": {
+      "version": "26.10.3.7",
+      "status": "obsolete; does nothing; retained in original DDL for traceability",
+      "source": "https://github.com/ClickHouse/ClickHouse/blob/v26.10.3.7-stable/src/Storages/MergeTree/MergeTreeSettings.cpp#L2701-L2714",
+      "local_probe": {
+        "rows": 10000,
+        "index_granularity": 8192,
+        "index_granularity_bytes": 0,
+        "values_tested": [
+          0,
+          1
+        ],
+        "marks_each": 2,
+        "primary_key_bytes_in_memory_each": 16
+      },
+      "original_formal_run_not_modified": true,
+      "marks_formula_basis": "One part and fixed granularity; not write_final_mark=0"
+    },
+    "table_numbering": {
+      "3.1": "Environment",
+      "3.2": "Fixed settings",
+      "3.3": "E2 reproducibility",
+      "3.4": "E2 matrix",
+      "3.5": "E2 query results",
+      "3.6": "E2 storage"
+    },
+    "checks": [
+      {
+        "tab": "t.rbdlbanesg5d",
+        "expectedEqualsActual": true,
+        "unmatched": []
+      }
+    ],
+    "all_table_cells_unchanged": true,
+    "all_inline_images_unchanged": true,
+    "all_original_reference_urls_preserved": true,
+    "cross_machine_inputs": {
+      "ownFiles": 30,
+      "taiFiles": 30,
+      "fields": [
+        "shard",
+        "url",
+        "parquet_sha256",
+        "parquet_bytes",
+        "rowbinary_sha256",
+        "rowbinary_bytes",
+        "rows"
+      ],
+      "samples": [
+        {
+          "scale": "1m",
+          "same": false
+        },
+        {
+          "scale": "3m",
+          "same": false
+        },
+        {
+          "scale": "10m",
+          "same": false
+        }
+      ],
+      "schemaSame": true,
+      "shard_matches": 30,
+      "parquet_sha256_matches": 30,
+      "rowbinary_sha256_matches": 12,
+      "rows_matches": 30
+    },
+    "cross_machine_limitation": "Parquet inputs match; only 12 of 30 RowBinary hashes match and all 3 sample hashes differ. Cause not established; measurements retained.",
+    "experimental_data_modified": false,
+    "benchmark_rerun": false,
+    "independent_review": "pending_deferred_by_user",
+    "final_readback": [
+      {
+        "tab": "t.rbdlbanesg5d",
+        "equal": true
+      }
+    ],
+    "resolved_style_checks": [
+      {
+        "id": "t.rbdlbanesg5d",
+        "title": "Tuấn 3.2 - 3.4",
+        "runs": 237,
+        "sizes": {
+          "12": 174,
+          "13": 53,
+          "14": 10
+        },
+        "bad": [],
+        "tableCount": 6,
+        "headersPinned": true,
+        "rowsPreventSplit": true
+      }
+    ],
+    "out_of_scope_rollback": {
+      "at": "2026-11-17T16:01:48.984574+00:00",
+      "baseline_revision": "AHj4eMRBkhidxfkbiik62mJxfQfSluIt2FZdVBj44U2CpGEr9DfB0sQBpPwvoblcP-9qffzHY-o0U6yFjIf8Gg7PFJXH5XRr0PYUU9jCYA",
+      "restored_tabs": [
+        {
+          "id": "t.p6fa8vwp9cc2",
+          "title": "Hà - chương 1",
+          "textMatchesBaseline": true,
+          "visibleStyleDifferences": 0
+        },
+        {
+          "id": "t.8vhnwqli08jf",
+          "title": "Tuấn 2.3-2.4",
+          "textMatchesBaseline": true,
+          "visibleStyleDifferences": 0
+        },
+        {
+          "id": "t.qn4439wgsqae",
+          "title": "Tài 2.5-2.6",
+          "textMatchesBaseline": true,
+          "visibleStyleDifferences": 0
+        },
+        {
+          "id": "t.5m93wmhxropw",
+          "title": "Tài 3.5 - 3.6",
+          "textMatchesBaseline": true,
+          "visibleStyleDifferences": 0
+        }
+      ],
+      "own_tab_body_unchanged": true,
+      "own_pdf_pages_pixel_equal": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "all_other_tabs_restored_or_untouched": true
+    }
+  },
+  "four_requested_edits": {
+    "at": "2026-11-17T16:29:19.593795+00:00",
+    "scope": "Only t.rbdlbanesg5d",
+    "changes": [
+      "Move original caption below original figure without replacing image",
+      "Clarify paired storage values in Table 3.6 column",
+      "Rename section 3.2.1",
+      "Add Table 3.5 / Table 3.6 / Figure 3.1(a) references to section 3.4.4"
+    ],
+    "checks": {
+      "onlyExpectedTextChanges": true,
+      "tableValuesUnchanged": true,
+      "imageIdAndPropertiesUnchanged": true,
+      "otherTabsUnchanged": true,
+      "fontErrors": [],
+      "titleBold": true
+    },
+    "concurrent_column_width_changes_preserved": true,
+    "image_recreated": false,
+    "pdf_pages": 9
+  }
 }
