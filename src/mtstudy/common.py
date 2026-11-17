@@ -102,6 +102,7 @@ class Client:
             self.conn.close()
         headers = dict(self.headers, **{'Content-Length': str(len(payload) if payload else 0)})
         start = time.perf_counter()
+        self.last_start = start
         # No automatic retry: an INSERT may have committed before a disconnect.
         self.conn.request('POST', '/?' + urllib.parse.urlencode(params), body=payload, headers=headers)
         response = self.conn.getresponse()
