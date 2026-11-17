@@ -11,7 +11,7 @@ SD giữa run được tính trên3run-means, không phải khoảng tin cậy. 
 |100,000|90.853|173.287|160.482|141.541|250,358|499.763|
 |1,000,000|50.501|111.678|133.341|98.506|410,617|499.949|
 
-## Minh chứng từngrun
+## Minh chứng từng run
 
 1. e3main_v2_20261117: config, input_manifest, environment, 9caseCSV, verification, hình và ZIP raw logs riêng.
 2. e3repeat2_v2_20261117: config, input_manifest, environment, 9caseCSV, verification, hình và ZIP raw logs riêng.
