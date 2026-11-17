@@ -1,0 +1,26 @@
+{
+  "recorded_at": "2026-11-17T10:50:11.2733354+07:00",
+  "os": {
+    "Caption": "Microsoft Windows 11 Home Single Language",
+    "Version": "10.0.26300",
+    "BuildNumber": "26300",
+    "TotalVisibleMemorySize": 8083108
+  },
+  "cpu": {
+    "Name": "11th Gen Intel(R) Core(TM) i5-11400H @ 2.70GHz",
+    "NumberOfCores": 6,
+    "NumberOfLogicalProcessors": 12
+  },
+  "drives": [
+    {
+      "Name": "C",
+      "Used": 235382857728,
+      "Free": 13651128320
+    },
+    {
+      "Name": "D",
+      "Used": 187827245056,
+      "Free": 73525075968
+    }
+  ]
+}
