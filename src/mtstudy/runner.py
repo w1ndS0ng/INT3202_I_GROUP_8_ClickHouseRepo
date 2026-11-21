@@ -171,7 +171,8 @@ class Run:
         sql=ddl(table,self.p,key,granularity)
         self.path('ddl',table.split('.')[1]+'.sql').write_text(sql+';\n')
         self.client.execute(sql)
-        self.path('ddl',table.split('.')[1]+'.actual.sql').write_text(self.client.scalar(f'SHOW CREATE TABLE {table}')+';\n')
+        actual_ddl, _ = self.client.execute(f'SHOW CREATE TABLE {table} FORMAT TSVRaw')
+        self.path('ddl',table.split('.')[1]+'.actual.sql').write_text(actual_ddl.strip()+';\n')
 
     def load(self,table,paths,batch_rows,limit_rows=None):
         count=0
@@ -305,7 +306,15 @@ class Run:
                     self.quiet()
                     qid='mtr_query_'+uuid.uuid4().hex
                     stamp=utc()
-                    _,elapsed=self.client.execute(sql+' FORMAT Null',qid)
+                    try:
+                        _,elapsed=self.client.execute(sql+' FORMAT Null',qid)
+                    except Exception as exc:
+                        failed=dict(experiment=experiment,scale=scale,variant=variant,case=case,
+                                    round=round_id,position=position,query_id=qid,started_at=stamp,
+                                    warmup=round_id<0,status='error',error=str(exc))
+                        out.write(json.dumps(failed)+'\n')
+                        out.flush()
+                        raise
                     record=dict(experiment=experiment,scale=scale,variant=variant,case=case,
                                 round=round_id,position=position,query_id=qid,started_at=stamp,
                                 warmup=round_id<0,client_ms=elapsed)

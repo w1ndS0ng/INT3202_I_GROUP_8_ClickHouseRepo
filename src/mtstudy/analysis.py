@@ -43,6 +43,24 @@ def summarize(run):
         storage.append(item)
     if storage:
         csv_write(run.path('summary','storage.csv'),storage)
+        granularity_cost=[]
+        for item in storage:
+            label=item['table'].split('.')[-1]
+            experiment,scale,variant=label.split('_')
+            if experiment!='granularity':
+                continue
+            g=int(variant[1:])
+            expected_marks=(item['rows']+g-1)//g
+            granularity_cost.append(dict(scale=scale,variant=variant,rows=item['rows'],
+                expected_marks=expected_marks,actual_marks=sum(int(p['marks']) for p in
+                    read(run.path('checks',f'{label}_built.json'))['parts']),
+                estimated_primary_key_bytes=expected_marks*6,
+                primary_key_bytes_in_memory=item['primary_key_bytes_in_memory'],
+                marks_bytes=item['marks_bytes'],data_compressed_bytes=item['data_compressed_bytes'],
+                bytes_on_disk=item['bytes_on_disk']))
+        if granularity_cost:
+            csv_write(run.path('summary','granularity_cost.csv'),
+                      sorted(granularity_cost,key=lambda r:int(r['variant'][1:])))
     for path in run.path('ingest').glob('*.csv'):
         complete=run.path('ingest',path.stem+'_complete.json')
         if not complete.exists():
@@ -159,6 +177,7 @@ def plot(run):
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     from matplotlib import font_manager
+    from matplotlib.lines import Line2D
     # Use the user's installed Windows font under WSL; font files are never
     # copied into this repository or redistributed with experiment outputs.
     windows_fonts=Path('/mnt/c/Windows/Fonts')
@@ -175,8 +194,8 @@ def plot(run):
     folder=run.path('figures')
     folder.mkdir(parents=True,exist_ok=True)
     save(folder/'plot_environment.json',dict(matplotlib=matplotlib.__version__,font='Times New Roman',font_size=13))
-    def export(fig,name):
-        fig.tight_layout()
+    def export(fig,name,rect=None):
+        fig.tight_layout(rect=rect)
         for suffix in ['png','svg']:
             fig.savefig(folder/(name+'.'+suffix),dpi=180,bbox_inches='tight')
         plt.close(fig)
@@ -216,6 +235,70 @@ def plot(run):
                 ax.bar([r['variant'] for r in group],[float(r[metric])/factor for r in group])
                 ax.set(title=label)
             export(fig,f'{experiment}_{scale}_storage')
+    cost_path=run.path('summary','granularity_cost.csv')
+    if cost_path.exists() and qpath.exists():
+        costs=[r for r in csv_read(cost_path) if r['scale']=='30m']
+        query_rows=[r for r in csv_read(qpath) if r['experiment']=='granularity' and r['scale']=='30m']
+        if costs and query_rows:
+            # Match the report's usable A4 width so 13 pt labels remain legible
+            # when the image is inserted without shrinking its typography.
+            fig,grid_axes=plt.subplots(2,2,figsize=(6.5,5.8))
+            axes=list(grid_axes.flat)
+            variants=[r['variant'] for r in costs]
+            x=list(range(len(variants)))
+            case_styles=[('w1','o','-'),('w2','s','--'),('w3','^',':')]
+            for case,marker,linestyle in case_styles:
+                group=[next(r for r in query_rows if r['variant']==variant and r['case']==case)
+                       for variant in variants]
+                med=[float(r['client_ms_median']) for r in group]
+                # Dodge the three series within each discrete configuration so
+                # overlapping quartile intervals remain individually visible.
+                offset={'w1':-.10,'w2':0,'w3':.10}[case]
+                positions=[position+offset for position in x]
+                axes[0].errorbar(positions,med,
+                    yerr=[[v-float(r['client_ms_q1']) for r,v in zip(group,med)],
+                          [float(r['client_ms_q3'])-v for r,v in zip(group,med)]],
+                    marker=marker,markerfacecolor='white',linestyle='none',
+                    color='black',ecolor='0.55',elinewidth=1,capsize=0,label=case.upper())
+                pruning=[100*float(r['pruning_ratio']) for r in group]
+                target=axes[2] if case=='w2' else axes[1]
+                target.plot(x,pruning,marker=marker,markerfacecolor='white',
+                            linestyle=linestyle,color='black',label=case.upper())
+                if case=='w2':
+                    for position,value in zip(x,pruning):
+                        target.annotate(f'{value:.1f}'.replace('.',','),(position,value),
+                                        xytext=(0,8),textcoords='offset points',ha='center')
+            axes[0].set(title='(a) Latency (ms, log)',yscale='log',yticks=[3,10,40])
+            axes[0].set_yticklabels(['3','10','40'])
+            axes[0].minorticks_off()
+            # Use marker-only keys for the discrete point/interval plot. Close
+            # latency series no longer cross each other's markers or intervals.
+            workload_labels={'w1':'W1 (tròn)','w2':'W2 (vuông)','w3':'W3 (tam giác)'}
+            legend_keys=[Line2D([],[],color='black',marker=marker,
+                markerfacecolor='white',linestyle='none',label=workload_labels[case])
+                for case,marker,linestyle in case_styles]
+            legend_keys.append(Line2D([],[],color='0.55',marker='|',markersize=10,
+                markeredgewidth=1,linestyle='none',label='Q1–Q3'))
+            axes[0].legend(handles=legend_keys,loc='center left',frameon=False,
+                           numpoints=1,handlelength=1.2,handletextpad=.5)
+            axes[1].set(title='(b) Pruning W1/W3 (%)',ylim=(99.6,100.02),yticks=[99.6,99.8,100])
+            axes[1].set_yticklabels(['99,6','99,8','100,0'])
+            axes[1].legend(loc='lower left',frameon=False)
+            axes[2].set(title='(c) Pruning W2 (%)',ylim=(0,100),yticks=[0,50,100])
+            axes[3].bar([v-.18 for v in x],
+                [float(r['primary_key_bytes_in_memory'])/1024 for r in costs],
+                width=.36,color='white',edgecolor='black',hatch='///',label='PK (RAM)')
+            axes[3].bar([v+.18 for v in x],
+                [float(r['marks_bytes'])/1024 for r in costs],
+                width=.36,color='white',edgecolor='black',hatch='...',label='Marks (đĩa)')
+            axes[3].set(title='(d) Dung lượng (KiB)',yticks=[0,125,250])
+            axes[3].legend(loc='upper right')
+            for ax in axes:
+                ax.set_xticks(x,[v[1:] for v in variants])
+                ax.set_xlim(-.5,len(variants)-.5)
+                ax.grid(axis='y',alpha=.2)
+                ax.set_xlabel('g (cấu hình)')
+            export(fig,'e2_granularity_tradeoff_v5')
     ep=run.path('summary','estimated_vs_actual.csv')
     if ep.exists():
         rows=[r for r in csv_read(ep) if r['predicted_client_ms']]
@@ -266,8 +349,10 @@ def package(run):
             for disk in value['disks']:
                 disk['path']='<local ClickHouse disk>'
         save(destination/name,value)
-    if (run.out/'SMOKE_ONLY.json').exists():
-        save(destination/'SMOKE_ONLY.json',read(run.out/'SMOKE_ONLY.json'))
+    for name in ['errors.jsonl','reproducibility.json']:
+        source=run.out/name
+        if source.exists():
+            shutil.copy2(source,destination/name)
     for name in ['ddl','sql','explain','checks','queries','ingest','model','summary','figures','setup']:
         source=run.out/name
         if source.exists():
