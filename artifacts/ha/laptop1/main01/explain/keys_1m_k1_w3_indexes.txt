@@ -1,0 +1,22 @@
+Output: count(), sum(ResolutionWidth)
+
+Aggregating
+│  Keys:
+│  Aggregates: count(), sum(ResolutionWidth)
+│  Skip merging: 0
+└──Filter ((WHERE + Change column names to column identifiers))
+   │  Filter column: CounterID = 3258 AND EventDate >= \'2013-07-15\' AND EventDate < \'2013-07-23\'
+   └──ReadFromMergeTree (mtr_ha_laptop1_main01.keys_1m_k1)
+         Read type: Default
+         Parts: 1 | Granules: 1
+         Output: ResolutionWidth, CounterID, EventDate
+         Indexes:
+           PrimaryKey
+             Keys:
+               CounterID
+               EventDate
+             Condition: and((EventDate in (-Inf, 15908]), and((EventDate in [15901, +Inf)), (CounterID in [3258, 3258])))
+             Parts: 1/1
+             Granules: 1/123
+             Search Algorithm: binary search
+           Ranges: 1

@@ -1,0 +1,13 @@
+{
+  "rows": 1000000,
+  "ingest_ack_s": 0.4012306690000287,
+  "throughput_rows_s": 2492331.9109485336,
+  "batches": [
+    {
+      "query_id": "mtr_insert_885e0e6b92c242a6bcc363610cacf45a",
+      "batch": 0,
+      "rows": 1000000,
+      "client_ms": 401.17259199996624
+    }
+  ]
+}

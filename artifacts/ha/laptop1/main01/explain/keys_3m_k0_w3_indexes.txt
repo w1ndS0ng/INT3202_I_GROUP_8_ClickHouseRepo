@@ -1,0 +1,12 @@
+Output: count(), sum(ResolutionWidth)
+
+Aggregating
+│  Keys:
+│  Aggregates: count(), sum(ResolutionWidth)
+│  Skip merging: 0
+└──Filter ((WHERE + Change column names to column identifiers))
+   │  Filter column: CounterID = 3258 AND EventDate >= \'2013-07-15\' AND EventDate < \'2013-07-23\'
+   └──ReadFromMergeTree (mtr_ha_laptop1_main01.keys_3m_k0)
+         Read type: Default
+         Parts: 1 | Granules: 367
+         Output: ResolutionWidth, CounterID, EventDate

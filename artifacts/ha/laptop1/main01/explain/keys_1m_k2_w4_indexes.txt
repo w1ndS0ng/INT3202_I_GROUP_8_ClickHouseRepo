@@ -1,0 +1,18 @@
+Output: count(), sum(ResolutionWidth)
+
+Aggregating
+│  Keys:
+│  Aggregates: count(), sum(ResolutionWidth)
+│  Skip merging: 0
+└──Filter ((WHERE + Change column names to column identifiers))
+   │  Filter column: RegionID = 229
+   └──ReadFromMergeTree (mtr_ha_laptop1_main01.keys_1m_k2)
+         Read type: Default
+         Parts: 1 | Granules: 123
+         Output: ResolutionWidth, RegionID
+         Indexes:
+           PrimaryKey
+             Condition: true
+             Parts: 1/1
+             Granules: 123/123
+           Ranges: 1

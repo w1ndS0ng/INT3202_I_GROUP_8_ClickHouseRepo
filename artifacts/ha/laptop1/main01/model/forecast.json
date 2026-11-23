@@ -1,0 +1,162 @@
+{
+  "frozen_at": "2026-11-23T08:35:46.632300+00:00",
+  "protocol_hash": "95fe58f29b96ebff5bffd3b8b60310328d7e6ba0e00be95f5772939e5c0fd3ec",
+  "model_sha256": "d41e5669e6783d0a4aa7912806112f9dabf10bc857e852f06a1aa3e41142d5cb",
+  "explain_sha256": {
+    "k0": "5828acc36971291a22e05e291415ad48daeaed6593ddc194c87f47b08e379ec1",
+    "k1": "3d709aaa72848f5eb6b469f527c2961fcf4a49bd138db8a8102da25dac259c8f",
+    "k2": "66e7ee7029e728150b7554e28614e798cfccc14d5a7df099572c436d58be4889"
+  },
+  "predictions": [
+    {
+      "variant": "k0",
+      "case": "w0",
+      "estimated_rows": 30000000,
+      "predicted_client_ms": 24.32962021613626,
+      "naive_client_ms": 33.376538999732475,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k0",
+      "case": "w1",
+      "estimated_rows": 30000000,
+      "predicted_client_ms": 30.810358432918566,
+      "naive_client_ms": 40.75722300012785,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k0",
+      "case": "w2",
+      "estimated_rows": 30000000,
+      "predicted_client_ms": 30.024806477394492,
+      "naive_client_ms": 42.17823899978157,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k0",
+      "case": "w3",
+      "estimated_rows": 30000000,
+      "predicted_client_ms": 31.835721581937356,
+      "naive_client_ms": 44.146858499857444,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k0",
+      "case": "w4",
+      "estimated_rows": 30000000,
+      "predicted_client_ms": 49.80354602223237,
+      "naive_client_ms": 63.072874499823676,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k1",
+      "case": "w0",
+      "estimated_rows": 30000000,
+      "predicted_client_ms": 23.07332241774482,
+      "naive_client_ms": 32.420663999971566,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k1",
+      "case": "w1",
+      "estimated_rows": 49152,
+      "predicted_client_ms": 3.8896206250882415,
+      "naive_client_ms": 7.102145000089877,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k1",
+      "case": "w2",
+      "estimated_rows": 14377856,
+      "predicted_client_ms": 20.593704260049556,
+      "naive_client_ms": 31.143850165017685,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k1",
+      "case": "w3",
+      "estimated_rows": 16384,
+      "predicted_client_ms": 4.429298999980347,
+      "naive_client_ms": 4.429298999980347,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": false
+    },
+    {
+      "variant": "k1",
+      "case": "w4",
+      "estimated_rows": 30000000,
+      "predicted_client_ms": 47.07866098497768,
+      "naive_client_ms": 60.16820549990598,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k2",
+      "case": "w0",
+      "estimated_rows": 30000000,
+      "predicted_client_ms": 23.179158507719308,
+      "naive_client_ms": 32.501808000120036,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k2",
+      "case": "w1",
+      "estimated_rows": 222080,
+      "predicted_client_ms": 5.431811477682641,
+      "naive_client_ms": 6.3588167928690265,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k2",
+      "case": "w2",
+      "estimated_rows": 11468800,
+      "predicted_client_ms": 15.876108401913111,
+      "naive_client_ms": 26.792443040694533,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    },
+    {
+      "variant": "k2",
+      "case": "w3",
+      "estimated_rows": 40960,
+      "predicted_client_ms": 4.687346499982444,
+      "naive_client_ms": 6.018005624923717,
+      "identifiable": true,
+      "boundary_fit": true,
+      "is_extrapolation": false
+    },
+    {
+      "variant": "k2",
+      "case": "w4",
+      "estimated_rows": 30000000,
+      "predicted_client_ms": 49.389752395573346,
+      "naive_client_ms": 62.24548500006222,
+      "identifiable": true,
+      "boundary_fit": false,
+      "is_extrapolation": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "table": "mtr_ha_laptop1_main01.keys_10m_k2",
+  "n": 10000000,
+  "fingerprint": {
+    "n": 10000000,
+    "hash_sum": 14557940342072703380,
+    "hash_xor": 126485128351338356
+  },
+  "parts": [
+    {
+      "name": "all_1_10_2",
+      "rows": 10000000,
+      "marks": 1221,
+      "bytes_on_disk": 184730005,
+      "data_compressed_bytes": 184691754,
+      "data_uncompressed_bytes": 401897837,
+      "marks_bytes": 35578,
+      "primary_key_bytes_in_memory": 7326,
+      "part_type": "Wide"
+    }
+  ],
+  "optimize_setup_ms": 1944.3933119999883,
+  "observed_stable_wait_s": 20.12370678000002,
+  "created_at": "2026-11-23T08:33:03.464649+00:00"
+}

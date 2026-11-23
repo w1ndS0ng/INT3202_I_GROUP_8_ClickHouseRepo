@@ -1,0 +1,22 @@
+{
+  "w0": {
+    "matched": 30000000,
+    "checksum": 45209977242
+  },
+  "w1": {
+    "matched": 38841,
+    "checksum": 60548808
+  },
+  "w2": {
+    "matched": 11464429,
+    "checksum": 17359982737
+  },
+  "w3": {
+    "matched": 4012,
+    "checksum": 6201708
+  },
+  "w4": {
+    "matched": 6185519,
+    "checksum": 9351769274
+  }
+}

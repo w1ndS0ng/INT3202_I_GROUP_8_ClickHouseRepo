@@ -1,0 +1,56 @@
+[
+  {
+    "elapsed_s": 0.011748511999940092,
+    "parts": [
+      {
+        "name": "all_1_30_2",
+        "rows": 30000000,
+        "marks": 3663,
+        "bytes_on_disk": 522420915,
+        "data_compressed_bytes": 522316841,
+        "data_uncompressed_bytes": 1205690840,
+        "marks_bytes": 102666,
+        "primary_key_bytes_in_memory": 0,
+        "part_type": "Wide"
+      }
+    ],
+    "merges": 0,
+    "mutations": 0
+  },
+  {
+    "elapsed_s": 10.039792699000031,
+    "parts": [
+      {
+        "name": "all_1_30_2",
+        "rows": 30000000,
+        "marks": 3663,
+        "bytes_on_disk": 522420915,
+        "data_compressed_bytes": 522316841,
+        "data_uncompressed_bytes": 1205690840,
+        "marks_bytes": 102666,
+        "primary_key_bytes_in_memory": 0,
+        "part_type": "Wide"
+      }
+    ],
+    "merges": 0,
+    "mutations": 0
+  },
+  {
+    "elapsed_s": 20.068612752000035,
+    "parts": [
+      {
+        "name": "all_1_30_2",
+        "rows": 30000000,
+        "marks": 3663,
+        "bytes_on_disk": 522420915,
+        "data_compressed_bytes": 522316841,
+        "data_uncompressed_bytes": 1205690840,
+        "marks_bytes": 102666,
+        "primary_key_bytes_in_memory": 0,
+        "part_type": "Wide"
+      }
+    ],
+    "merges": 0,
+    "mutations": 0
+  }
+]

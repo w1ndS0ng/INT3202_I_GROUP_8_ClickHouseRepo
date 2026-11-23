@@ -1,0 +1,67 @@
+{
+  "rows": 10000000,
+  "ingest_ack_s": 6.67550452699993,
+  "throughput_rows_s": 1498014.1140723857,
+  "batches": [
+    {
+      "query_id": "mtr_insert_b3392a0826f7455ea4a7a585203739fb",
+      "batch": 0,
+      "rows": 1000000,
+      "client_ms": 346.85497599991777
+    },
+    {
+      "query_id": "mtr_insert_685d3f5cd07249a6b2f4f96bd062655f",
+      "batch": 1,
+      "rows": 1000000,
+      "client_ms": 275.5348360000198
+    },
+    {
+      "query_id": "mtr_insert_091031fb44a544ba911d84d7cceac1b4",
+      "batch": 2,
+      "rows": 1000000,
+      "client_ms": 283.0869669999174
+    },
+    {
+      "query_id": "mtr_insert_be2a5e7d00af47dcab04ff03c583aac2",
+      "batch": 3,
+      "rows": 1000000,
+      "client_ms": 249.6893850000106
+    },
+    {
+      "query_id": "mtr_insert_b8d5f8d25b364c1e84e92ea2fcca7da9",
+      "batch": 4,
+      "rows": 1000000,
+      "client_ms": 241.21019500000784
+    },
+    {
+      "query_id": "mtr_insert_2e0b57493e8147969ed9f65f7ab3c626",
+      "batch": 5,
+      "rows": 1000000,
+      "client_ms": 261.3428270000213
+    },
+    {
+      "query_id": "mtr_insert_b5866e76fca74949b16904320879502e",
+      "batch": 6,
+      "rows": 1000000,
+      "client_ms": 288.51621199999045
+    },
+    {
+      "query_id": "mtr_insert_38f8b155e2b04582a479ab972ed023d1",
+      "batch": 7,
+      "rows": 1000000,
+      "client_ms": 280.87932300002194
+    },
+    {
+      "query_id": "mtr_insert_d92924838ec245098dc5dc398792ee4e",
+      "batch": 8,
+      "rows": 1000000,
+      "client_ms": 263.1094270000176
+    },
+    {
+      "query_id": "mtr_insert_c3260d256291473f99194ee97edbbee3",
+      "batch": 9,
+      "rows": 1000000,
+      "client_ms": 382.70137500001056
+    }
+  ]
+}
