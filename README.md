@@ -5,7 +5,9 @@ Nghiên cứu một node ClickHouse: **sorting key → sparse index/granule prun
 **batch INSERT → data parts/background merges → tốc độ ghi và dung lượng**.
 
 Đây là thực nghiệm tùy biến từ ClickBench, không phải điểm ClickBench chính thức.
-Phạm vi mới không triển khai PostgreSQL, vectorization benchmark, MV, Kafka hay cluster.
+Các thí nghiệm chương 3 không triển khai PostgreSQL, vectorization benchmark, MV, Kafka hay cluster.
+Đối chiếu PostgreSQL ở mục 4.2–4.3 được tách riêng trong `configs/comparison.json` và
+`scripts/compare_databases.py`, với run pilot 1M và run chính thức 30M độc lập.
 
 ## Bắt đầu
 
@@ -111,6 +113,33 @@ Thư mục `results/` mặc định không được Git theo dõi. Chỉ đưa b
 vào `artifacts/<member>/<machine>/<run>/`; giữ ZIP lớn ở Release nếu cần.
 
 ## Cộng tác
+
+### Đối chiếu PostgreSQL (mục 4.2–4.3)
+
+Workflow này dùng hai instance nghiên cứu riêng, ClickHouse 26.10.3.7 và PostgreSQL
+18.6; không dùng lại các bảng/kết quả chương 3 làm baseline thời gian. Cài dependency
+tùy chọn bằng `pip install -r requirements-comparison.txt`. Trên Linux, client và
+server đều dùng CPU affinity 0–3; cấu hình PostgreSQL và chính sách RAM/cache được
+ghi trong hồ sơ chạy. Các tham số RAM hai hệ không phải hai giới hạn tổng tương đương.
+Instance ClickHouse dành riêng đặt `keep_alive_timeout=3600` để kết nối HTTP không
+đóng trong lúc các cấu hình PostgreSQL đang được đo; runner kiểm thiết lập này.
+
+```bash
+CH_HTTP_PORT=18124 taskset -c 0-3 python scripts/compare_databases.py \
+  --data /path/to/locked/dataset --derived /path/to/derived-input \
+  --pg-socket /path/to/private/pgsocket --pg-port 55432 \
+  --machine wsl_xeon --run pilot42_new --scale 1m
+```
+
+Lệnh trên chạy pilot 1M: giữ nguồn gốc, chuyển sang PostgreSQL COPY BINARY ngoài
+thời gian đo, dựng CH0/CH1/PG0/PG1/PG2, kiểm toàn bộ 12 cột và COUNT/SUM, lưu
+DDL/EXPLAIN/settings, 50 warmup và 250 lượt SELECT. Kết quả mang nhãn
+`PASS_PILOT_ONLY`; không dùng làm kết luận hiệu năng 30M. Đo chính thức bằng
+`--scale 30m` với một run ID mới; runner kiểm SHA-256 cả 30 shard trước nạp và chỉ
+ghi `PASS_FORMAL` khi kiểm dữ liệu, đáp án, QueryFinish và trạng thái parts đạt.
+Dùng `python scripts/audit_comparison.py results/tuan/<machine>/<run>` để tính lại
+thống kê và sinh bảng đối chiếu từ số đo gốc, không truy vấn lại database. Dùng run ID mới mỗi lần;
+runner không tự xóa hoặc ghi đè database/schema/thư mục kết quả đã tồn tại.
 
 Mỗi người dùng nhánh `ha/sorting-key`, `tuan/granularity`, `tai/batch-merge`.
 Sửa protocol/schema/workload chung phải qua PR và tăng phiên bản protocol **trước khi đo**.
