@@ -1,0 +1,97 @@
+[
+  {
+    "experiment": "keys",
+    "scale": "3m",
+    "variant": "k1",
+    "case": "w0",
+    "estimated_rows": 3000000,
+    "selected_marks": 367,
+    "selected_parts": 1,
+    "total_marks": 367,
+    "raw": [
+      {
+        "database": "mtr_ha_laptop1_main01",
+        "table": "keys_3m_k1",
+        "parts": 1,
+        "rows": 3000000,
+        "marks": 367
+      }
+    ]
+  },
+  {
+    "experiment": "keys",
+    "scale": "3m",
+    "variant": "k1",
+    "case": "w1",
+    "estimated_rows": 8192,
+    "selected_marks": 1,
+    "selected_parts": 1,
+    "total_marks": 367,
+    "raw": [
+      {
+        "database": "mtr_ha_laptop1_main01",
+        "table": "keys_3m_k1",
+        "parts": 1,
+        "rows": 8192,
+        "marks": 1
+      }
+    ]
+  },
+  {
+    "experiment": "keys",
+    "scale": "3m",
+    "variant": "k1",
+    "case": "w2",
+    "estimated_rows": 1959616,
+    "selected_marks": 240,
+    "selected_parts": 1,
+    "total_marks": 367,
+    "raw": [
+      {
+        "database": "mtr_ha_laptop1_main01",
+        "table": "keys_3m_k1",
+        "parts": 1,
+        "rows": 1959616,
+        "marks": 240
+      }
+    ]
+  },
+  {
+    "experiment": "keys",
+    "scale": "3m",
+    "variant": "k1",
+    "case": "w3",
+    "estimated_rows": 8192,
+    "selected_marks": 1,
+    "selected_parts": 1,
+    "total_marks": 367,
+    "raw": [
+      {
+        "database": "mtr_ha_laptop1_main01",
+        "table": "keys_3m_k1",
+        "parts": 1,
+        "rows": 8192,
+        "marks": 1
+      }
+    ]
+  },
+  {
+    "experiment": "keys",
+    "scale": "3m",
+    "variant": "k1",
+    "case": "w4",
+    "estimated_rows": 3000000,
+    "selected_marks": 367,
+    "selected_parts": 1,
+    "total_marks": 367,
+    "raw": [
+      {
+        "database": "mtr_ha_laptop1_main01",
+        "table": "keys_3m_k1",
+        "parts": 1,
+        "rows": 3000000,
+        "marks": 367
+      }
+    ]
+  }
+]

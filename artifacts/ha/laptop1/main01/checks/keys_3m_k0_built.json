@@ -1,0 +1,25 @@
+{
+  "table": "mtr_ha_laptop1_main01.keys_3m_k0",
+  "n": 3000000,
+  "fingerprint": {
+    "n": 3000000,
+    "hash_sum": 6236426022786504931,
+    "hash_xor": 7923152785863773603
+  },
+  "parts": [
+    {
+      "name": "all_1_3_1",
+      "rows": 3000000,
+      "marks": 367,
+      "bytes_on_disk": 62830121,
+      "data_compressed_bytes": 62816948,
+      "data_uncompressed_bytes": 120566560,
+      "marks_bytes": 11784,
+      "primary_key_bytes_in_memory": 0,
+      "part_type": "Wide"
+    }
+  ],
+  "optimize_setup_ms": 443.12156800003777,
+  "observed_stable_wait_s": 20.098524737999924,
+  "created_at": "2026-11-23T08:30:36.932199+00:00"
+}

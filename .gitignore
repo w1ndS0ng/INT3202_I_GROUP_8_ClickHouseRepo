@@ -13,3 +13,4 @@ client.xml
 *.zip
 .DS_Store
 .publish/
+.idea/

@@ -1,0 +1,25 @@
+{
+  "rows": 3000000,
+  "ingest_ack_s": 1.672790473999953,
+  "throughput_rows_s": 1793410.4997779203,
+  "batches": [
+    {
+      "query_id": "mtr_insert_f9e4a8dbdfe7487a8335c3ffe5ec28a4",
+      "batch": 0,
+      "rows": 1000000,
+      "client_ms": 359.13276400003724
+    },
+    {
+      "query_id": "mtr_insert_6c13f8c4416643f0b0569ec95954985b",
+      "batch": 1,
+      "rows": 1000000,
+      "client_ms": 254.5428119999542
+    },
+    {
+      "query_id": "mtr_insert_ffc1861edea645e78daa574ad442df13",
+      "batch": 2,
+      "rows": 1000000,
+      "client_ms": 236.42466800004058
+    }
+  ]
+}
