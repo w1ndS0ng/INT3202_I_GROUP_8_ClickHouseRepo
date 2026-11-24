@@ -1,0 +1,37 @@
+{
+  "ch0": {
+    "w0": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.ch0",
+    "w1": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.ch0 WHERE CounterID=3258",
+    "w2": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.ch0 WHERE EventDate >= toDate('2013-07-15') AND EventDate < toDate('2013-07-23')",
+    "w3": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.ch0 WHERE CounterID=3258 AND EventDate >= toDate('2013-07-15') AND EventDate < toDate('2013-07-23')",
+    "w4": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.ch0 WHERE RegionID=229"
+  },
+  "ch1": {
+    "w0": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.ch1",
+    "w1": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.ch1 WHERE CounterID=3258",
+    "w2": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.ch1 WHERE EventDate >= toDate('2013-07-15') AND EventDate < toDate('2013-07-23')",
+    "w3": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.ch1 WHERE CounterID=3258 AND EventDate >= toDate('2013-07-15') AND EventDate < toDate('2013-07-23')",
+    "w4": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.ch1 WHERE RegionID=229"
+  },
+  "pg0": {
+    "w0": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg0",
+    "w1": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg0 WHERE CounterID=3258",
+    "w2": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg0 WHERE EventDate >= DATE('2013-07-15') AND EventDate < DATE('2013-07-23')",
+    "w3": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg0 WHERE CounterID=3258 AND EventDate >= DATE('2013-07-15') AND EventDate < DATE('2013-07-23')",
+    "w4": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg0 WHERE RegionID=229"
+  },
+  "pg1": {
+    "w0": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg1",
+    "w1": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg1 WHERE CounterID=3258",
+    "w2": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg1 WHERE EventDate >= DATE('2013-07-15') AND EventDate < DATE('2013-07-23')",
+    "w3": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg1 WHERE CounterID=3258 AND EventDate >= DATE('2013-07-15') AND EventDate < DATE('2013-07-23')",
+    "w4": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg1 WHERE RegionID=229"
+  },
+  "pg2": {
+    "w0": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg2",
+    "w1": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg2 WHERE CounterID=3258",
+    "w2": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg2 WHERE EventDate >= DATE('2013-07-15') AND EventDate < DATE('2013-07-23')",
+    "w3": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg2 WHERE CounterID=3258 AND EventDate >= DATE('2013-07-15') AND EventDate < DATE('2013-07-23')",
+    "w4": "SELECT count(*) AS matched, sum(ResolutionWidth) AS checksum FROM cmp_pilot42_v2_20261123.pg2 WHERE RegionID=229"
+  }
+}

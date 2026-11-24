@@ -1,0 +1,33 @@
+{
+  "postgresql_pid": 705,
+  "postgresql_affinity": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "clickhouse_process_affinities": {
+    "715": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "721": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "ch_http_port": 18124,
+  "ch_native_port": 19001,
+  "pg_socket": "/home/anhtuan/mergetree-compare-v1/pgsocket",
+  "pg_port": 55432,
+  "data_dir": "/home/anhtuan/mergetree-study-data",
+  "derived_dir": "/home/anhtuan/mergetree-compare-v1/derived",
+  "servers_on_same_linux_filesystem": true,
+  "other_clickhouse_instance_present": true,
+  "process_memory_limits_equalized": false,
+  "windows_C_free_bytes_at_preflight": 102080811008
+}

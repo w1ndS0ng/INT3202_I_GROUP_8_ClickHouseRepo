@@ -1,0 +1,15 @@
+{
+  "autovacuum": "on",
+  "block_size": "8192",
+  "fsync": "on",
+  "full_page_writes": "on",
+  "jit": "off",
+  "maintenance_work_mem": "262144",
+  "max_parallel_workers": "4",
+  "max_parallel_workers_per_gather": "3",
+  "max_worker_processes": "8",
+  "shared_buffers": "32768",
+  "statement_timeout": "1200000",
+  "synchronous_commit": "on",
+  "work_mem": "32768"
+}

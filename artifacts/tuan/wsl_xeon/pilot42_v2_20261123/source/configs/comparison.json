@@ -1,0 +1,25 @@
+{
+  "protocol_version": "crossdb-v2",
+  "base_protocol": "configs/protocol.json",
+  "base_protocol_sha256": "c725bf826f83e37a843f7d40042b6194baedec0e5b093f87ee9a67c2fcfc40f4",
+  "expected_postgresql_version_num": 180006,
+  "granularity": 8192,
+  "brin_pages_per_range": 128,
+  "cluster": false,
+  "psycopg_prepare_threshold": null,
+  "cpu_affinity": [0, 1, 2, 3],
+  "postgresql_settings": {
+    "timezone": "UTC",
+    "max_parallel_workers_per_gather": "3",
+    "work_mem": "32MB",
+    "maintenance_work_mem": "256MB",
+    "jit": "off",
+    "statement_timeout": "1200s"
+  },
+  "query_rounds": 10,
+  "warmups": 2,
+  "seed": 20261123,
+  "measurement": "persistent local clients; SELECT count/sum; fetch and normalize both values; setup and EXPLAIN excluded",
+  "cache_policy": "warm-repeat; OS cache not cleared; query caches disabled",
+  "scope": "Five configurations; pilot 1M validates section 4.2. No formal 30M results yet."
+}

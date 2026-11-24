@@ -1,0 +1,28 @@
+{
+  "ch0": [
+    {
+      "name": "all_1_1_1",
+      "rows": 1000000,
+      "marks": 123,
+      "part_type": "Wide",
+      "bytes_on_disk": 25338092,
+      "data_compressed_bytes": 25331981,
+      "data_uncompressed_bytes": 40188357,
+      "marks_bytes": 4726,
+      "primary_key_bytes_in_memory": 0
+    }
+  ],
+  "ch1": [
+    {
+      "name": "all_1_1_1",
+      "rows": 1000000,
+      "marks": 123,
+      "part_type": "Wide",
+      "bytes_on_disk": 25326703,
+      "data_compressed_bytes": 25320191,
+      "data_uncompressed_bytes": 40188358,
+      "marks_bytes": 4745,
+      "primary_key_bytes_in_memory": 738
+    }
+  ]
+}
