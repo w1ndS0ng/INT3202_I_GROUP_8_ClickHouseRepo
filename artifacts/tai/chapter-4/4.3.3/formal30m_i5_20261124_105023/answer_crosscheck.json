@@ -1,0 +1,6 @@
+{
+  "status": "storage_setup_and_answers_verified",
+  "verified_xeon_workload_answers": 25,
+  "xeon_run": "formal43_v3_20261123",
+  "scope": "Storage and preparation on i5. The report uses Xeon query timing and plans."
+}

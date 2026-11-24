@@ -1,0 +1,84 @@
+RUN_ID=formal30m_i5_20261124_105023
+The files belonging to this database system will be owned by user "anhtai06".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "C.UTF-8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are enabled.
+
+creating directory <wsl-home>/ch4-pilot-20261124/formal30m_i5_20261124_105023/pg ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default "max_connections" ... 100
+selecting default "shared_buffers" ... 128MB
+selecting default time zone ... Asia/Bangkok
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+
+Success. You can now start the database server using:
+
+    <wsl-home>/.local/ch4-pg18-20261124/usr/lib/postgresql/18/bin/pg_ctl -D <wsl-home>/ch4-pilot-20261124/formal30m_i5_20261124_105023/pg -l logfile start
+
+waiting for server to start.... done
+server started
+Ok.
+Converted source hits_0.rowbinary rows 1000000
+Converted source hits_10.rowbinary rows 2000000
+Converted source hits_20.rowbinary rows 3000000
+Converted source hits_30.rowbinary rows 4000000
+Fingerprint rows: 5000000
+Converted source hits_40.rowbinary rows 5000000
+Converted source hits_50.rowbinary rows 6000000
+Converted source hits_60.rowbinary rows 7000000
+Converted source hits_70.rowbinary rows 8000000
+Converted source hits_80.rowbinary rows 9000000
+Fingerprint rows: 10000000
+Converted source hits_90.rowbinary rows 10000000
+Converted source hits_1.rowbinary rows 11000000
+Converted source hits_11.rowbinary rows 12000000
+Converted source hits_21.rowbinary rows 13000000
+Converted source hits_31.rowbinary rows 14000000
+Fingerprint rows: 15000000
+Converted source hits_41.rowbinary rows 15000000
+Converted source hits_51.rowbinary rows 16000000
+Converted source hits_61.rowbinary rows 17000000
+Converted source hits_71.rowbinary rows 18000000
+Converted source hits_81.rowbinary rows 19000000
+Fingerprint rows: 20000000
+Converted source hits_91.rowbinary rows 20000000
+Converted source hits_2.rowbinary rows 21000000
+Converted source hits_12.rowbinary rows 22000000
+Converted source hits_22.rowbinary rows 23000000
+Converted source hits_32.rowbinary rows 24000000
+Fingerprint rows: 25000000
+Converted source hits_42.rowbinary rows 25000000
+Converted source hits_52.rowbinary rows 26000000
+Converted source hits_62.rowbinary rows 27000000
+Converted source hits_72.rowbinary rows 28000000
+Converted source hits_82.rowbinary rows 29000000
+Fingerprint rows: 30000000
+Converted source hits_92.rowbinary rows 30000000
+Build ch0
+Build ch1
+Build pg0
+Build pg1
+Build pg2
+Validate all fields: ch0
+Fingerprint rows: 5000000
+Fingerprint rows: 10000000
+Fingerprint rows: 15000000
+Fingerprint rows: 20000000
+Fingerprint rows: 25000000
+Fingerprint rows: 30000000
+Validate all fields: ch1
+Fingerprint rows: 5000000
+Fingerprint rows: 10000000
+Fingerprint rows: 15000000
+Fingerprint rows: 20000000
+Fingerprint rows: 25000000
+Fingerprint rows: 30000000
+Validate all fields: pg0

@@ -1,0 +1,9 @@
+{
+  "fingerprint": {
+    "rows": 1000000,
+    "sha256_sum": "c8c6a42b113c999883527949e76b33fa7fa8e143cded6365077d220cf73f0f3a",
+    "sha256_xor": "05233f837521687d02cbb73149d7b5768a227b352c2fcba5fc75702aa12d1060"
+  },
+  "pgcopy_sha256": "0bc2e880844df245da3c112aa635406e18bca89ab83adc7b588ffee4818bfd27",
+  "conversion_excluded_from_timing": true
+}

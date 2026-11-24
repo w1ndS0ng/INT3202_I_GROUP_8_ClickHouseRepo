@@ -1,0 +1,18 @@
+{
+  "status": "pilot_only",
+  "rows": 1000000,
+  "rowbinary_sample": [
+    {
+      "field": "group_sha256",
+      "value": "9daf2b6987330203680230af07318a5548fac8a49f551b0f6f4623302a8cbdda"
+    },
+    {
+      "field": "pilot_sha256",
+      "value": "7c58959cfa97eab4e371d023d318a265493cd06886f308909fc27757b3a9f9fa"
+    },
+    {
+      "field": "rows",
+      "value": 1000000
+    }
+  ]
+}
