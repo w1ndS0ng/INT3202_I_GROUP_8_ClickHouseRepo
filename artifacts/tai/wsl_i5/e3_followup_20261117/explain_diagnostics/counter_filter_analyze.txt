@@ -1,0 +1,51 @@
+Query summary:
+  Time:        11.48 ms (planning 1.78 ms · execution 9.70 ms)
+  Execution:   in steps 9.19 ms (94.76%) · outside steps 2.25 us (0.02%) · idle 505.68 us (5.21%)
+  Read:        73.73 thousand rows, 442.37 KB (7.60 million rows/s., 45.62 MB/s.)
+  Peak memory: 270.88 KiB
+
+Output: sum(ResolutionWidth)
+
+Expression ((Project names + Projection))
+│  I/O: rows 1 → 1 · 8 B → 8 B
+│  Time: step 2.31 us (0.02%) · branch 9.19 ms (94.76%)
+│  Concurrency: step 1.00/3 · branch 1.81/3
+│    time 2.35 us (0.02%) · parallelism 0.98/1
+└──Aggregating
+   │  Keys:
+   │  Aggregates: sum(ResolutionWidth)
+   │  Skip merging: 0
+   │  Memory: bytes 12.31 KB
+   │  I/O: rows 38.84 thousand → 1 (0.00%) · 77.68 KB → 8 B
+   │  Time: step 118.36 us (1.22%) · branch 9.19 ms (94.74%)
+   │  Concurrency: step 1.75/3 · branch 1.81/3
+   │    Stage (partial aggregation): time 112.48 us (1.16%) · parallelism 1.06/3
+   │    Stage (final aggregation): time 6.21 us (0.06%) · parallelism 0.99/1
+   └──Expression (Before GROUP BY)
+      │  I/O: rows 38.84 thousand → 38.84 thousand · 77.68 KB → 77.68 KB
+      │  Time: step 2.99 us (0.03%) · branch 9.12 ms (94.06%)
+      │  Concurrency: step 2.67/3 · branch 1.81/3
+      │    time 3.16 us (0.03%) · parallelism 0.94/1
+      └──Filter ((WHERE + Change column names to column identifiers))
+         │  Filter column: CounterID = 3258
+         │  I/O: rows 73.73 thousand → 38.84 thousand (52.68%) · 442.37 KB → 77.68 KB
+         │  Time: step 211.29 us (2.18%) · branch 9.12 ms (94.06%)
+         │  Concurrency: step 2.65/3 · branch 1.81/3
+         │    time 211.57 us (2.18%) · parallelism 1.07/3
+         └──ReadFromMergeTree (mtr_tai_wsl_i5_e3main_v2_20261117.ingest_30m_b1000000_r0)
+               Read type: Default
+               Parts: 4 | Granules: 9
+               Output: ResolutionWidth, CounterID
+               Indexes:
+                 PrimaryKey
+                   Keys:
+                     CounterID
+                   Condition: (CounterID in [3258, 3258])
+                   Parts: 4/5
+                   Granules: 9/3665
+                   Search Algorithm: binary search
+                 Ranges: 4
+               I/O: rows 0 → 73.73 thousand · 0 B → 442.37 KB
+               Time: step 9.11 ms (93.90%) · branch 9.11 ms (93.90%)
+               Concurrency: step 1.81/3 · branch 1.81/3
+                 time 9.11 ms (93.90%) · parallelism 1.78/3

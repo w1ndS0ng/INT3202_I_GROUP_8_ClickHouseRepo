@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "cases": 9,
+  "rows_per_case": 1000000,
+  "total_batches": 333,
+  "source_worktree_clean_at_init": false,
+  "pilot_note": "Pilot init recorded generated, untracked source-audit manifests; numerical checks retained; formal run requires clean frozen source",
+  "all_fingerprints_match_source": true,
+  "all_newpart_rows_accounted": true,
+  "completed_at": "2026-11-17T03:55:19.477306+00:00",
+  "max_post_ack_snapshot_delay_s": 0.01366610499997023,
+  "summary_csv_sha256": "59fa12ab7163c41de83f655e149be6d4b60f0b1acf9be2954ac9dba044bb9104"
+}

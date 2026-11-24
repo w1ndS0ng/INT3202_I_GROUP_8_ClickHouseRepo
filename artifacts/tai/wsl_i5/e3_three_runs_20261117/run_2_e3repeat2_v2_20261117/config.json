@@ -1,0 +1,175 @@
+{
+  "member": "tai",
+  "machine": "wsl_i5",
+  "run": "e3repeat2_v2_20261117",
+  "database": "mtr_tai_wsl_i5_e3repeat2_v2_20261117",
+  "protocol": {
+    "protocol_version": "mergetree-v2-e3-r1",
+    "expected_clickhouse_version": "26.10.3.7",
+    "clickbench_commit": "b0b7dd8f11a2a719211cc41d8c7ebbada267df66",
+    "schema": [
+      [
+        "WatchID",
+        "Int64",
+        8
+      ],
+      [
+        "UserID",
+        "Int64",
+        8
+      ],
+      [
+        "CounterID",
+        "Int32",
+        4
+      ],
+      [
+        "EventDate",
+        "Date",
+        2
+      ],
+      [
+        "EventTime",
+        "DateTime('UTC')",
+        4
+      ],
+      [
+        "RegionID",
+        "Int32",
+        4
+      ],
+      [
+        "AdvEngineID",
+        "Int16",
+        2
+      ],
+      [
+        "IsRefresh",
+        "Int16",
+        2
+      ],
+      [
+        "ResolutionWidth",
+        "Int16",
+        2
+      ],
+      [
+        "ResolutionHeight",
+        "Int16",
+        2
+      ],
+      [
+        "DontCountHits",
+        "Int16",
+        2
+      ],
+      [
+        "ResponseEndTiming",
+        "Int32",
+        4
+      ]
+    ],
+    "shards": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      1,
+      11,
+      21,
+      31,
+      41,
+      51,
+      61,
+      71,
+      81,
+      91,
+      2,
+      12,
+      22,
+      32,
+      42,
+      52,
+      62,
+      72,
+      82,
+      92
+    ],
+    "scales": {
+      "1m": 1,
+      "3m": 3,
+      "10m": 10,
+      "30m": 30
+    },
+    "keys": {
+      "k0": "tuple()",
+      "k1": "(CounterID, EventDate)",
+      "k2": "(EventDate, CounterID)"
+    },
+    "granularities": [
+      2048,
+      8192,
+      32768
+    ],
+    "batch_rows": [
+      10000,
+      100000,
+      1000000
+    ],
+    "query_rounds": 10,
+    "warmups": 2,
+    "ingest_rounds": 3,
+    "seed": 20261116,
+    "stable_samples": 3,
+    "stable_interval_seconds": 10,
+    "stable_timeout_seconds": 1200,
+    "parameters": {
+      "counter_id": 3258,
+      "date_start": "2013-07-15",
+      "date_end": "2013-07-23",
+      "region_id": 229
+    },
+    "settings": {
+      "max_threads": 4,
+      "max_insert_threads": 1,
+      "max_memory_usage": 2000000000,
+      "use_query_cache": 0,
+      "use_query_condition_cache": 0,
+      "use_skip_indexes": 0,
+      "use_skip_indexes_on_data_read": 0,
+      "optimize_move_to_prewhere": 0,
+      "optimize_trivial_count_query": 0,
+      "optimize_aggregation_in_order": 0,
+      "optimize_read_in_order": 0,
+      "async_insert": 0,
+      "log_queries": 1,
+      "log_queries_probability": 1,
+      "log_queries_min_query_duration_ms": 0,
+      "log_query_settings": 1,
+      "max_block_size": 16384,
+      "min_insert_block_size_rows": 1000000,
+      "min_insert_block_size_bytes": 0,
+      "max_insert_block_size": 1000000
+    },
+    "e3_measurement": {
+      "source": "Adopted from shared report Tuáº¥n 3.2/3.4 on 2026-11-17; unavailable Tuáº¥n commits are not claimed as this run source",
+      "ack": "first HTTP request start to last complete HTTP response; intervening local input/journal work included",
+      "snapshot": "taken immediately after ACK; completion delay recorded",
+      "merge_window": "fresh table UUID through server observation-end timestamp after stable snapshot",
+      "source_fingerprint": "independent Parquet-to-RowBinary and global source audits required",
+      "pilot_sample": "Own frozen systematic 1M sample; some profile counts differ from reported E2 pilot; no exact identity with curator sample claimed"
+    }
+  },
+  "protocol_hash": "7b99eef2f31d6201bbf30b91cce846a466309f9bd0a79db29f486d00c1c8aeea",
+  "data_dir": "/home/anhtai06/mergetree-study-v1/data",
+  "manifest_hash": "1efba7dded946c538c55f88f6c95bd32de0754e690e737d397b324b158dfeff9",
+  "git_commit": "0c360382b07c584f11957782079b144cee13cb75",
+  "git_dirty": false,
+  "created_at": "2026-11-17T06:17:56.265588+00:00"
+}

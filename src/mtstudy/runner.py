@@ -174,24 +174,28 @@ class Run:
         actual_ddl, _ = self.client.execute(f'SHOW CREATE TABLE {table} FORMAT TSVRaw')
         self.path('ddl',table.split('.')[1]+'.actual.sql').write_text(actual_ddl.strip()+';\n')
 
-    def load(self,table,paths,batch_rows,limit_rows=None):
+    def load(self,table,paths,batch_rows,limit_rows=None,batch_journal=None):
         count=0
         log=[]
         started=None
         finished=None
         for i,payload in enumerate(fixed_batches(paths,self.row_bytes,batch_rows,limit_rows)):
             query_id='mtr_insert_'+uuid.uuid4().hex
-            before=time.perf_counter()
-            if started is None:
-                started=before
             _,elapsed=self.client.execute(f'INSERT INTO {table} FORMAT RowBinary',query_id,payload)
-            finished=time.perf_counter()
+            if started is None:
+                started=self.client.last_start
+            finished=self.client.last_end
             n=len(payload)//self.row_bytes
             count+=n
-            log.append(dict(query_id=query_id,batch=i,rows=n,client_ms=elapsed))
+            record=dict(query_id=query_id,batch=i,rows=n,client_ms=elapsed,ack_at=utc())
+            log.append(record)
+            if batch_journal:
+                batch_journal.write(json.dumps(record)+'\n')
+                batch_journal.flush()
         if not count:
             raise RuntimeError('Empty input')
-        return dict(rows=count,ingest_ack_s=finished-started,throughput_rows_s=count/(finished-started),batches=log)
+        return dict(rows=count,ingest_ack_s=finished-started,throughput_rows_s=count/(finished-started),
+                    last_ack_perf=finished,batches=log)
 
     def build(self,experiment,scale):
         paths,n=self.inputs(scale)
@@ -337,6 +341,9 @@ class Run:
 
     def ingest(self,scale):
         paths,n=self.inputs(scale)
+        source_fingerprint=self.manifest.get('fingerprints',{}).get(scale)
+        if not self.p.get('smoke_test') and not source_fingerprint:
+            raise RuntimeError('Audit source fingerprints before an official ingestion run')
         if not int(self.client.scalar("EXISTS TABLE system.part_log")):
             raise RuntimeError('system.part_log is required; enable the supplied config and restart before starting a run')
         journal=self.path('ingest',f'{scale}_journal.jsonl')
@@ -373,7 +380,10 @@ class Run:
                     worker=threading.Thread(target=observe,daemon=True)
                     worker.start()
                     try:
-                        loaded=self.load(table,paths,batch)
+                        with self.path('ingest',short+'_batch_journal.jsonl').open('x') as batch_log:
+                            loaded=self.load(table,paths,batch,batch_journal=batch_log)
+                        at_ack=self.snapshot(table)
+                        snapshot_delay_s=time.perf_counter()-loaded['last_ack_perf']
                     finally:
                         stop.set()
                         worker.join(timeout=35)
@@ -383,23 +393,30 @@ class Run:
                     log.write(json.dumps(dict(table=table,phase='ack',**loaded))+'\n')
                     log.flush()
                     save(self.path('ingest',short+'_batches.json'),loaded['batches'])
-                    at_ack=self.snapshot(table)
                     wait=self.stable(table,short)
                     final=self.snapshot(table)
+                    cutoff=self.client.scalar('SELECT now64(6)')
                     fp=self.fingerprint(table)
                     if int(fp['n'])!=n or reference is not None and fp!=reference:
                         raise RuntimeError('Ingestion count/fingerprint mismatch')
+                    if source_fingerprint and any(int(fp[k])!=int(source_fingerprint[k]) for k in ['n','hash_sum','hash_xor']):
+                        raise RuntimeError('Ingested contents differ from the independently audited source')
                     reference=fp
                     save(self.path('checks',short+'_fingerprint.json'),fp)
                     self.client.execute('SYSTEM FLUSH LOGS')
                     events=self.client.rows("SELECT event_type,event_time_microseconds,duration_ms,rows,read_rows,"
                         "read_bytes,bytes_uncompressed,size_in_bytes,peak_memory_usage,merged_from,error,exception "
-                        f"FROM system.part_log WHERE table_uuid=toUUID({quote(table_uuid)}) ORDER BY event_time_microseconds")
+                        f"FROM system.part_log WHERE table_uuid=toUUID({quote(table_uuid)}) "
+                        f"AND event_time_microseconds<=toDateTime64({quote(cutoff)},6) ORDER BY event_time_microseconds")
                     save(self.path('ingest',short+'_part_log.json'),events)
                     if any(int(e['error'])!=0 for e in events):
                         raise RuntimeError('Part log contains failures')
                     merges=[e for e in events if e['event_type']=='MergeParts']
+                    if sum(int(e['rows']) for e in events if e['event_type']=='NewPart')!=n:
+                        raise RuntimeError('NewPart log coverage does not account for all input rows')
                     record=dict(scale=scale,repeat=repeat,position=position,batch_rows=batch,rows=n,
+                         table=table,table_uuid=table_uuid,observation_end_server_time=cutoff,
+                         snapshot_after_ack_delay_s=snapshot_delay_s,
                          ingest_ack_s=loaded['ingest_ack_s'],throughput_rows_s=loaded['throughput_rows_s'],
                          observed_stable_wait_s=wait,parts_at_ack=len(at_ack),parts_stable=len(final),
                          active_bytes_at_ack=sum(int(x['bytes_on_disk']) for x in at_ack),

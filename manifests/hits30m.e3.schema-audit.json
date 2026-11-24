@@ -1,0 +1,815 @@
+{
+  "complete": true,
+  "files": [
+    {
+      "shard": 0,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 542207736209759942,
+        "hash_xor": 12383610822081996488
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 542207736209759942,
+        "hash_xor": 12383610822081996488
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 10,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 9061234944789574597,
+        "hash_xor": 8197679435907003517
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 9061234944789574597,
+        "hash_xor": 8197679435907003517
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 20,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 18275933707029282793,
+        "hash_xor": 6541887391405329483
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 18275933707029282793,
+        "hash_xor": 6541887391405329483
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 30,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 15821802652733498045,
+        "hash_xor": 10262877048292303129
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 15821802652733498045,
+        "hash_xor": 10262877048292303129
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 40,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 8698071099330782678,
+        "hash_xor": 13903949867371025296
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 8698071099330782678,
+        "hash_xor": 13903949867371025296
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 50,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 5944643995167130814,
+        "hash_xor": 15724893223906018658
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 5944643995167130814,
+        "hash_xor": 15724893223906018658
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 60,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 11957409684455899883,
+        "hash_xor": 2439397760843892771
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 11957409684455899883,
+        "hash_xor": 2439397760843892771
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 70,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 11736446435749035896,
+        "hash_xor": 1182505623821998092
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 11736446435749035896,
+        "hash_xor": 1182505623821998092
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 80,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 4859527360495611580,
+        "hash_xor": 17627921899703367182
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 4859527360495611580,
+        "hash_xor": 17627921899703367182
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 90,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 11878192824422339150,
+        "hash_xor": 13518313988348837126
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 11878192824422339150,
+        "hash_xor": 13518313988348837126
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 1,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 551683750110274081,
+        "hash_xor": 10389103599152066915
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 551683750110274081,
+        "hash_xor": 10389103599152066915
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 11,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 16323868930143302618,
+        "hash_xor": 4480031307757823602
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 16323868930143302618,
+        "hash_xor": 4480031307757823602
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 21,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 7404397919444687244,
+        "hash_xor": 5997109032601500924
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 7404397919444687244,
+        "hash_xor": 5997109032601500924
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 31,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 5221881465496367596,
+        "hash_xor": 1941783191320255090
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 5221881465496367596,
+        "hash_xor": 1941783191320255090
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 41,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 1779157432131018116,
+        "hash_xor": 9843610884313695246
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 1779157432131018116,
+        "hash_xor": 9843610884313695246
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 51,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 8844740698487633475,
+        "hash_xor": 11128537340487486511
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 8844740698487633475,
+        "hash_xor": 11128537340487486511
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 61,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 11977381405723022072,
+        "hash_xor": 4477003004819521820
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 11977381405723022072,
+        "hash_xor": 4477003004819521820
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 71,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 10786277358063255920,
+        "hash_xor": 10938311800012845560
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 10786277358063255920,
+        "hash_xor": 10938311800012845560
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 81,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 6300658809339773917,
+        "hash_xor": 7796661836731706181
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 6300658809339773917,
+        "hash_xor": 7796661836731706181
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 91,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 16935544105177208305,
+        "hash_xor": 9044888956484726049
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 16935544105177208305,
+        "hash_xor": 9044888956484726049
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 2,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 11655931491032428699,
+        "hash_xor": 17983178776552561139
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 11655931491032428699,
+        "hash_xor": 17983178776552561139
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 12,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 170193556660380568,
+        "hash_xor": 16168837796646995702
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 170193556660380568,
+        "hash_xor": 16168837796646995702
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 22,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 9049100084767950856,
+        "hash_xor": 3255191657110365490
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 9049100084767950856,
+        "hash_xor": 3255191657110365490
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 32,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 6871733910885753332,
+        "hash_xor": 7728504884596335290
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 6871733910885753332,
+        "hash_xor": 7728504884596335290
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 42,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 13698307995855284913,
+        "hash_xor": 8814482360123157037
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 13698307995855284913,
+        "hash_xor": 8814482360123157037
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 52,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 8210974512177482397,
+        "hash_xor": 7946292759351625487
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 8210974512177482397,
+        "hash_xor": 7946292759351625487
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 62,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 10924714820599775243,
+        "hash_xor": 13689315419381920441
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 10924714820599775243,
+        "hash_xor": 13689315419381920441
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 72,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 1328421728350474079,
+        "hash_xor": 10311380080406346559
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 1328421728350474079,
+        "hash_xor": 10311380080406346559
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 82,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 16854841159286719946,
+        "hash_xor": 9479358462927142114
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 16854841159286719946,
+        "hash_xor": 9479358462927142114
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    },
+    {
+      "shard": 92,
+      "source_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 4786729722317713307,
+        "hash_xor": 9108196315743516131
+      },
+      "normalized_fingerprint": {
+        "n": 1000000,
+        "hash_sum": 4786729722317713307,
+        "hash_xor": 9108196315743516131
+      },
+      "invalid": {
+        "WatchID": 0,
+        "UserID": 0,
+        "CounterID": 0,
+        "EventDate": 0,
+        "EventTime": 0,
+        "RegionID": 0,
+        "AdvEngineID": 0,
+        "IsRefresh": 0,
+        "ResolutionWidth": 0,
+        "ResolutionHeight": 0,
+        "DontCountHits": 0,
+        "ResponseEndTiming": 0
+      }
+    }
+  ]
+}

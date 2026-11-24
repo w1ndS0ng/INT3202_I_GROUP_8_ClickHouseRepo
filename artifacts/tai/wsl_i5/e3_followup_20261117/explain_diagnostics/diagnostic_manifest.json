@@ -1,0 +1,95 @@
+{
+  "created_at": "2026-11-17T10:02:11.751732+00:00",
+  "purpose": "Two one-off SELECT diagnostics, not E1/E2/E3 repeated benchmark results",
+  "table": "mtr_tai_wsl_i5_e3main_v2_20261117.ingest_30m_b1000000_r0",
+  "same_parts_before_after": true,
+  "settings": {
+    "max_threads": 4,
+    "max_insert_threads": 1,
+    "max_memory_usage": 2000000000,
+    "use_query_cache": 0,
+    "use_query_condition_cache": 0,
+    "use_skip_indexes": 0,
+    "use_skip_indexes_on_data_read": 0,
+    "optimize_move_to_prewhere": 0,
+    "optimize_trivial_count_query": 0,
+    "optimize_aggregation_in_order": 0,
+    "optimize_read_in_order": 0,
+    "async_insert": 0,
+    "log_queries": 1,
+    "log_queries_probability": 1,
+    "log_queries_min_query_duration_ms": 0,
+    "log_query_settings": 1,
+    "max_block_size": 16384,
+    "min_insert_block_size_rows": 1000000,
+    "min_insert_block_size_bytes": 0,
+    "max_insert_block_size": 1000000
+  },
+  "records": [
+    {
+      "label": "version",
+      "query_id": "e3_diagnostic_f93da1614af548ebb1b76964e553515d",
+      "exit_code": 0
+    },
+    {
+      "label": "parts_before",
+      "query_id": "e3_diagnostic_017b4a052513405d83c1855463b3a6ce",
+      "exit_code": 0
+    },
+    {
+      "label": "full_scan_estimate",
+      "query_id": "e3_diagnostic_3bdefb880a3a4077a131c0b6db69e982",
+      "exit_code": 0
+    },
+    {
+      "label": "full_scan_plan",
+      "query_id": "e3_diagnostic_f31654807db74868ba5f61b21cb6e831",
+      "exit_code": 0
+    },
+    {
+      "label": "full_scan_analyze",
+      "query_id": "e3_diagnostic_3356d4ad45c14e37818bd50ee8535728",
+      "exit_code": 0
+    },
+    {
+      "label": "full_scan_actual",
+      "query_id": "e3_diagnostic_be36bea2f5e9410d8111aaf7e045b856",
+      "exit_code": 0
+    },
+    {
+      "label": "counter_filter_estimate",
+      "query_id": "e3_diagnostic_5d48718f4b434368926a3a6cf664aaed",
+      "exit_code": 0
+    },
+    {
+      "label": "counter_filter_plan",
+      "query_id": "e3_diagnostic_b03ea69b9895415abbcc458de2ed1fab",
+      "exit_code": 0
+    },
+    {
+      "label": "counter_filter_analyze",
+      "query_id": "e3_diagnostic_aecd5871bc2f44ea95f462a4418364a0",
+      "exit_code": 0
+    },
+    {
+      "label": "counter_filter_actual",
+      "query_id": "e3_diagnostic_96672c2c09064d18a619a2f8fc6d02e2",
+      "exit_code": 0
+    },
+    {
+      "label": "parts_after",
+      "query_id": "e3_diagnostic_b1887b44a461401b9391bb89e110ef1e",
+      "exit_code": 0
+    },
+    {
+      "label": "flush_logs",
+      "query_id": "e3_diagnostic_abe7fd8c356e4d4a88393addc9a15b52",
+      "exit_code": 0
+    },
+    {
+      "label": "query_finish",
+      "query_id": "e3_diagnostic_9733b4d52ceb4133a449776d37143023",
+      "exit_code": 0
+    }
+  ]
+}

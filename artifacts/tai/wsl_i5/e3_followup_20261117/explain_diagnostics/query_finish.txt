@@ -1,0 +1,4 @@
+{"query_id":"e3_diagnostic_3356d4ad45c14e37818bd50ee8535728","query_duration_ms":61,"read_rows":30000042,"read_bytes":60002270,"result_rows":42,"memory_usage":741042}
+{"query_id":"e3_diagnostic_96672c2c09064d18a619a2f8fc6d02e2","query_duration_ms":3,"read_rows":73728,"read_bytes":442368,"result_rows":1,"memory_usage":431231}
+{"query_id":"e3_diagnostic_aecd5871bc2f44ea95f462a4418364a0","query_duration_ms":12,"read_rows":73779,"read_bytes":445234,"result_rows":51,"memory_usage":464823}
+{"query_id":"e3_diagnostic_be36bea2f5e9410d8111aaf7e045b856","query_duration_ms":25,"read_rows":30000000,"read_bytes":60000000,"result_rows":1,"memory_usage":703642}

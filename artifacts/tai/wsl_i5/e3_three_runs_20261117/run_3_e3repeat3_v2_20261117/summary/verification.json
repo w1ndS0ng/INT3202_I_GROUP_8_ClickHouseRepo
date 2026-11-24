@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "cases": 9,
+  "rows_per_case": 30000000,
+  "total_batches": 9990,
+  "source_worktree_clean_at_init": true,
+  "pilot_note": null,
+  "all_fingerprints_match_source": true,
+  "all_newpart_rows_accounted": true,
+  "completed_at": "2026-11-17T07:33:08.604820+00:00",
+  "max_post_ack_snapshot_delay_s": 0.07006185399950482,
+  "summary_csv_sha256": "771d3cb80a4b50563fd60f25b0abdce358204bf67cb14da6e67ea8fbb85d2457"
+}

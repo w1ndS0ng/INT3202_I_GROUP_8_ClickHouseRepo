@@ -1,0 +1,70 @@
+{
+  "created_at": "2026-11-17T10:02:00.879637+00:00",
+  "analysis_type": "retrospective; no preregistered forecast or validation holdout",
+  "authorship": "Group-defined empirical baseline, not an author-provided formula or official ClickHouse cost model",
+  "formula": "T_est(N,B) = (N/N0) * mean(T_ACK(N0,B)); N0=1000000",
+  "assumptions": [
+    "same batch, row format, settings, machine and row order policy",
+    "constant average per-request/per-row cost across scales",
+    "negligible fixed run overhead and scale-dependent merge/cache effects"
+  ],
+  "caveats": [
+    "single pilot scale; no alpha/beta fit or validated extrapolation",
+    "pilot source commit differs and git_dirty was true at initialization",
+    "formal protocol adds provenance notes; numeric schema/settings match pilot",
+    "all original observations retained, including the slow first 10k pilot"
+  ],
+  "inputs": {
+    "pilot": {
+      "name": "1m.csv",
+      "sha256": "acee47cc1f8007ff9eb741ebb4d1161be627b0903b3f7136b3cc01d8a47ca41e"
+    },
+    "formal": {
+      "name": "Tat_ca_27_case.csv",
+      "sha256": "9e3717a8af027d5084dbd7d222d37b43dbb0335fe6633b72d3109f0a6b5ba7ff"
+    }
+  },
+  "mae_s": 76.77764290851832,
+  "mape_percent": 46.27407242365416,
+  "results": [
+    {
+      "batch_rows": 10000,
+      "pilot_n": 1000000,
+      "pilot_observations": 3,
+      "pilot_ack_mean_s": 7.904892830333324,
+      "target_n": 30000000,
+      "actual_observations": 9,
+      "estimated_ack_s": 237.14678490999972,
+      "actual_ack_mean_s": 343.0720047528889,
+      "signed_error_s": -105.92521984288919,
+      "absolute_error_s": 105.92521984288919,
+      "ape_percent": 30.87550670862404
+    },
+    {
+      "batch_rows": 100000,
+      "pilot_n": 1000000,
+      "pilot_observations": 3,
+      "pilot_ack_mean_s": 2.7365719940000113,
+      "target_n": 30000000,
+      "actual_observations": 9,
+      "estimated_ack_s": 82.09715982000034,
+      "actual_ack_mean_s": 141.54064828055556,
+      "signed_error_s": -59.443488460555216,
+      "absolute_error_s": 59.443488460555216,
+      "ape_percent": 41.997467994302944
+    },
+    {
+      "batch_rows": 1000000,
+      "pilot_n": 1000000,
+      "pilot_observations": 3,
+      "pilot_ack_mean_s": 1.1180724373333533,
+      "target_n": 30000000,
+      "actual_observations": 9,
+      "estimated_ack_s": 33.5421731200006,
+      "actual_ack_mean_s": 98.50639354211113,
+      "signed_error_s": -64.96422042211053,
+      "absolute_error_s": 64.96422042211053,
+      "ape_percent": 65.9492425680355
+    }
+  ]
+}

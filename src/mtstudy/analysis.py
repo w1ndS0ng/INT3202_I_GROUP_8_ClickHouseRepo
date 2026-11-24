@@ -316,13 +316,21 @@ def plot(run):
             export(fig,'estimated_vs_actual')
     for path in run.path('summary').glob('ingest_*.csv'):
         rows=sorted(csv_read(path),key=lambda r:int(r['batch_rows']))
+        raw_path=run.path('ingest',rows[0]['scale']+'.csv')
+        raw=csv_read(raw_path) if raw_path.exists() else []
         fig,axes=plt.subplots(1,3,figsize=(13,4))
         for ax,metric,label,factor in zip(axes,['throughput_rows_s','active_bytes_stable','merge_row_amplification'],
                ['Ingestion throughput (rows/s)','Active storage (MiB)','Merge rows read / input rows'],[1,2**20,1]):
             med=[float(r[metric+'_median'])/factor for r in rows]
             err=[[v-float(r[metric+'_q1'])/factor for r,v in zip(rows,med)],
                  [float(r[metric+'_q3'])/factor-v for r,v in zip(rows,med)]]
-            ax.bar([r['batch_rows'] for r in rows],med,yerr=err,capsize=4)
+            ax.bar(range(len(rows)),med,yerr=err,capsize=4,alpha=.65)
+            ax.set_xticks(range(len(rows)),[r['batch_rows'] for r in rows])
+            for j,r in enumerate(rows):
+                observations=[v for v in raw if v['batch_rows']==r['batch_rows']]
+                if observations:
+                    ax.scatter([j+(int(v['repeat'])-1)*.12 for v in observations],
+                               [float(v[metric])/factor for v in observations],color='black',s=22,zorder=3)
             ax.set(xlabel='Rows / batch',title=label)
         export(fig,path.stem)
     for path in run.path('ingest').glob('*_timeline.json'):

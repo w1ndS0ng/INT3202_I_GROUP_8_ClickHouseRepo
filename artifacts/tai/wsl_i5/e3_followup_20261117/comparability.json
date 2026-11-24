@@ -1,0 +1,11 @@
+{
+  "protocol_difference_keys": [
+    "e3_measurement"
+  ],
+  "same_manifest_hash": true,
+  "pilot_git_commit": "6b433b626382e80333a0d8c72cf47c1ec228e056",
+  "pilot_git_dirty": true,
+  "formal_git_commit": "0c360382b07c584f11957782079b144cee13cb75",
+  "formal_git_dirty": false,
+  "numeric_controls_match": true
+}
