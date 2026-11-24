@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "rows": 30000000,
+  "measured": 250,
+  "warmups": 50,
+  "unique_query_ids": 300,
+  "ch_queryfinish": 120,
+  "cells_recomputed": 25,
+  "source_archive_hashes_match": true,
+  "data_fingerprints_match": true,
+  "answers_match": true
+}

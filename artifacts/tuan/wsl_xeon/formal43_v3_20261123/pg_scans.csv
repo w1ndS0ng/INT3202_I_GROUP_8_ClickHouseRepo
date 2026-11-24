@@ -1,0 +1,16 @@
+﻿variant,case,Node Type,Relation Name,Actual Rows,Actual Loops,Shared Hit Blocks,Shared Read Blocks,Rows Removed by Filter,Rows Removed by Index Recheck,Exact Heap Blocks,Lossy Heap Blocks
+pg0,w0,Seq Scan,pg0,7500000.0,4,940,308396,,,,
+pg0,w1,Seq Scan,pg0,9710.25,4,2444,306892,7490290,,,
+pg0,w2,Seq Scan,pg0,2866107.25,4,3948,305388,4633893,,,
+pg0,w3,Seq Scan,pg0,1003.0,4,5452,303884,7498997,,,
+pg0,w4,Seq Scan,pg0,1546379.75,4,6956,302380,5953620,,,
+pg1,w0,Seq Scan,pg1,7500000.0,4,940,308396,,,,
+pg1,w1,Bitmap Heap Scan,pg1,38841.0,1,2061,0,,159815,0,2048
+pg1,w2,Seq Scan,pg1,2866107.25,4,4474,304862,4633893,,,
+pg1,w3,Bitmap Heap Scan,pg1,4012.0,1,1677,0,,157396,0,1664
+pg1,w4,Seq Scan,pg1,1546379.75,4,5978,303358,5953620,,,
+pg2,w0,Seq Scan,pg2,7500000.0,4,18052,291284,,,,
+pg2,w1,Bitmap Heap Scan,pg2,38841.0,1,438,0,,0,402,0
+pg2,w2,Seq Scan,pg2,2866107.25,4,19958,289378,4633893,,,
+pg2,w3,Bitmap Heap Scan,pg2,4012.0,1,49,0,,0,42,0
+pg2,w4,Seq Scan,pg2,1546379.75,4,21462,287874,5953620,,,

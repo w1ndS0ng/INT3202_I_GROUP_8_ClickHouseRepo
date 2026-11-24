@@ -141,6 +141,15 @@ Dùng `python scripts/audit_comparison.py results/tuan/<machine>/<run>` để t�
 thống kê và sinh bảng đối chiếu từ số đo gốc, không truy vấn lại database. Dùng run ID mới mỗi lần;
 runner không tự xóa hoặc ghi đè database/schema/thư mục kết quả đã tồn tại.
 
+Hồ sơ đã công bố của Tuấn (CSV từng lượt, QueryFinish, SQL/DDL/EXPLAIN, cấu hình,
+kiểm dữ liệu, dung lượng, thời gian chuẩn bị và SHA-256; không chứa dataset):
+
+- [Pilot 1M, crossdb-v2](artifacts/tuan/wsl_xeon/pilot42_v2_20261123/): kiểm tra quy trình, không dùng kết luận hiệu năng 30M.
+- [Formal 30M, crossdb-v3](artifacts/tuan/wsl_xeon/formal43_v3_20261123/): 250 lượt đo và 50 warmup; bảng kết quả ở `report_tables.json`, chi phí chuẩn bị ở `setup.json`, dung lượng ở `ch_storage.json` và `pg_storage.json`.
+
+`files.sha256.json` kiểm tra toàn vẹn tệp; `audit.json` ghi kết quả đối chiếu tự động.
+Trạng thái này không thay thế tái lập độc lập, hiện vẫn chưa thực hiện.
+
 Mỗi người dùng nhánh `ha/sorting-key`, `tuan/granularity`, `tai/batch-merge`.
 Sửa protocol/schema/workload chung phải qua PR và tăng phiên bản protocol **trước khi đo**.
 Review vòng: Hà → Tuấn → Tài → Hà. Một người tái lập ít nhất một đối chứng của người khác.

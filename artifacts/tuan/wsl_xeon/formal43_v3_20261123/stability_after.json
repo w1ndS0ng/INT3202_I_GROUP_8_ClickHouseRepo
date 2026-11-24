@@ -1,0 +1,101 @@
+[
+  {
+    "elapsed_s": 0.042133499999636115,
+    "parts": {
+      "ch0": [
+        {
+          "name": "all_1_30_2",
+          "rows": 30000000,
+          "marks": 3663,
+          "part_type": "Wide",
+          "bytes_on_disk": 522429305,
+          "data_compressed_bytes": 522324612,
+          "data_uncompressed_bytes": 1205690847,
+          "marks_bytes": 103285,
+          "primary_key_bytes_in_memory": 0
+        }
+      ],
+      "ch1": [
+        {
+          "name": "all_1_30_2",
+          "rows": 30000000,
+          "marks": 3663,
+          "part_type": "Wide",
+          "bytes_on_disk": 522405099,
+          "data_compressed_bytes": 522298612,
+          "data_uncompressed_bytes": 1205701679,
+          "marks_bytes": 103008,
+          "primary_key_bytes_in_memory": 21978
+        }
+      ]
+    },
+    "merges": 0,
+    "mutations": 0
+  },
+  {
+    "elapsed_s": 10.059196215999691,
+    "parts": {
+      "ch0": [
+        {
+          "name": "all_1_30_2",
+          "rows": 30000000,
+          "marks": 3663,
+          "part_type": "Wide",
+          "bytes_on_disk": 522429305,
+          "data_compressed_bytes": 522324612,
+          "data_uncompressed_bytes": 1205690847,
+          "marks_bytes": 103285,
+          "primary_key_bytes_in_memory": 0
+        }
+      ],
+      "ch1": [
+        {
+          "name": "all_1_30_2",
+          "rows": 30000000,
+          "marks": 3663,
+          "part_type": "Wide",
+          "bytes_on_disk": 522405099,
+          "data_compressed_bytes": 522298612,
+          "data_uncompressed_bytes": 1205701679,
+          "marks_bytes": 103008,
+          "primary_key_bytes_in_memory": 21978
+        }
+      ]
+    },
+    "merges": 0,
+    "mutations": 0
+  },
+  {
+    "elapsed_s": 20.079340813999806,
+    "parts": {
+      "ch0": [
+        {
+          "name": "all_1_30_2",
+          "rows": 30000000,
+          "marks": 3663,
+          "part_type": "Wide",
+          "bytes_on_disk": 522429305,
+          "data_compressed_bytes": 522324612,
+          "data_uncompressed_bytes": 1205690847,
+          "marks_bytes": 103285,
+          "primary_key_bytes_in_memory": 0
+        }
+      ],
+      "ch1": [
+        {
+          "name": "all_1_30_2",
+          "rows": 30000000,
+          "marks": 3663,
+          "part_type": "Wide",
+          "bytes_on_disk": 522405099,
+          "data_compressed_bytes": 522298612,
+          "data_uncompressed_bytes": 1205701679,
+          "marks_bytes": 103008,
+          "primary_key_bytes_in_memory": 21978
+        }
+      ]
+    },
+    "merges": 0,
+    "mutations": 0
+  }
+]
