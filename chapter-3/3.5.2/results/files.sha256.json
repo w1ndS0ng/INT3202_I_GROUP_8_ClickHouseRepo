@@ -1,0 +1,19 @@
+{
+  "ver1_single_run/Bang_9_luot_30M_ver1.csv": "af2a24c5279872d902611a7a0b2bf1746b6800a9dc3d9678bbec65b5d37e3d72",
+  "ver1_single_run/Ket_qua_3_5_day_du_ver1.zip": "722cf4bb9ed355a612fa08f809807af35f667767f3b9d10bf4302cc1b370a345",
+  "ver1_single_run/KIEM_CHUNG_30M_ver1.json": "0168fad84e80e56b47c907b810118f4cbc377681e8dc00ad4ed639576097140b",
+  "ver1_single_run/SHA256SUMS_ver1.txt": "7c7664e4fa3270d91a358bbf7945cc28211afebd8af8ee79434855825d6ee830",
+  "ver2_three_runs/KIEM_CHUNG_3_RUN_ver2.json": "eeb1abc27c14e7f081dc5c2f2393f78fc0e13a19c7c78c6da579d285aa7ef1fc",
+  "ver2_three_runs/run_1_e3main_v2_20261117/ingest/30m_ver2.csv": "af2a24c5279872d902611a7a0b2bf1746b6800a9dc3d9678bbec65b5d37e3d72",
+  "ver2_three_runs/run_1_e3main_v2_20261117/Ket_qua_day_du_ver2.zip": "6334eb74c0c2f93d88c73ea433799def969a6d31878acdf91bae5b3760ab75a9",
+  "ver2_three_runs/run_1_e3main_v2_20261117/summary/verification_ver2.json": "0168fad84e80e56b47c907b810118f4cbc377681e8dc00ad4ed639576097140b",
+  "ver2_three_runs/run_2_e3repeat2_v2_20261117/ingest/30m_ver2.csv": "fbb7b246ffc279a6a8ab3dae69bf5b92a1b02c9d4f0b978ada8159593fe8e9e8",
+  "ver2_three_runs/run_2_e3repeat2_v2_20261117/Ket_qua_day_du_ver2.zip": "06c32e887e1069c5a35452c9f619fededd3be658d919936f23fa8172023ef413",
+  "ver2_three_runs/run_2_e3repeat2_v2_20261117/summary/verification_ver2.json": "7dbc6e1cd95dcfd17a0d373b3c9f2d1aa7aefbb16caa13c00f0c5ccce60e2d30",
+  "ver2_three_runs/run_3_e3repeat3_v2_20261117/ingest/30m_ver2.csv": "4e4a3690ac30b95b9bad68fe55e4c6240f25b7438a29189d9939308bf25d0e8c",
+  "ver2_three_runs/run_3_e3repeat3_v2_20261117/Ket_qua_day_du_ver2.zip": "6626ae4a77335479fb57e685db04b4109aff532d9e31fe5933faf36e7f1bb4c2",
+  "ver2_three_runs/run_3_e3repeat3_v2_20261117/summary/verification_ver2.json": "2f6c85cc59b3fbbe230a2659f86a714eaf1bd04bf787d250ab2340cc297816b5",
+  "ver2_three_runs/SHA256SUMS_ver2.txt": "912b417103effa6c136326c7d5810c6780d2878a0d1024280bac88420ec290b9",
+  "ver2_three_runs/Tat_ca_27_case_ver2.csv": "9e3717a8af027d5084dbd7d222d37b43dbb0335fe6633b72d3109f0a6b5ba7ff",
+  "ver2_three_runs/Toan_bo_3_run_ver2.zip": "04b101445d096f86a3287962fc73aa91254e01ff73a8b30448f7f3b974e7d036"
+}

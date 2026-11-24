@@ -87,32 +87,28 @@ Bản nộp tối đa30trang toàn bộ, Times New Roman13; xem
 [ngân sách từng chương](docs/PAGE_BUDGET_VI.md). Checklist/SQL/log đầy đủ nằm trong repo,
 không chép nguyên vào bản nộp. Script vẽ hình dùng Times New Roman13 từ font có trên máy.
 
-## Kết quả
+## Cấu trúc theo Chương và Tiểu mục (`chapter-2/`, `chapter-3/`, `chapter-4/`)
 
-```text
-results/<member>/<machine>/<run>/
-  config.json, environment.json, effective_settings.json, input_manifest.json
-  ddl/ sql/ explain/ checks/ setup/
-  queries/           # journal, CSV từng lượt, system.query_log
-  ingest/            # từng batch, 9 lượt nạp, part_log, timeline, storage
-  model/             # hệ số + dự đoán có timestamp và hash
-  summary/           # median, Q1, Q3, IQR; estimated_vs_actual.csv
-  figures/           # PNG + SVG
-```
+Toàn bộ hình vẽ, mã thực thi/kiểm chứng và minh chứng kết quả của cả 3 thành viên (Hà, Tuấn, Tài) đã được tổ chức thống nhất theo từng chương và tiểu mục báo cáo. Mỗi tiểu mục đều gồm `scripts/`, `results/` (kèm `files.sha256.json`) và `README.md`; các đợt đo hoặc phiên bản bổ sung theo thời gian được gắn hậu tố `_ver1`, `_ver2` theo đúng trình tự thời điểm đưa vào nghiên cứu:
+
+- **[Chương 2 — Cơ sở lý thuyết MergeTree](chapter-2/README.md):** [`2.3`](chapter-2/2.3/) (Sorting key & sparse primary index), [`2.4`](chapter-2/2.4/) (Granules, marks & công thức kích thước chỉ mục).
+- **[Chương 3 — Thực nghiệm MergeTree](chapter-3/README.md):**
+  - `3.1` ([RQ1–RQ5](chapter-3/3.1/)); `3.2` ([`3.2.1`](chapter-3/3.2.1/) Dataset/manifest `ver1`–`ver2`, [`3.2.2`](chapter-3/3.2.2/) Môi trường & thiết lập, [`3.2.3`](chapter-3/3.2.3/) Workload W0–W4 `ver1`–`ver2`, [`3.2.4`](chapter-3/3.2.4/) Lịch lặp & ổn định).
+  - `3.3` — Thực nghiệm E1 của Hà: [`3.3.1`](chapter-3/3.3.1/), [`3.3.2`](chapter-3/3.3.2/), [`3.3.3`](chapter-3/3.3.3/), [`3.3.4`](chapter-3/3.3.4/).
+  - `3.4` — Thực nghiệm E2 của Tuấn (`ver1` pilot 1M, `ver2` chính thức 30M): [`3.4.1`](chapter-3/3.4.1/), [`3.4.2`](chapter-3/3.4.2/), [`3.4.3`](chapter-3/3.4.3/), [`3.4.4`](chapter-3/3.4.4/).
+  - `3.5` — Thực nghiệm E3 của Tài (`ver1` 1 đợt, `ver2` 3 đợt = 27 lượt nạp): [`3.5.1`](chapter-3/3.5.1/), [`3.5.2`](chapter-3/3.5.2/), [`3.5.3`](chapter-3/3.5.3/), [`3.5.4`](chapter-3/3.5.4/).
+  - `3.6` — Mô hình thời gian & nghiệm thu (`ver1` E3 hồi cứu, `ver2` E1 SELECT holdout): [`3.6.1`](chapter-3/3.6.1/), [`3.6.2`](chapter-3/3.6.2/), [`3.6.3`](chapter-3/3.6.3/), [`3.6.4`](chapter-3/3.6.4/), [`3.6.5`](chapter-3/3.6.5/).
+- **[Chương 4 — Đối chiếu MergeTree với PostgreSQL](chapter-4/README.md):** [`4.1`](chapter-4/4.1/), [`4.2`](chapter-4/4.2/) (`ver1` Xeon pilot 1M, `ver2` Core i5 pilot 1M), [`4.3.1`](chapter-4/4.3.1/) (Query latency Bảng 4.3), [`4.3.2`](chapter-4/4.3.2/) (Pruning & EXPLAIN Bảng 4.4–4.5), [`4.3.3`](chapter-4/4.3.3/) (Dung lượng: `ver1` Xeon, `ver2` Core i5 Bảng 4.6), [`4.3.4`](chapter-4/4.3.4/) (Chi phí chuẩn bị: `ver1` Xeon, `ver2` Core i5 Bảng 4.7), [`4.4`](chapter-4/4.4/), [`4.5`](chapter-4/4.5/).
+
+Thư mục chạy nháp cục bộ tại gốc (`/results/<member>/<machine>/<run>/`) vẫn được `.gitignore` bỏ qua để không đẩy nhầm dữ liệu thô chưa rà soát:
 
 ```bash
-# Thay bộ ba nhãn bằng đúng run của bạn.
+# Thay bộ ba nhãn bằng đúng run cục bộ của bạn khi chạy mới:
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 .venv/bin/python scripts/study.py plot --member ha --machine laptop1 --run main01
 python3 scripts/study.py package --member ha --machine laptop1 --run main01
 ```
-
-`share_results.zip` chứa hồ sơ thực nghiệm, không chứa dataset hay cấu hình mật khẩu.
-Thư mục `results/` mặc định không được Git theo dõi. Chỉ đưa bộ kết quả đã rà soát
-vào `artifacts/<member>/<machine>/<run>/`; giữ ZIP lớn ở Release nếu cần.
-Tra cứu [minh chứng theo từng phần báo cáo của Tuấn](artifacts/tuan/README.md),
-gồm hình Chương 2, dữ liệu/kiểm tra Chương 3 và đối chiếu Chương 4.
 
 ## Cộng tác
 
@@ -143,11 +139,12 @@ Dùng `python scripts/audit_comparison.py results/tuan/<machine>/<run>` để t�
 thống kê và sinh bảng đối chiếu từ số đo gốc, không truy vấn lại database. Dùng run ID mới mỗi lần;
 runner không tự xóa hoặc ghi đè database/schema/thư mục kết quả đã tồn tại.
 
-Hồ sơ đã công bố của Tuấn (CSV từng lượt, QueryFinish, SQL/DDL/EXPLAIN, cấu hình,
+Hồ sơ đối chiếu đã công bố của nhóm (CSV từng lượt, QueryFinish, SQL/DDL/EXPLAIN, cấu hình,
 kiểm dữ liệu, dung lượng, thời gian chuẩn bị và SHA-256; không chứa dataset):
 
-- [Pilot 1M, crossdb-v2](artifacts/tuan/wsl_xeon/pilot42_v2_20261123/): kiểm tra quy trình, không dùng kết luận hiệu năng 30M.
-- [Formal 30M, crossdb-v3](artifacts/tuan/wsl_xeon/formal43_v3_20261123/): 250 lượt đo và 50 warmup; bảng kết quả ở `report_tables.json`, chi phí chuẩn bị ở `setup.json`, dung lượng ở `ch_storage.json` và `pg_storage.json`.
+- [Pilot 1M Xeon (`ver1`, `crossdb-v2`)](chapter-4/4.2/results/ver1_xeon_pilot_1m/) và [Pilot 1M Core i5 (`ver2`)](chapter-4/4.2/results/ver2_i5_pilot_1m/): kiểm tra quy trình ở mục 4.2.
+- [Formal 30M Xeon (`ver1`, `crossdb-v3`)](chapter-4/README.md): độ trễ ở [`4.3.1`](chapter-4/4.3.1/results/), kế hoạch thực thi & pruning ở [`4.3.2`](chapter-4/4.3.2/results/), bảng tổng hợp & kiểm toán ở [`4.5`](chapter-4/4.5/results/).
+- [Formal 30M Core i5 (`ver2`)](chapter-4/4.3.3/results/ver2_i5_30m/): dung lượng đối tượng ở [`4.3.3`](chapter-4/4.3.3/results/) và thời gian chuẩn bị ở [`4.3.4`](chapter-4/4.3.4/results/).
 
 `files.sha256.json` kiểm tra toàn vẹn tệp; `audit.json` ghi kết quả đối chiếu tự động.
 Trạng thái này không thay thế tái lập độc lập, hiện vẫn chưa thực hiện.

@@ -1,0 +1,10 @@
+{
+  "ver1_shared_manifest/hits30m.lock_ver1.json": "e1a923df99844c46e4756b973e5b0af52a3ace534836d3a53c59d9d1de8a0a5e",
+  "ver1_shared_manifest/hits30m.profile_ver1.json": "2809f9bb34bbceadca27483141f9131e6c2585d1cc621885bba8a8c22fa17e37",
+  "ver1_shared_manifest/hits30m.sources_ver1.json": "c17d4ced06904ac9f2465674edd8df1fa0a9902277b881db2f875f25949fcf84",
+  "ver1_shared_manifest/hits30m_ver1.sampling-audit.json": "b7e808e8850248747b83db1f901e2c056762619844d106342ae389360b87a60c",
+  "ver1_shared_manifest/hits30m_ver1.schema-audit.json": "9ed98b687949a5bcd213589881ce772a464631fa297d3a62b20345905cceac30",
+  "ver2_e3_source_audit/hits30m.e3_ver2.schema-audit.json": "220cea079998dd3eadf6c9826fb5c1d81e2ca1dc491af1386a5c91de71c49dc8",
+  "ver2_e3_source_audit/hits30m_ver2.e3.lock.json": "ce0aa1b76e4a9bfcd3d0b23f3f81c94ebae6b3a9d4ee29096d5651ec072fe3d2",
+  "ver2_e3_source_audit/hits30m_ver2.e3.profile.json": "63d082f77325ce44e041ed1b6c6a014d0d24cde01257258bba9731a837ff0dcb"
+}

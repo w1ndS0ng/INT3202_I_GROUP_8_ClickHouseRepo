@@ -1,0 +1,17 @@
+{
+  "ver1_preparation_20261116/.gitattributes": "993555d4c90ca31e8e0fe87215d985913ddea95aa5a9b56c316f0f63b8880eed",
+  "ver1_preparation_20261116/connection_ver1.json": "19b19bbee848f90dd647dacd8ea4758c63b7587616d6ff962bd82013fc608662",
+  "ver1_preparation_20261116/effective_settings_ver1.json": "6837c6bd8023a8af376dfb7c30350a8efc8ce613e914ffaeeeff90da6d093cf0",
+  "ver1_preparation_20261116/environment_ver1.linux.json": "1183876d3115ce13b4ae12d4e84d7a2de1f4003231c2c89df2a8cf047c1fd5fb",
+  "ver1_preparation_20261116/environment_ver1.windows.json": "cc8f4e5c5ab2b64a7c821de29b982c7f7e569c8c5279d1b928bec94ccfc77070",
+  "ver1_preparation_20261116/schema_probe.audit_ver1.json": "b098cffec449c6b6cbddfa5a4bf001765b46999d511917feeb880b29cb793969",
+  "ver1_preparation_20261116/schema_probe.parts_ver1.json": "6e08af4d123f25d9d710dabd898481dd9c663ee0dfc28493d3679db96956f2d9",
+  "ver1_preparation_20261116/schema_probe_ver1.actual.sql": "f594b3d3ffff023547716cfd12407136330d61c3d1c13ded7393f3067e8eef2f",
+  "ver1_preparation_20261116/schema_probe_ver1.requested.sql": "9c34302eb7f3713e0852f5e309df8e22e49c6fab8edb0932d8c0a7736b74a13f",
+  "ver1_preparation_20261116/settings_query_log_ver1.json": "8a0b71513c8133f3c3c60b7f2c4b17c391fe9749a897d260b393453b36325853",
+  "ver2_pilot_20261117/.gitattributes": "4180f2d48686a16fd3d6a4e5a48a1375b4bea36d4e4428cd77ee56422bc1f434",
+  "ver2_pilot_20261117/config_ver2.json": "784c70c9a207f278cd2aad69d17dfe293c477802f969942bce661f8069d01e7d",
+  "ver2_pilot_20261117/effective_settings_ver2.json": "8bfd6ff7c6b8d45fb22b6a563d5d5aeac6884d4dd83cb60259b2829632b61ed1",
+  "ver2_pilot_20261117/environment_ver2.json": "9540fd473bfba820f24009422d1909613400b00ee0dbeb79937395042b176125",
+  "ver2_pilot_20261117/input_manifest_ver2.json": "e1a923df99844c46e4756b973e5b0af52a3ace534836d3a53c59d9d1de8a0a5e"
+}

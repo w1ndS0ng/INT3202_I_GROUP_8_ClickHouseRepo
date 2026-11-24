@@ -1,0 +1,17 @@
+{
+  "storage_mib_30m": {
+    "CH0": 498.226,
+    "CH1": 498.204,
+    "PG0": 2417.383,
+    "PG1": 2417.5,
+    "PG2": 2616.266
+  },
+  "index_disk_mib_30m": {
+    "CH0": 0.0,
+    "CH1": 0.002,
+    "PG0": 0.0,
+    "PG1": 0.117,
+    "PG2": 198.883
+  },
+  "note": "Latency measured on wsl_xeon (ver1); storage match verified across wsl_xeon (ver1) and wsl_i5 (ver2); setup times compared strictly within each machine."
+}

@@ -5,3 +5,6 @@
 *.md text eol=lf
 *.yml text eol=lf
 artifacts/** -text
+chapter-2/**/results/** -text
+chapter-3/**/results/** -text
+chapter-4/**/results/** -text

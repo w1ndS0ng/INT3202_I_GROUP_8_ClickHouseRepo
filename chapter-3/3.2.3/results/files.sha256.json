@@ -1,0 +1,7 @@
+{
+  "ingestion_metrics_pilot_ver1.json": "a6ec37a313e7e2627e290816233809d468c795f94a59f552d5bbb73818c54550",
+  "query_metrics_pilot_ver1.json": "2f8f595d7193a9d4f70739cc71d6c9b9481ab12a30c71e3d608ba019949f299e",
+  "storage_metrics_pilot_ver1.json": "d06fdf0a34550c8067fb5e5667d4bc2c7a63fbe64e521bf40c8ec81b4009b015",
+  "workload_pilot_ver1.json": "04e8f9ea95e749a702819225cccd775a077b789ac4e701cbe04191b62516cd3e",
+  "workload_pilot_ver2.json": "784c9d71ee3f59b6e932af856af943f90f53477a49737bf9e7a8c6f3a1eeb81e"
+}

@@ -1,0 +1,9 @@
+{
+  "ver1_xeon_30m/ch_storage_ver1.json": "ed2ce4ddb2eacc40e5324ffa6b83c4272ea570eb51368b410441fd7ff73b2517",
+  "ver1_xeon_30m/pg_storage_ver1.json": "d9209fcd942efc3c7b08a812961b4f9dd057c457f2f2607e312b8127a14daf19",
+  "ver2_i5_30m/ch_primary_file_bytes_ver2.json": "9bfd55df744ce48ceec8adadb260a6cd9d505bdac5e21e4b42d7345dc2d20b71",
+  "ver2_i5_30m/ch_storage_ver2.json": "6567fbb76b172a265f0390dc4ba82f55ecafdb5288cd6f0bd44a1be6e17ab27a",
+  "ver2_i5_30m/i5_notes_ver2.md": "a7cc4ad187a97051a1827ad369ad5a30beca12943b9f214d334ecea49e0180ba",
+  "ver2_i5_30m/pg_storage_ver2.json": "55525fb95b9a79320c48713c42ff4ed8e46dc6222bd01d0878f2378e6ab66a21",
+  "ver2_i5_30m/summary_4_3_3_4_3_4_ver2.csv": "435c9b548bbf0ab477643e5ee0a02cb7d87abc936971cc82d90eb708074a6d1f"
+}

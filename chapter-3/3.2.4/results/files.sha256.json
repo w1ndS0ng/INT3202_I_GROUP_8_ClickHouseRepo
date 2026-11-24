@@ -1,0 +1,18 @@
+{
+  "ver1_preparation_20261116/files_ver1.sha256.json": "ae03a655abd01ea7cff91292910d687b3c5cd8c36bf3a615cd225778f7951235",
+  "ver1_preparation_20261116/journal_failure_validation_ver1.json": "8377fca848eba2480e1359bba1a027c99490d6d6ec19b701ff2afe0b7675845d",
+  "ver1_preparation_20261116/query_run_plan_v2_ver1.json": "a856b0eae5b500970fe65294f33bb2e7d5b05a9bff530f2ddc543c80d4bca7a6",
+  "ver1_preparation_20261116/reproducibility_ver1.json": "69c5a43b95f7c50d9cf3ac0e9b5fe4a786ab7af4b8643c0b044e46b727725a0c",
+  "ver1_preparation_20261116/stability_validation_ver1.json": "ebea48f508ddcdc287b2f77369d8777c9451c0bed6ab28de753cc00deb65c014",
+  "ver2_pilot_20261117/checks/ingestion_metric_probe_stability_ver2.json": "72ea7e47dcd2a875248d62aca84a6653bec891960564df04fadf2574573d40ab",
+  "ver2_pilot_20261117/checks/journalcheck_1m_answers_ver2.json": "e82bb4e990f456a9d24f230aeafffdc5ae8a5246ec3d727807597b8c13c72cf8",
+  "ver2_pilot_20261117/checks/preparation_1m_baseline_built_ver2.json": "f411bdb671c7a3ae874da2c87d7bc6be027f6b675eb73eedb6a4228bea00cf55",
+  "ver2_pilot_20261117/checks/preparation_1m_baseline_stability_ver2.json": "14268b607005b6903b0d9ffc4b700a7756976cbe3678f21b1f014d169fd358d0",
+  "ver2_pilot_20261117/ddl/ingestion_metric_probe_ver2.actual.sql": "0ceb4f3e0ec3deb7403b9a1a64e00bdadbad82df6181701e47c183bcc3de2dbb",
+  "ver2_pilot_20261117/ddl/ingestion_metric_probe_ver2.sql": "235b24fd1eaea1f54e4f699d8722059408ba84511068e53b63799c882dde7a9f",
+  "ver2_pilot_20261117/ddl/preparation_1m_baseline_ver2.actual.sql": "9d8f97aacb0598e7c40775a1982702ea5da13e2430ce3fccedb92af964daefba",
+  "ver2_pilot_20261117/ddl/preparation_1m_baseline_ver2.sql": "1aaec73a8952a827e880bca0e0f17b416e2e7e92c71998686cf5b801d1591dba",
+  "ver2_pilot_20261117/files_ver2.sha256.json": "ceb21a2b19350e22b67d6b0cb8ad9fd36f7b889ac13edb6a61e69a429f374fd9",
+  "ver2_pilot_20261117/queries/journalcheck_1m_journal_ver2.jsonl": "8e750cbcb4128baab1bf3e6cc2bd77c74816b67b9f5e0b3ef36914e83adf50c1",
+  "ver2_pilot_20261117/setup/preparation_1m_baseline_load_ver2.json": "b4cdc15878ba11798320b0bf47ac7d9bcb1e065470b173f702d6ac5d237f01b3"
+}

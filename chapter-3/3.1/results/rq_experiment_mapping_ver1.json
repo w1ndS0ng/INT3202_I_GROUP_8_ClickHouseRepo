@@ -1,0 +1,40 @@
+{
+  "protocol": "mergetree-v2",
+  "questions": [
+    {
+      "id": "RQ1",
+      "experiment": "E1",
+      "section": "3.3",
+      "owner": "Hà",
+      "independent_var": "ORDER BY (K0, K1, K2)"
+    },
+    {
+      "id": "RQ2",
+      "experiment": "E2",
+      "section": "3.4",
+      "owner": "Tuấn",
+      "independent_var": "index_granularity (2048, 8192, 32768)"
+    },
+    {
+      "id": "RQ3",
+      "experiment": "E3",
+      "section": "3.5",
+      "owner": "Tài",
+      "independent_var": "Batch INSERT rows (10k, 100k, 1M)"
+    },
+    {
+      "id": "RQ4",
+      "experiment": "Model",
+      "section": "3.6",
+      "owner": "Tài & Hà",
+      "independent_var": "Scale 1M/3M/10M -> 30M holdout"
+    },
+    {
+      "id": "RQ5",
+      "experiment": "Cross-DB",
+      "section": "4.1-4.5",
+      "owner": "Tuấn & Tài",
+      "independent_var": "MergeTree vs PostgreSQL Heap/BRIN/B-tree"
+    }
+  ]
+}

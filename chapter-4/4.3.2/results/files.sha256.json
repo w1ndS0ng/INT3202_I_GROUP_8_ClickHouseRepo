@@ -1,0 +1,8 @@
+{
+  "ch_pruning_ver1.csv": "f83a43133b50b96d9e8ae70f76bfcb7dd8afabd55a0cdb629d813ce7b76fe5d4",
+  "pg_correlations_ver1.json": "1ba0da01e8e89acb8bbf878501aaf90b12dd73e6487bef8aa3a1848cb89a0afe",
+  "pg_indexes_ver1.json": "20b0f9af299b344f5876cc28d6b39469ebc1d5606bd972db156578b11999aa00",
+  "pg_scans_ver1.csv": "5724e4d093763de077afda4409d0dba3cc23a46bd038c17eb6cca00ed45ccf15",
+  "plans_ver1.json": "d4fc4a5bba5eea12a2d8f0da31c74cd77da651f1dbd2131c531016ed743446b5",
+  "sql_ver1.json": "802bb475eb6ea19cfbbd9afef73092ccabaf29cf21aa34d0df4c461b1508e305"
+}

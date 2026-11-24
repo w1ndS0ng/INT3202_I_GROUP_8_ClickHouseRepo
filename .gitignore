@@ -1,8 +1,8 @@
 .venv*/
 __pycache__/
 *.py[cod]
-data/
-results/
+/data/
+/results/
 .env
 .env.*
 *.local.json
@@ -11,6 +11,6 @@ client.xml
 *.rowbinary
 *.native
 *.zip
+!/chapter-*/**/*.zip
 .DS_Store
 .publish/
-.idea/
