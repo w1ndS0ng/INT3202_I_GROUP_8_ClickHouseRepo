@@ -8,3 +8,4 @@ artifacts/** -text
 chapter-2/**/results/** -text
 chapter-3/**/results/** -text
 chapter-4/**/results/** -text
+docs/figures/** -text

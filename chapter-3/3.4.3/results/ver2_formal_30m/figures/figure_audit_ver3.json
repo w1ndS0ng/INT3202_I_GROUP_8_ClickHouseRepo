@@ -1,0 +1,19 @@
+{
+  "version": "v6_ver3",
+  "dpi": 450,
+  "figsize_inches": [
+    6.5,
+    6.45
+  ],
+  "legend_layout": "shared_external_top_2row",
+  "latency_layout": "marker-only median with crisp gray capless Q1-Q3 intervals",
+  "connecting_lines_panel_a": 0,
+  "median_points": 9,
+  "quartile_intervals": 9,
+  "font": "Times New Roman",
+  "experimental_data_unchanged": true,
+  "source_csvs": [
+    "ver2_formal_30m/summary/queries_ver2.csv",
+    "ver2_formal_30m/summary/granularity_cost_ver2.csv"
+  ]
+}

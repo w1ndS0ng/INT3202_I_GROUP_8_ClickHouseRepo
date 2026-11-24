@@ -178,12 +178,13 @@ def plot(run):
     import matplotlib.pyplot as plt
     from matplotlib import font_manager
     from matplotlib.lines import Line2D
-    # Use the user's installed Windows font under WSL; font files are never
+    from matplotlib.patches import FancyBboxPatch, Patch
+    # Use the user's installed Windows font under WSL or Windows; font files are never
     # copied into this repository or redistributed with experiment outputs.
-    windows_fonts=Path('/mnt/c/Windows/Fonts')
-    if windows_fonts.exists():
-        for path in windows_fonts.glob('times*.ttf'):
-            font_manager.fontManager.addfont(str(path))
+    for font_dir in [Path('/mnt/c/Windows/Fonts'), Path('C:/Windows/Fonts')]:
+        if font_dir.exists():
+            for path in font_dir.glob('times*.ttf'):
+                font_manager.fontManager.addfont(str(path))
     try:
         font_manager.findfont('Times New Roman',fallback_to_default=False)
     except ValueError as exc:
@@ -240,65 +241,95 @@ def plot(run):
         costs=[r for r in csv_read(cost_path) if r['scale']=='30m']
         query_rows=[r for r in csv_read(qpath) if r['experiment']=='granularity' and r['scale']=='30m']
         if costs and query_rows:
-            # Match the report's usable A4 width so 13 pt labels remain legible
-            # when the image is inserted without shrinking its typography.
-            fig,grid_axes=plt.subplots(2,2,figsize=(6.5,5.8))
-            axes=list(grid_axes.flat)
+            # Match usable A4 text width (6.5 in = 468 pt) at 450 DPI with a shared external legend.
+            fig=plt.figure(figsize=(6.5,6.45))
+            gs=fig.add_gridspec(3,2,height_ratios=[0.42,1.0,1.0],hspace=0.44,wspace=0.28,
+                                left=0.085,right=0.98,top=0.975,bottom=0.085)
+            leg_ax=fig.add_subplot(gs[0,:])
+            leg_ax.axis('off')
+            axes=[fig.add_subplot(gs[1,0]),fig.add_subplot(gs[1,1]),
+                  fig.add_subplot(gs[2,0]),fig.add_subplot(gs[2,1])]
             variants=[r['variant'] for r in costs]
             x=list(range(len(variants)))
-            case_styles=[('w1','o','-'),('w2','s','--'),('w3','^',':')]
-            for case,marker,linestyle in case_styles:
+            styles={
+                'w1':{'marker':'o','ls':'-','color':'#1B4F72','ms':7.0,'label':'W1'},
+                'w2':{'marker':'s','ls':'--','color':'#A93226','ms':6.6,'label':'W2'},
+                'w3':{'marker':'^','ls':':','color':'#117864','ms':7.4,'label':'W3'},
+            }
+            offsets={'w1':-0.15,'w2':0.0,'w3':0.15}
+            q_gray='#7A7A7A'
+            halo=dict(boxstyle='round,pad=0.08',facecolor='white',edgecolor='none',alpha=0.88)
+            for case in ['w1','w2','w3']:
+                st=styles[case]
                 group=[next(r for r in query_rows if r['variant']==variant and r['case']==case)
                        for variant in variants]
                 med=[float(r['client_ms_median']) for r in group]
-                # Dodge the three series within each discrete configuration so
-                # overlapping quartile intervals remain individually visible.
-                offset={'w1':-.10,'w2':0,'w3':.10}[case]
-                positions=[position+offset for position in x]
-                axes[0].errorbar(positions,med,
-                    yerr=[[v-float(r['client_ms_q1']) for r,v in zip(group,med)],
-                          [float(r['client_ms_q3'])-v for r,v in zip(group,med)]],
-                    marker=marker,markerfacecolor='white',linestyle='none',
-                    color='black',ecolor='0.55',elinewidth=1,capsize=0,label=case.upper())
+                positions=[position+offsets[case] for position in x]
+                for px,r in zip(positions,group):
+                    axes[0].plot([px,px],[float(r['client_ms_q1']),float(r['client_ms_q3'])],
+                                 color=q_gray,linewidth=2.0,solid_capstyle='butt',zorder=2)
+                axes[0].plot(positions,med,linestyle='none',marker=st['marker'],markersize=st['ms'],
+                             markerfacecolor='white',markeredgecolor=st['color'],markeredgewidth=1.65,zorder=4)
                 pruning=[100*float(r['pruning_ratio']) for r in group]
                 target=axes[2] if case=='w2' else axes[1]
-                target.plot(x,pruning,marker=marker,markerfacecolor='white',
-                            linestyle=linestyle,color='black',label=case.upper())
-                if case=='w2':
-                    for position,value in zip(x,pruning):
-                        target.annotate(f'{value:.1f}'.replace('.',','),(position,value),
-                                        xytext=(0,8),textcoords='offset points',ha='center')
-            axes[0].set(title='(a) Latency (ms, log)',yscale='log',yticks=[3,10,40])
-            axes[0].set_yticklabels(['3','10','40'])
+                target.plot(x,pruning,linestyle=st['ls'],linewidth=1.6,color=st['color'],
+                            marker=st['marker'],markersize=st['ms'],markerfacecolor='white',
+                            markeredgecolor=st['color'],markeredgewidth=1.65,zorder=4)
+                for position,value in zip(x,pruning):
+                    decimals=1 if case=='w2' else 2
+                    dy=8 if case in ('w2','w3') else -15
+                    target.annotate(f'{value:.{decimals}f}'.replace('.',','),(position,value),
+                                    xytext=(0,dy),textcoords='offset points',ha='center',
+                                    fontsize=11 if case=='w2' else 10.5,color=st['color'],bbox=halo,zorder=5)
+            axes[0].set(yscale='log',ylim=(2.3,52),yticks=[3,5,10,20,40])
+            axes[0].set_yticklabels(['3','5','10','20','40'])
             axes[0].minorticks_off()
-            # Use marker-only keys for the discrete point/interval plot. Close
-            # latency series no longer cross each other's markers or intervals.
-            workload_labels={'w1':'W1 (tròn)','w2':'W2 (vuông)','w3':'W3 (tam giác)'}
-            legend_keys=[Line2D([],[],color='black',marker=marker,
-                markerfacecolor='white',linestyle='none',label=workload_labels[case])
-                for case,marker,linestyle in case_styles]
-            legend_keys.append(Line2D([],[],color='0.55',marker='|',markersize=10,
-                markeredgewidth=1,linestyle='none',label='Q1–Q3'))
-            axes[0].legend(handles=legend_keys,loc='center left',frameon=False,
-                           numpoints=1,handlelength=1.2,handletextpad=.5)
-            axes[1].set(title='(b) Pruning W1/W3 (%)',ylim=(99.6,100.02),yticks=[99.6,99.8,100])
+            axes[0].set_title('(a) Độ trễ client_ms (ms, log)',pad=8,fontweight='bold')
+            axes[1].set(ylim=(99.58,100.09),yticks=[99.6,99.8,100.0])
             axes[1].set_yticklabels(['99,6','99,8','100,0'])
-            axes[1].legend(loc='lower left',frameon=False)
-            axes[2].set(title='(c) Pruning W2 (%)',ylim=(0,100),yticks=[0,50,100])
-            axes[3].bar([v-.18 for v in x],
-                [float(r['primary_key_bytes_in_memory'])/1024 for r in costs],
-                width=.36,color='white',edgecolor='black',hatch='///',label='PK (RAM)')
-            axes[3].bar([v+.18 for v in x],
-                [float(r['marks_bytes'])/1024 for r in costs],
-                width=.36,color='white',edgecolor='black',hatch='...',label='Marks (đĩa)')
-            axes[3].set(title='(d) Dung lượng (KiB)',yticks=[0,125,250])
-            axes[3].legend(loc='upper right')
+            axes[1].set_title('(b) Pruning W1, W3 (%)',pad=8,fontweight='bold')
+            axes[2].set(ylim=(0,100),yticks=[0,50,100])
+            axes[2].set_yticklabels(['0','50','100'])
+            axes[2].set_title('(c) Pruning W2 (%)',pad=8,fontweight='bold')
+            axes[2].set_xlabel('index_granularity (g)')
+            pk_kib=[float(r['primary_key_bytes_in_memory'])/1024 for r in costs]
+            mk_kib=[float(r['marks_bytes'])/1024 for r in costs]
+            bars_pk=axes[3].bar([v-.175 for v in x],pk_kib,width=.35,facecolor='#D6E6F4',
+                                edgecolor='#1B4F72',linewidth=1.1,hatch='///',zorder=3)
+            bars_mk=axes[3].bar([v+.175 for v in x],mk_kib,width=.35,facecolor='#FAE5D3',
+                                edgecolor='#873600',linewidth=1.1,hatch='..',zorder=3)
+            for bar,val,col in [(b,v,'#1B4F72') for b,v in zip(bars_pk,pk_kib)]+[(b,v,'#873600') for b,v in zip(bars_mk,mk_kib)]:
+                axes[3].annotate(f'{val:.1f}'.replace('.',','),(bar.get_x()+bar.get_width()/2,val),
+                                 xytext=(0,3),textcoords='offset points',ha='center',va='bottom',
+                                 fontsize=10.5,color=col,bbox=halo,zorder=5)
+            axes[3].set(ylim=(0,288),yticks=[0,125,250])
+            axes[3].set_yticklabels(['0','125','250'])
+            axes[3].set_title('(d) Chỉ mục & marks (KiB)',pad=8,fontweight='bold')
+            axes[3].set_xlabel('index_granularity (g)')
             for ax in axes:
                 ax.set_xticks(x,[v[1:] for v in variants])
-                ax.set_xlim(-.5,len(variants)-.5)
-                ax.grid(axis='y',alpha=.2)
-                ax.set_xlabel('g (cấu hình)')
-            export(fig,'e2_granularity_tradeoff_v5')
+                ax.set_xlim(-.52,len(variants)-.48)
+                ax.grid(axis='y',color='#D5D8DC',linewidth=0.7,alpha=.85,zorder=0)
+            row1=[Line2D([],[],color=styles[c]['color'],linestyle=styles[c]['ls'],linewidth=1.6,
+                         marker=styles[c]['marker'],markersize=styles[c]['ms'],markerfacecolor='white',
+                         markeredgecolor=styles[c]['color'],markeredgewidth=1.65,label=styles[c]['label'])
+                  for c in ['w1','w2','w3']]
+            row1.append(Line2D([],[],color=q_gray,linestyle='none',marker='|',markersize=12,
+                               markeredgewidth=2.0,label='Khoảng Q1–Q3'))
+            row2=[Patch(facecolor='#D6E6F4',edgecolor='#1B4F72',linewidth=1.1,hatch='///',label='Primary index (RAM)'),
+                  Patch(facecolor='#FAE5D3',edgecolor='#873600',linewidth=1.1,hatch='..',label='Marks (đĩa)')]
+            leg1=leg_ax.legend(handles=row1,loc='center',bbox_to_anchor=(0.5,0.73),ncol=4,
+                               frameon=False,columnspacing=1.8,handlelength=2.1,handletextpad=0.5,fontsize=12)
+            leg_ax.add_artist(leg1)
+            leg_ax.legend(handles=row2,loc='center',bbox_to_anchor=(0.5,0.27),ncol=2,
+                          frameon=False,columnspacing=2.4,handlelength=2.0,handletextpad=0.55,fontsize=12)
+            leg_ax.add_patch(FancyBboxPatch((0.01,0.04),0.98,0.92,transform=leg_ax.transAxes,
+                             boxstyle='round,pad=0.015,rounding_size=0.03',facecolor='#F8FAFC',
+                             edgecolor='#CBD5E1',linewidth=0.9,zorder=-1,clip_on=False))
+            for suffix,dpi_val in [('png',450),('svg',None),('pdf',None)]:
+                fig.savefig(folder/('e2_granularity_tradeoff_v6.'+suffix),
+                            dpi=dpi_val,bbox_inches='tight',pad_inches=0.06)
+            plt.close(fig)
     ep=run.path('summary','estimated_vs_actual.csv')
     if ep.exists():
         rows=[r for r in csv_read(ep) if r['predicted_client_ms']]
