@@ -1,7 +1,7 @@
 # Kiểm tra trước bàn giao
 
 Đây là ghi nhận các đợt kiểm tra trước đây, gồm E2 ngày 17/11/2026; các số test
-và trạng thái phần mềm bên dưới thuộc thời điểm đó. Tra [mục lục minh chứng](../artifacts/tuan/README.md)
+và trạng thái phần mềm bên dưới thuộc thời điểm đó. Tra [mục lục Chương 2–4](../README.md#cấu-trúc-theo-chương-và-tiểu-mục-chapter-2-chapter-3-chapter-4)
 để tìm các hồ sơ Chương 2–4 hiện được công bố.
 
 - Unit tests: chia batch giữ đúng byte/thứ tự qua ranh giới file; mẫu hệ thống lồng nhau;
@@ -40,8 +40,8 @@ DDL chỉ khác `index_granularity`. Mã nguồn đo ở commit `2e65b9d`; mã x
 - Chạy lại `python -m unittest discover -s tests -v`: cả 5 test đạt. Việc kiểm tra
   báo cáo không tạo thêm lượt benchmark hoặc sửa số đo gốc.
 
-Hồ sơ minh chứng E2 đã rà soát nằm tại
-[`artifacts/tuan/wsl_xeon/e2main_v2_20261117/`](../artifacts/tuan/wsl_xeon/e2main_v2_20261117/).
+Hồ sơ minh chứng E2 đã rà soát hiện được tổ chức theo tiểu mục tại
+[`chapter-3/3.4.1/`](../chapter-3/3.4.1/), [`chapter-3/3.4.2/`](../chapter-3/3.4.2/), [`chapter-3/3.4.3/results/ver2_formal_30m/`](../chapter-3/3.4.3/results/ver2_formal_30m/) và [`chapter-3/3.4.4/`](../chapter-3/3.4.4/).
 Bản báo cáo hiện hành nằm trong [tab Tuấn 3.2–3.4](https://docs.google.com/document/d/1eA1XSvGx-8YbP02ilUgHmPeRKYKhRwCHg_8KZZysm3o/edit?tab=t.rbdlbanesg5d);
 hai bản Markdown/PDF cũ đã được bỏ khỏi cây hiện hành vì khác nội dung Docs.
 T32-15 còn bước tái lập ít nhất một cặp đối chứng trên máy thứ hai. Trạng thái review

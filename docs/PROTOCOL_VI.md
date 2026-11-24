@@ -2,7 +2,7 @@
 
 Tài liệu này quy định các thực nghiệm E1–E3 ở Chương 3. Đối chiếu PostgreSQL
 ở Chương 4 dùng protocol riêng trong `configs/comparison.json`; hồ sơ theo từng
-phần báo cáo được dẫn tại [mục lục minh chứng Tuấn](../artifacts/tuan/README.md).
+chương và tiểu mục báo cáo được dẫn tại [mục lục Chương 2–4 trong README gốc](../README.md#cấu-trúc-theo-chương-và-tiểu-mục-chapter-2-chapter-3-chapter-4).
 
 ## 1. Phạm vi và giả thuyết
 

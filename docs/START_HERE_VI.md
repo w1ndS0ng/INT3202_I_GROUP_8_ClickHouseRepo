@@ -45,7 +45,7 @@ Một máy chỉ chạy một thí nghiệm tại một thời điểm; không d
 
 ## 4. Viết bản30trang
 
-Vẽ hình, package ZIP, review chéo rồi viết theo `REPORT_PLAN_VI.md` và `PAGE_BUDGET_VI.md`.
+Vẽ hình, package ZIP, review chéo rồi viết theo [Outline Báo cáo hiện hành](https://docs.google.com/document/d/1eA1XSvGx-8YbP02ilUgHmPeRKYKhRwCHg_8KZZysm3o/edit?tab=t.le5tjknhw5zq) và [PAGE_BUDGET_VI.md](PAGE_BUDGET_VI.md).
 Phân công: Hà sorting key; Tuấn granularity và dataset/protocol; Tài batch/merge và tổng hợp.
 Ngân sách30trang là cho bản nộp có nội dung, không phải yêu cầu chép nguyên checklist/script.
 Sau khi có các kết quả, cần export PDF kiểm tra số trang thật và bảng/hình ở Times New Roman13.
