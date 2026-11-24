@@ -1,10 +1,15 @@
 # Protocol MergeTree v2
 
+Tài liệu này quy định các thực nghiệm E1–E3 ở Chương 3. Đối chiếu PostgreSQL
+ở Chương 4 dùng protocol riêng trong `configs/comparison.json`; hồ sơ theo từng
+phần báo cáo được dẫn tại [mục lục minh chứng Tuấn](../artifacts/tuan/README.md).
+
 ## 1. Phạm vi và giả thuyết
 
 Single node, append-only, dữ liệu tĩnh lúc đo SELECT. Dataset gồm sự kiện web analytics
 thực từ ClickBench; chỉ lấy 12 trường có kiểu cố định. Báo cáo không kết luận về toàn bộ
-105 cột, chuỗi dài, JOIN, cluster, OLTP, end-to-end streaming hay ưu thế với PostgreSQL.
+105 cột, chuỗi dài, JOIN, cluster, OLTP, end-to-end streaming; E1–E3 không dùng để
+suy ưu thế với PostgreSQL.
 
 1. Khóa phù hợp bộ lọc giảm marks/rows đọc; lợi ích thời gian phụ thuộc độ chọn lọc.
 2. Granule nhỏ có thể giảm đọc thừa nhưng làm tăng số marks/chỉ mục; không mặc định nhanh hơn.

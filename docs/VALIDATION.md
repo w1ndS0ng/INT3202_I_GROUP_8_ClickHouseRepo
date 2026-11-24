@@ -1,5 +1,9 @@
 # Kiểm tra trước bàn giao
 
+Đây là ghi nhận các đợt kiểm tra trước đây, gồm E2 ngày 17/11/2026; các số test
+và trạng thái phần mềm bên dưới thuộc thời điểm đó. Tra [mục lục minh chứng](../artifacts/tuan/README.md)
+để tìm các hồ sơ Chương 2–4 hiện được công bố.
+
 - Unit tests: chia batch giữ đúng byte/thứ tự qua ranh giới file; mẫu hệ thống lồng nhau;
   fit hồi phục được α/β đã biết, không sinh thời gian âm khi dữ liệu không phù hợp;
   phát hiện trường hợp không đủ biến thiên để fit; kiểm tra schema44byte/dòng.
@@ -36,8 +40,10 @@ DDL chỉ khác `index_granularity`. Mã nguồn đo ở commit `2e65b9d`; mã x
 - Chạy lại `python -m unittest discover -s tests -v`: cả 5 test đạt. Việc kiểm tra
   báo cáo không tạo thêm lượt benchmark hoặc sửa số đo gốc.
 
-Bản báo cáo và hồ sơ đã rà soát nằm tại
+Hồ sơ minh chứng E2 đã rà soát nằm tại
 [`artifacts/tuan/wsl_xeon/e2main_v2_20261117/`](../artifacts/tuan/wsl_xeon/e2main_v2_20261117/).
+Bản báo cáo hiện hành nằm trong [tab Tuấn 3.2–3.4](https://docs.google.com/document/d/1eA1XSvGx-8YbP02ilUgHmPeRKYKhRwCHg_8KZZysm3o/edit?tab=t.rbdlbanesg5d);
+hai bản Markdown/PDF cũ đã được bỏ khỏi cây hiện hành vì khác nội dung Docs.
 T32-15 còn bước tái lập ít nhất một cặp đối chứng trên máy thứ hai. Trạng thái review
 độc lập là **chưa thực hiện**; kiểm tra nội bộ không thay thế bước này. Tài liệu này
 không xác nhận đã hoàn tất E1, E3 hoặc benchmark chính thức trên cả ba máy.
