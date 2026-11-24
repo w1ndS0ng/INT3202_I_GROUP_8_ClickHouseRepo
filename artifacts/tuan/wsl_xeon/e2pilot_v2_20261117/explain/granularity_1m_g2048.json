@@ -1,0 +1,97 @@
+[
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g2048",
+    "case": "w0",
+    "estimated_rows": 1000000,
+    "selected_marks": 489,
+    "selected_parts": 1,
+    "total_marks": 489,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g2048",
+        "parts": 1,
+        "rows": 1000000,
+        "marks": 489
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g2048",
+    "case": "w1",
+    "estimated_rows": 4096,
+    "selected_marks": 2,
+    "selected_parts": 1,
+    "total_marks": 489,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g2048",
+        "parts": 1,
+        "rows": 4096,
+        "marks": 2
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g2048",
+    "case": "w2",
+    "estimated_rows": 621120,
+    "selected_marks": 304,
+    "selected_parts": 1,
+    "total_marks": 489,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g2048",
+        "parts": 1,
+        "rows": 621120,
+        "marks": 304
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g2048",
+    "case": "w3",
+    "estimated_rows": 4096,
+    "selected_marks": 2,
+    "selected_parts": 1,
+    "total_marks": 489,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g2048",
+        "parts": 1,
+        "rows": 4096,
+        "marks": 2
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g2048",
+    "case": "w4",
+    "estimated_rows": 1000000,
+    "selected_marks": 489,
+    "selected_parts": 1,
+    "total_marks": 489,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g2048",
+        "parts": 1,
+        "rows": 1000000,
+        "marks": 489
+      }
+    ]
+  }
+]

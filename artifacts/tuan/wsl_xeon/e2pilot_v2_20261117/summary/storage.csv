@@ -1,0 +1,4 @@
+﻿table,rows,parts,bytes_on_disk,data_compressed_bytes,data_uncompressed_bytes,marks_bytes,primary_key_bytes_in_memory,compressed_fraction
+mtr_tuan_wsl_xeon_e2pilot_v2_20261117.granularity_1m_g2048,1000000,1,25334760,25322527,40194843,10078,2934,0.6299944249066977
+mtr_tuan_wsl_xeon_e2pilot_v2_20261117.granularity_1m_g32768,1000000,1,24482294,24478178,40186734,2545,186,0.6091109070968544
+mtr_tuan_wsl_xeon_e2pilot_v2_20261117.granularity_1m_g8192,1000000,1,25326703,25320191,40188358,4745,738,0.6300379577588117

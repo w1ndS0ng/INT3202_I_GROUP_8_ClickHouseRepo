@@ -1,0 +1,15 @@
+{
+  "recorded_at": "2026-11-16T17:08:04.365138+00:00",
+  "member": "tuan",
+  "machine": "wsl_xeon",
+  "active_protocol": "mergetree-v2",
+  "protocol_hash": "5127ff92b278bfbc3534ce91fe6a54616d36ee35dfcddae31d04bcdf2e94cc1d",
+  "git_commit": "2e65b9d32fdb610a83a1d7ada14cc0d9d2e4fe98",
+  "git_status": "",
+  "dataset_lock_sha256": "e1a923df99844c46e4756b973e5b0af52a3ace534836d3a53c59d9d1de8a0a5e",
+  "pilot_run": "pilot_v2_20261117",
+  "formal_run_started": false,
+  "reviewer": "tai",
+  "independent_review_status": "pending",
+  "scope": "setup and pilot validation, not formal30M latency"
+}

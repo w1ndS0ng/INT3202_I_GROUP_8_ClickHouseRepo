@@ -1,0 +1,17 @@
+{
+  ".gitattributes": "4180f2d48686a16fd3d6a4e5a48a1375b4bea36d4e4428cd77ee56422bc1f434",
+  "checks/ingestion_metric_probe_stability.json": "72ea7e47dcd2a875248d62aca84a6653bec891960564df04fadf2574573d40ab",
+  "checks/journalcheck_1m_answers.json": "e82bb4e990f456a9d24f230aeafffdc5ae8a5246ec3d727807597b8c13c72cf8",
+  "checks/preparation_1m_baseline_built.json": "f411bdb671c7a3ae874da2c87d7bc6be027f6b675eb73eedb6a4228bea00cf55",
+  "checks/preparation_1m_baseline_stability.json": "14268b607005b6903b0d9ffc4b700a7756976cbe3678f21b1f014d169fd358d0",
+  "config.json": "784c70c9a207f278cd2aad69d17dfe293c477802f969942bce661f8069d01e7d",
+  "ddl/ingestion_metric_probe.actual.sql": "0ceb4f3e0ec3deb7403b9a1a64e00bdadbad82df6181701e47c183bcc3de2dbb",
+  "ddl/ingestion_metric_probe.sql": "235b24fd1eaea1f54e4f699d8722059408ba84511068e53b63799c882dde7a9f",
+  "ddl/preparation_1m_baseline.actual.sql": "9d8f97aacb0598e7c40775a1982702ea5da13e2430ce3fccedb92af964daefba",
+  "ddl/preparation_1m_baseline.sql": "1aaec73a8952a827e880bca0e0f17b416e2e7e92c71998686cf5b801d1591dba",
+  "effective_settings.json": "8bfd6ff7c6b8d45fb22b6a563d5d5aeac6884d4dd83cb60259b2829632b61ed1",
+  "environment.json": "9540fd473bfba820f24009422d1909613400b00ee0dbeb79937395042b176125",
+  "input_manifest.json": "e1a923df99844c46e4756b973e5b0af52a3ace534836d3a53c59d9d1de8a0a5e",
+  "queries/journalcheck_1m_journal.jsonl": "8e750cbcb4128baab1bf3e6cc2bd77c74816b67b9f5e0b3ef36914e83adf50c1",
+  "setup/preparation_1m_baseline_load.json": "b4cdc15878ba11798320b0bf47ac7d9bcb1e065470b173f702d6ac5d237f01b3"
+}

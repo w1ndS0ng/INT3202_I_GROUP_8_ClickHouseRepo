@@ -1,0 +1,97 @@
+[
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g32768",
+    "case": "w0",
+    "estimated_rows": 1000000,
+    "selected_marks": 31,
+    "selected_parts": 1,
+    "total_marks": 31,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g32768",
+        "parts": 1,
+        "rows": 1000000,
+        "marks": 31
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g32768",
+    "case": "w1",
+    "estimated_rows": 32768,
+    "selected_marks": 1,
+    "selected_parts": 1,
+    "total_marks": 31,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g32768",
+        "parts": 1,
+        "rows": 32768,
+        "marks": 1
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g32768",
+    "case": "w2",
+    "estimated_rows": 967232,
+    "selected_marks": 30,
+    "selected_parts": 1,
+    "total_marks": 31,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g32768",
+        "parts": 1,
+        "rows": 967232,
+        "marks": 30
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g32768",
+    "case": "w3",
+    "estimated_rows": 32768,
+    "selected_marks": 1,
+    "selected_parts": 1,
+    "total_marks": 31,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g32768",
+        "parts": 1,
+        "rows": 32768,
+        "marks": 1
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g32768",
+    "case": "w4",
+    "estimated_rows": 1000000,
+    "selected_marks": 31,
+    "selected_parts": 1,
+    "total_marks": 31,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g32768",
+        "parts": 1,
+        "rows": 1000000,
+        "marks": 31
+      }
+    ]
+  }
+]

@@ -1,0 +1,51 @@
+{
+  "recorded_at": "2026-11-16T16:50:58.407261+00:00",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "os_release": "PRETTY_NAME=\"Ubuntu 26.04.1 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"26.04\"\nVERSION=\"26.04.1 LTS (Resolute Raccoon)\"\nVERSION_CODENAME=resolute\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=resolute\nLOGO=ubuntu-logo\n",
+  "cpu_count": 12,
+  "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           39 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  12\nOn-line CPU(s) list:                     0-11\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Xeon(R) E-2176M  CPU @ 2.70GHz\nCPU family:                              6\nModel:                                   158\nThread(s) per core:                      2\nCore(s) per socket:                      6\nSocket(s):                               1\nStepping:                                10\nBogoMIPS:                                5424.01\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm arch_perfmon rep_good nopl xtopology cpuid tsc_known_freq pni pclmulqdq vmx ssse3 fma cx16 pdcm pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch pti ssbd ibrs ibpb stibp tpr_shadow ept vpid ept_ad fsgsbase bmi1 hle avx2 smep bmi2 erms invpcid rtm rdseed adx smap clflushopt xsaveopt xsavec xgetbv1 xsaves vnmi md_clear flush_l1d arch_capabilities\nVirtualization:                          VT-x\nHypervisor vendor:                       Microsoft\nVirtualization type:                     full\nL1d cache:                               192 KiB (6 instances)\nL1i cache:                               192 KiB (6 instances)\nL2 cache:                                1.5 MiB (6 instances)\nL3 cache:                                12 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-11\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Mitigation; Aligned branch/return thunks\nVulnerability Itlb multihit:             KVM: Mitigation: Split huge pages\nVulnerability L1tf:                      Mitigation; PTE Inversion; VMX conditional cache flushes, SMT vulnerable\nVulnerability Mds:                       Mitigation; Clear CPU buffers; SMT Host state unknown\nVulnerability Meltdown:                  Mitigation; PTI\nVulnerability Mmio stale data:           Mitigation; Clear CPU buffers; SMT Host state unknown\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Mitigation; IBRS\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; IBRS; IBPB conditional; STIBP conditional; RSB filling; PBRSB-eIBRS Not affected; BHI SW loop, KVM SW loop\nVulnerability Srbds:                     Unknown: Dependent on hypervisor status\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Mitigation; Clear CPU buffers; SMT Host state unknown\nVulnerability Vmscape:                   Not affected\n",
+  "memory": "MemTotal:       16130816 kB\nMemFree:        13786880 kB\nMemAvailable:   14650732 kB\nBuffers:           93512 kB\nCached:          1439308 kB\nSwapCached:            0 kB\nActive:           186824 kB\nInactive:        1159756 kB\nActive(anon):       3684 kB\nInactive(anon):   323928 kB\nActive(file):     183140 kB\nInactive(file):   835828 kB\nUnevictable:      509384 kB\nMlocked:          509384 kB\nSwapTotal:       4194304 kB\nSwapFree:        4194304 kB\nDirty:             15692 kB\nWriteback:             0 kB\nAnonPages:        323748 kB\nMapped:           725632 kB\nShmem:              4236 kB\nKReclaimable:      61752 kB\nSlab:             126600 kB\nSReclaimable:      61752 kB\nSUnreclaim:        64848 kB\nKernelStack:        8624 kB\nPageTables:         9048 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    12259712 kB\nCommitted_AS:    2935212 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       37764 kB\nVmallocChunk:          0 kB\nPercpu:             6592 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:     16384 kB\nFilePmdMapped:         0 kB\nBalloon:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:       52224 kB\nDirectMap2M:     7036928 kB\nDirectMap1G:    17825792 kB\n",
+  "python": "3.14.4",
+  "versions": {
+    "clickhouse-client": "ClickHouse client version 26.10.3.7 (official build).",
+    "clickhouse-local": "ClickHouse local version 26.10.3.7 (official build)."
+  },
+  "server": {
+    "version": "26.10.3.7",
+    "timezone": "Asia/Bangkok"
+  },
+  "disks": [
+    {
+      "name": "default",
+      "type": "Local",
+      "path": "/home/anhtuan/mergetree-study-server/data/",
+      "total_space": 1081101176832,
+      "free_space": 1008862400512
+    }
+  ],
+  "isolated_instance": true,
+  "http_port": 18123,
+  "tcp_port": 19000,
+  "server_settings": [
+    {
+      "name": "background_pool_size",
+      "value": "16"
+    },
+    {
+      "name": "background_schedule_pool_size",
+      "value": "16"
+    },
+    {
+      "name": "mark_cache_size",
+      "value": "536870912"
+    },
+    {
+      "name": "max_server_memory_usage",
+      "value": "4000000000"
+    },
+    {
+      "name": "uncompressed_cache_size",
+      "value": "0"
+    }
+  ]
+}

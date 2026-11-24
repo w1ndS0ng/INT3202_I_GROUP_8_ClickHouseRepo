@@ -1,0 +1,22 @@
+Output: count(), sum(ResolutionWidth)
+
+Aggregating
+│  Keys:
+│  Aggregates: count(), sum(ResolutionWidth)
+│  Skip merging: 0
+└──Filter ((WHERE + Change column names to column identifiers))
+   │  Filter column: CounterID = 3258 AND EventDate >= \'2013-07-15\' AND EventDate < \'2013-07-23\'
+   └──ReadFromMergeTree (mtr_tuan_wsl_xeon_e2pilot_v2_20261117.granularity_1m_g2048)
+         Read type: Default
+         Parts: 1 | Granules: 2
+         Output: ResolutionWidth, CounterID, EventDate
+         Indexes:
+           PrimaryKey
+             Keys:
+               CounterID
+               EventDate
+             Condition: and((EventDate in (-Inf, 15908]), and((EventDate in [15901, +Inf)), (CounterID in [3258, 3258])))
+             Parts: 1/1
+             Granules: 2/489
+             Search Algorithm: binary search
+           Ranges: 1

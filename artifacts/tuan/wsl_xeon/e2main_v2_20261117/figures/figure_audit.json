@@ -1,0 +1,18 @@
+{
+  "latency_layout": "marker-only median with thin gray capless Q1-Q3 intervals",
+  "connecting_lines": 0,
+  "horizontal_caps": 0,
+  "median_points": 9,
+  "quartile_intervals": 9,
+  "values_preserved": true,
+  "legend_markers": [
+    "o",
+    "s",
+    "^",
+    "|"
+  ],
+  "interval_color_gray": 0.55,
+  "interval_linewidth": 1,
+  "font": "Times New Roman 13pt",
+  "experimental_data_unchanged": true
+}

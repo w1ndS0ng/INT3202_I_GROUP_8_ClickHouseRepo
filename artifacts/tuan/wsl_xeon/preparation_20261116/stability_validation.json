@@ -1,0 +1,18 @@
+{
+  "recorded_at": "2026-11-16T17:06:53.161830+00:00",
+  "records": [
+    {
+      "file": "ingestion_metric_probe_stability.json",
+      "samples": 3,
+      "confirmed_span_s": 20.027541255000074
+    },
+    {
+      "file": "preparation_1m_baseline_stability.json",
+      "samples": 3,
+      "confirmed_span_s": 20.03719340200007
+    }
+  ],
+  "os_cache_cleared": false,
+  "query_cache": 0,
+  "query_condition_cache": 0
+}

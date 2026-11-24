@@ -1,0 +1,10 @@
+{
+  "live_parts_fingerprints_and_ddl_match": true,
+  "ddl_only_granularity_differs": true,
+  "machine_quiet_at_audit": true,
+  "variants": [
+    "g2048",
+    "g8192",
+    "g32768"
+  ]
+}

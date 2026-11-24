@@ -1,0 +1,295 @@
+{
+  "schema_hash": "ecfa7745cdd95216b2add48ee2473d610143d9e989ee14480f34688546541c11",
+  "row_bytes": 44,
+  "clickbench_commit": "b0b7dd8f11a2a719211cc41d8c7ebbada267df66",
+  "files": [
+    {
+      "shard": 0,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_0.parquet",
+      "parquet_sha256": "fa134fe101e68324e0de851146fda69624f5cbb707d387141d1c2a88a219a16d",
+      "parquet_bytes": 122446530,
+      "rowbinary_sha256": "0497f19c7c7c8f6d60e39250180bb6216c80de7e22e855b6474a9fdea18cfdaa",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 10,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_10.parquet",
+      "parquet_sha256": "2205196b258c76db80945aaf54e2f6c80b77ded8a619c5b67387211baff42f6a",
+      "parquet_bytes": 101513258,
+      "rowbinary_sha256": "6ef075d6110f5aa77faff26be8ba99933c03d7721dd06fb41f800edb165d3676",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 20,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_20.parquet",
+      "parquet_sha256": "88c0e1ea725ff815a0ea45fbf5b01eae389426181fddc02a08fc9e6145b4c634",
+      "parquet_bytes": 85766533,
+      "rowbinary_sha256": "f2396dc8c27b2a7e681393e3e99814e1e42c4fb354f43a1417a89a5afc06e03b",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 30,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_30.parquet",
+      "parquet_sha256": "d9476120f3ea3f42d1d4d17ea76a1c3abc10b3b88761a212813dcbff376ae80a",
+      "parquet_bytes": 124187913,
+      "rowbinary_sha256": "de1c2bcf7ed7c63a191add54de52c98e5a17eb97d9c493c7f8163f1739c5300a",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 40,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_40.parquet",
+      "parquet_sha256": "a703c7d331ca6040c488a58155402538ba2b056858e2ec61510fe39c079835b2",
+      "parquet_bytes": 142508647,
+      "rowbinary_sha256": "737b64a04339ccc2886480e52bcfc035affcac5f82956a4a8d58e6b54ccb6c4e",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 50,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_50.parquet",
+      "parquet_sha256": "639618352b58a0d968f8dd2d3914b8f2ae120fc030925056e07baa98fca6edb3",
+      "parquet_bytes": 245339079,
+      "rowbinary_sha256": "720491c568ac4eb3f8fe31e74c6f2fbae2cf28fb78b99b006819181b0a68f8ee",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 60,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_60.parquet",
+      "parquet_sha256": "ad3885c4314042a4968bb01099eceac45bc9f34115d09a8b856dba3f5b13f231",
+      "parquet_bytes": 143594342,
+      "rowbinary_sha256": "12ff6bdd9c25f12477962c7a9dcd73b910955710f90d7601e84008b6323f27c7",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 70,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_70.parquet",
+      "parquet_sha256": "ee09cd2a3056898fba78064e7c486592cf74ad385373f879296cc6d2d65b87fb",
+      "parquet_bytes": 128851017,
+      "rowbinary_sha256": "e55fec283d294b50aeadcdc96bcbfbd8bb95733b9b2bdcca583f24e279f25d05",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 80,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_80.parquet",
+      "parquet_sha256": "409606171d5ec63afba99fc89bc4bcf576f21eac1525bdb6cee9753b05a393f9",
+      "parquet_bytes": 135714790,
+      "rowbinary_sha256": "4028d64ddcd388afc30da71a356be929366a244d5b213f5c01679c91dad21400",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 90,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_90.parquet",
+      "parquet_sha256": "c7e7493b834efad5cf49aeef2e7617a661b2b13ccbdf684cf24c8b200b0c3a9a",
+      "parquet_bytes": 179154543,
+      "rowbinary_sha256": "94fd56cc2d0aa2e326beb1be4f8fe6210ebffc3337f6bcf8583ff95abf34ff9c",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 1,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_1.parquet",
+      "parquet_sha256": "04f5af123af25d9a6e65584b8fd166fb9b651da11c777ed51379a79bcd52bee3",
+      "parquet_bytes": 174965044,
+      "rowbinary_sha256": "17ba6a82f172b35903761b279eb5a50da6cc0c4b27e1c339fecf34fa85aaaf5c",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 11,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_11.parquet",
+      "parquet_sha256": "959aa46d139710d75af4cb30648bb9ca2c577f8e4b520858907079ced974bae0",
+      "parquet_bytes": 118419888,
+      "rowbinary_sha256": "06109172dde8970ac18ebaf1be2e2da304cf2b7666ba60d1fdba741d868035c5",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 21,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_21.parquet",
+      "parquet_sha256": "b094383f0fa045aed77042dcaa651185408cab93a305a6f48faeb903bc26027d",
+      "parquet_bytes": 113455196,
+      "rowbinary_sha256": "e08e788cffd9881497367a339f5a63427e26d2fda2bf0f5c0d6fcf40c48e55ba",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 31,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_31.parquet",
+      "parquet_sha256": "dacd97f27a9451563664667570e5e7e2f605455197656b9bef2fad1e155db70d",
+      "parquet_bytes": 123065410,
+      "rowbinary_sha256": "95501b7b201951099c68d9425841d759359600371dcb6690b34cf2bc726281bf",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 41,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_41.parquet",
+      "parquet_sha256": "8e3b10062fd11ab29e94a772bf5a2f082fe76af2f134d565805f64721108a1ce",
+      "parquet_bytes": 290614269,
+      "rowbinary_sha256": "ca726fefc043e9c3c4343e3519d56299ea718604813e57e7d747b416242cad81",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 51,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_51.parquet",
+      "parquet_sha256": "0022875abad247a7830a73b6cbf8fcaf26fc65bc2d8a1f29ef56a6a0b37df2b5",
+      "parquet_bytes": 362954325,
+      "rowbinary_sha256": "dc4720cc49592ca291a2c82eff71115fe6c86d64258c57e216c8414e8e94ec59",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 61,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_61.parquet",
+      "parquet_sha256": "294753d4253755dfb9b0cb32aec960cdd06587d1a1333d45184e3deac3bb042c",
+      "parquet_bytes": 117270944,
+      "rowbinary_sha256": "7514847bcdfa6f0de1b1cb21b4028244b29ba088f68a6d4d0593819d50722f97",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 71,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_71.parquet",
+      "parquet_sha256": "f1a37ad3f61a265ab93e7122dd74ae87758a05777f99c8ec342f665e057e87d1",
+      "parquet_bytes": 152098737,
+      "rowbinary_sha256": "fd1edff053d8806abeba95285eb093f1d38808b31aa1613ea09674c1bf9fd5d5",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 81,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_81.parquet",
+      "parquet_sha256": "704a35642afa1527d0cf4656834effcd9336f2e4cf8807ec36c5d9b52d511ddd",
+      "parquet_bytes": 130504343,
+      "rowbinary_sha256": "f9bf9434414a2619987aa7e6b232f14d84b7654d1bd9107fed63446088bc5271",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 91,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_91.parquet",
+      "parquet_sha256": "40d20c5e62111d44c2ca4f49c82381379114a03d1533dff9feb32aa1d9007285",
+      "parquet_bytes": 131821351,
+      "rowbinary_sha256": "26672280bac2918e6a6a9928134e7db68ac4ae4b5e5b8ed331fa69fa97930379",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 2,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_2.parquet",
+      "parquet_sha256": "089abaab27e608d1c201cdad0ef7b9e1cb8e84e662745d3e3a4372a7780d0ae0",
+      "parquet_bytes": 230595491,
+      "rowbinary_sha256": "4cdd7c9ea44bf9880392946d8857c95a539cc70bdabb3e3d8ecc1dedb63d8f1d",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 12,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_12.parquet",
+      "parquet_sha256": "92539cd6811602133973b574d55a7b9a9c6cfcb2d4cbe7b7e8df6515064fa191",
+      "parquet_bytes": 149514164,
+      "rowbinary_sha256": "dd113b014aa09276aef7eb6f97e99516c0855a2e3a205fc1c80a3e17dd1ebd58",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 22,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_22.parquet",
+      "parquet_sha256": "c91b016661e9cfd26a6dcc5ec140ee1e38c91a2d4159d93b5da5391e6c92b4dd",
+      "parquet_bytes": 79775901,
+      "rowbinary_sha256": "645007f680bea3183ad1cd20158b732b0675af8c7e250fe6f9253140f167406c",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 32,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_32.parquet",
+      "parquet_sha256": "d07e0c237c308e0ca0d4b2976b29aef94b14c77ddf7439615acfef0fda730172",
+      "parquet_bytes": 94506004,
+      "rowbinary_sha256": "6be5fcae40d70f33d1cb04a06f18a26e797b81a25bbef9824eee5718beb50850",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 42,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_42.parquet",
+      "parquet_sha256": "e70b17745f9dadc2fe881011ffd90d4e778489432b18c89896567f1aa7c74b95",
+      "parquet_bytes": 288524057,
+      "rowbinary_sha256": "bad0d943ccc3e36803700ddac83d7f1610a66c9855a7481fde0ec26b27a82e9c",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 52,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_52.parquet",
+      "parquet_sha256": "e3cc5ced523776c759448f1e9d331a7159c622e0e285b0cbf36043317efd1c6f",
+      "parquet_bytes": 135911190,
+      "rowbinary_sha256": "8ba5a5f790e37ed5101b52a0dcd63ee2decd68aa40d8f7deee2df8a265ae5e68",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 62,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_62.parquet",
+      "parquet_sha256": "9a75c7f7fd423fc8fb20c12b854a27f5408dd3fe53fa8f636c5ae075a8b13b73",
+      "parquet_bytes": 163014901,
+      "rowbinary_sha256": "be555193c1857df7acffa506082dfff39d7efa6a27b3761d678ea69a060c5230",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 72,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_72.parquet",
+      "parquet_sha256": "c250bb945e3eb7d399c5d41c8926ff74ca70b81c111773a76e1bc13e05d071f8",
+      "parquet_bytes": 110153808,
+      "rowbinary_sha256": "81e67b80407abdbd8fd9310e90f68069b422e7e6854c80ada1dccd895a35d347",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 82,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_82.parquet",
+      "parquet_sha256": "59a4aef919c5c187ebda90abc5f3f74ed4749dfcf7485a64e2341f4d30a79f4d",
+      "parquet_bytes": 144222581,
+      "rowbinary_sha256": "517d72ae1ec09ebd1804c2342137b5e2ae0ce92a97150e674f44f79a1b63aead",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    },
+    {
+      "shard": 92,
+      "url": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_92.parquet",
+      "parquet_sha256": "2265fef5132b76bba366fcf8115da400f36f2520971d9e3deb245689ac7b3a30",
+      "parquet_bytes": 191403426,
+      "rowbinary_sha256": "02bd326d54fded376eb6402b9d597ffa726ee6355a1bc9ae827ee0746c3367bb",
+      "rowbinary_bytes": 44000000,
+      "rows": 1000000
+    }
+  ],
+  "created_at": "2026-11-16T16:45:02.759563+00:00",
+  "samples": {
+    "1m": {
+      "filename": "sample_1m.rowbinary",
+      "sha256": "9daf2b6987330203680230af07318a5548fac8a49f551b0f6f4623302a8cbdda",
+      "rows": 1000000
+    },
+    "3m": {
+      "filename": "sample_3m.rowbinary",
+      "sha256": "f7e7dcbd1bb66b1ace3278f5195e973724aa0bca17b2d6c341335107d8c83f68",
+      "rows": 3000000
+    },
+    "10m": {
+      "filename": "sample_10m.rowbinary",
+      "sha256": "9f805dcde6af7dec0d980fa08ab18d3efc86190d1689f64c1d7290811fa400e2",
+      "rows": 10000000
+    }
+  }
+}

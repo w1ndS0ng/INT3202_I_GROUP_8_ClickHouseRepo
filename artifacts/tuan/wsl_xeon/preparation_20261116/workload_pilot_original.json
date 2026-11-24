@@ -1,0 +1,57 @@
+{
+  "recorded_at": "2026-11-16T16:59:18.301282+00:00",
+  "status": "invalid_empty_case",
+  "parameters": {
+    "counter_id": 3258,
+    "date_start": "2013-07-15",
+    "date_end": "2013-07-22",
+    "region_id": 225
+  },
+  "records": [
+    {
+      "case": "w0",
+      "sql": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM mtr_tuan_wsl_xeon_pilot_20261116.preparation_1m_baseline",
+      "answer": {
+        "matched": 1000000,
+        "checksum": 1506948466
+      },
+      "selectivity": 1.0
+    },
+    {
+      "case": "w1",
+      "sql": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM mtr_tuan_wsl_xeon_pilot_20261116.preparation_1m_baseline WHERE CounterID=3258",
+      "answer": {
+        "matched": 1294,
+        "checksum": 2016337
+      },
+      "selectivity": 0.001294
+    },
+    {
+      "case": "w2",
+      "sql": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM mtr_tuan_wsl_xeon_pilot_20261116.preparation_1m_baseline WHERE EventDate >= toDate('2013-07-15') AND EventDate < toDate('2013-07-22')",
+      "answer": {
+        "matched": 370892,
+        "checksum": 561894061
+      },
+      "selectivity": 0.370892
+    },
+    {
+      "case": "w3",
+      "sql": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM mtr_tuan_wsl_xeon_pilot_20261116.preparation_1m_baseline WHERE CounterID=3258 AND EventDate >= toDate('2013-07-15') AND EventDate < toDate('2013-07-22')",
+      "answer": {
+        "matched": 0,
+        "checksum": 0
+      },
+      "selectivity": 0.0
+    },
+    {
+      "case": "w4",
+      "sql": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM mtr_tuan_wsl_xeon_pilot_20261116.preparation_1m_baseline WHERE RegionID=225",
+      "answer": {
+        "matched": 0,
+        "checksum": 0
+      },
+      "selectivity": 0.0
+    }
+  ]
+}

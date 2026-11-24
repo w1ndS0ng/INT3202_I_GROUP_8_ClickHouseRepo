@@ -1,0 +1,25 @@
+{
+  "table": "mtr_tuan_wsl_xeon_pilot_v2_20261117.preparation_1m_baseline",
+  "n": 1000000,
+  "fingerprint": {
+    "n": 1000000,
+    "hash_sum": 8910158936815733278,
+    "hash_xor": 16054429064133781808
+  },
+  "parts": [
+    {
+      "name": "all_1_1_1",
+      "rows": 1000000,
+      "marks": 123,
+      "bytes_on_disk": 25326703,
+      "data_compressed_bytes": 25320191,
+      "data_uncompressed_bytes": 40188358,
+      "marks_bytes": 4745,
+      "primary_key_bytes_in_memory": 738,
+      "part_type": "Wide"
+    }
+  ],
+  "optimize_setup_ms": 115.82489699992493,
+  "observed_stable_wait_s": 20.06647240199993,
+  "created_at": "2026-11-16T17:01:24.090828+00:00"
+}
