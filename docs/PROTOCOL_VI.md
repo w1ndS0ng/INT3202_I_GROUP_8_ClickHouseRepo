@@ -1,10 +1,15 @@
-# Protocol MergeTree v1
+# Protocol MergeTree v2
+
+Tài liệu này quy định các thực nghiệm E1–E3 ở Chương 3. Đối chiếu PostgreSQL
+ở Chương 4 dùng protocol riêng trong `configs/comparison.json`; hồ sơ theo từng
+phần báo cáo được dẫn tại [mục lục minh chứng Tuấn](../artifacts/tuan/README.md).
 
 ## 1. Phạm vi và giả thuyết
 
 Single node, append-only, dữ liệu tĩnh lúc đo SELECT. Dataset gồm sự kiện web analytics
 thực từ ClickBench; chỉ lấy 12 trường có kiểu cố định. Báo cáo không kết luận về toàn bộ
-105 cột, chuỗi dài, JOIN, cluster, OLTP, end-to-end streaming hay ưu thế với PostgreSQL.
+105 cột, chuỗi dài, JOIN, cluster, OLTP, end-to-end streaming; E1–E3 không dùng để
+suy ưu thế với PostgreSQL.
 
 1. Khóa phù hợp bộ lọc giảm marks/rows đọc; lợi ích thời gian phụ thuộc độ chọn lọc.
 2. Granule nhỏ có thể giảm đọc thừa nhưng làm tăng số marks/chỉ mục; không mặc định nhanh hơn.
@@ -32,9 +37,16 @@ Workload dùng cùng `SELECT count(), sum(ResolutionWidth)` để buộc đọc 
 |---|---|---|
 | W0 | Không lọc | Full-scan đối chứng |
 | W1 | CounterID=3258 | Phù hợp cột đầu K1 |
-| W2 | EventDate trong [15/07,22/07/2013) | Phù hợp cột đầu K2 |
+| W2 | EventDate trong [15/07,23/07/2013) | Phù hợp cột đầu K2 |
 | W3 | Kết hợp W1 và W2 | Key-prefix và lọc kết hợp |
-| W4 | RegionID=225 | Đối chứng cột ngoài sorting key |
+| W4 | RegionID=229 | Đối chứng cột ngoài sorting key |
+
+Pilot 1M trên snapshot 30 shard phát hiện W3 của v1 rỗng và RegionID=225 không xuất hiện.
+V2 giữ CounterID=3258, mở rộng cận trên ngày đến 23/07 (loại trừ) để bao gồm ngày 22/07,
+là ngày có dữ liệu đầu tiên của website này từ mốc 15/07. W4 chọn RegionID=229,
+mã khác 0 có tần suất lớn nhất trong profile pilot. Lựa chọn chỉ dựa trên số dòng và
+phân bố, không dựa trên latency. Dùng nguyên literals v2 cho mọi cấu hình/quy mô và
+tạo run mới; không gộp kết quả từ v1. Nhật ký kiểm tra literals được giữ trong hồ sơ chuẩn bị.
 
 Kiểm tra số dòng thỏa điều kiện trên pilot. Nếu rỗng hoặc độ chọn lọc không phù hợp,
 chọn lại theo profile trước khi đóng băng protocol, ghi lý do và dùng cùng literal cho
@@ -43,8 +55,8 @@ không pruning ở mọi phiên bản; phải đọc EXPLAIN, không suy đoán 
 
 ## 3. Dữ liệu và môi trường
 
-- Tuấn tải 30 shard được kê trong config; 10 shard đầu là bộ cũ, tiếp 10 shard dư1,
-  rồi 10 shard dư2 theo modulo10. Tập30M giữ toàn bộ. Các mẫu1M/3M/10M giữ các dòng
+- Tuấn tải đủ 30 shard được kê trong config theo thứ tự 0,10,…,90;
+  1,11,…,91; 2,12,…,92. Tập30M giữ toàn bộ. Các mẫu1M/3M/10M giữ các dòng
   có vị trí toàn cục modulo30 <1/<3/<10, nên rải trên mọi file và lồng nhau. Đây là
   systematic sample xác định; có thể lệch nếu dữ liệu có tính chu kỳ theo vị trí dòng.
 - Script chuẩn hóa Date theo ngày epoch, DateTime theo epoch giây UTC; các số giữ kiểu
@@ -73,7 +85,9 @@ chuẩn bị riêng. Đây là cách loại biến số part count trên dataset
 Chờ 3 lần quan sát cách10s, không merge/mutation và parts không đổi. Đây chỉ là trạng thái
 ổn định quan sát được, không bảo đảm mọi merge tương lai hoàn tất. 20s tối thiểu xác nhận
 không được gọi là CPU time hay chi phí merge thực tế. Không xóa cache OS; phép đo là warm
-repeat sau2 warmups, có thể vẫn đọc đĩa nếu working set lớn. Máy không chạy tác vụ nặng khác.
+repeat sau2 warmups, có thể vẫn đọc đĩa nếu working set lớn. Cần hạn chế tác vụ nặng khác;
+kiểm tra quiet của runner chỉ quan sát instance ClickHouse được kết nối, không giám sát
+toàn bộ ứng dụng Windows/WSL2 hoặc các instance khác.
 
 ## 4. Metrics và ý nghĩa
 

@@ -1,0 +1,18 @@
+Output: count(), sum(ResolutionWidth)
+
+Aggregating
+│  Keys:
+│  Aggregates: count(), sum(ResolutionWidth)
+│  Skip merging: 0
+└──Filter ((WHERE + Change column names to column identifiers))
+   │  Filter column: RegionID = 229
+   └──ReadFromMergeTree (mtr_tuan_wsl_xeon_e2pilot_v2_20261117.granularity_1m_g32768)
+         Read type: Default
+         Parts: 1 | Granules: 31
+         Output: ResolutionWidth, RegionID
+         Indexes:
+           PrimaryKey
+             Condition: true
+             Parts: 1/1
+             Granules: 31/31
+           Ranges: 1

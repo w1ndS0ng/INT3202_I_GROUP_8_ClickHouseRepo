@@ -1,0 +1,38 @@
+{
+    "recorded_at":  "2026-11-16T23:49:58.5989414+07:00",
+    "cpu":  [
+                {
+                    "Name":  "Intel(R) Xeon(R) E-2176M  CPU @ 2.70GHz",
+                    "NumberOfCores":  6,
+                    "NumberOfLogicalProcessors":  12
+                }
+            ],
+    "os":  {
+               "Caption":  "Microsoft Windows 11 Pro for Workstations",
+               "Version":  "10.0.26200",
+               "BuildNumber":  "26200",
+               "TotalVisibleMemorySize":  33056952
+           },
+    "disks":  [
+                  {
+                      "FriendlyName":  "INTEL SSDPEKKF512G8L",
+                      "MediaType":  "SSD",
+                      "BusType":  "NVMe",
+                      "Size":  512110190592
+                  }
+              ],
+    "drive_c":  {
+                    "Used":  385456078848,
+                    "Free":  125223747584
+                },
+    "wsl_ubuntu":  [
+                       {
+                           "DistributionName":  "Ubuntu",
+                           "BasePath":  "C:\\Users\\admin\\AppData\\Local\\wsl\\{72c792a3-b495-4b5d-b11d-11cde3d4d7fc}"
+                       }
+                   ],
+    "custom_wslconfig_exists":  false,
+    "wslconfig_resource_limits":  {
+
+                                  }
+}

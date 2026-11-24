@@ -1,0 +1,18 @@
+{
+  "checklist": "T32-11",
+  "recorded_at": "2026-11-16T17:03:06.316070+00:00",
+  "scope": "metric validation only; not formal30M result",
+  "parts": [
+    {
+      "name": "all_1_1_1",
+      "rows": 1000000,
+      "marks": 123,
+      "bytes_on_disk": 25326703,
+      "data_compressed_bytes": 25320191,
+      "data_uncompressed_bytes": 40188358,
+      "marks_bytes": 4745,
+      "primary_key_bytes_in_memory": 738,
+      "part_type": "Wide"
+    }
+  ]
+}

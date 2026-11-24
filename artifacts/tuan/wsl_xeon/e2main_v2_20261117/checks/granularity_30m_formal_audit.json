@@ -1,0 +1,19 @@
+{
+  "measured": 150,
+  "warmups": 30,
+  "cells": 15,
+  "queryfinish_matched": 150,
+  "query_errors": 0,
+  "plot_environment_error_resolved": true,
+  "fingerprint": {
+    "n": 30000000,
+    "hash_sum": 10197594264499699438,
+    "hash_xor": 11747036748708005924
+  },
+  "cost_variants": [
+    "g2048",
+    "g8192",
+    "g32768"
+  ],
+  "median_iqr_explain_storage_checked": true
+}

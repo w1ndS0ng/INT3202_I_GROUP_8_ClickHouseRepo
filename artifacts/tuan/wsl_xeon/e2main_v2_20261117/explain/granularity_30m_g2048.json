@@ -1,0 +1,97 @@
+[
+  {
+    "experiment": "granularity",
+    "scale": "30m",
+    "variant": "g2048",
+    "case": "w0",
+    "estimated_rows": 30000000,
+    "selected_marks": 14649,
+    "selected_parts": 1,
+    "total_marks": 14649,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2main_v2_20261117",
+        "table": "granularity_30m_g2048",
+        "parts": 1,
+        "rows": 30000000,
+        "marks": 14649
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "30m",
+    "variant": "g2048",
+    "case": "w1",
+    "estimated_rows": 40960,
+    "selected_marks": 20,
+    "selected_parts": 1,
+    "total_marks": 14649,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2main_v2_20261117",
+        "table": "granularity_30m_g2048",
+        "parts": 1,
+        "rows": 40960,
+        "marks": 20
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "30m",
+    "variant": "g2048",
+    "case": "w2",
+    "estimated_rows": 12780416,
+    "selected_marks": 6241,
+    "selected_parts": 1,
+    "total_marks": 14649,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2main_v2_20261117",
+        "table": "granularity_30m_g2048",
+        "parts": 1,
+        "rows": 12780416,
+        "marks": 6241
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "30m",
+    "variant": "g2048",
+    "case": "w3",
+    "estimated_rows": 6144,
+    "selected_marks": 3,
+    "selected_parts": 1,
+    "total_marks": 14649,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2main_v2_20261117",
+        "table": "granularity_30m_g2048",
+        "parts": 1,
+        "rows": 6144,
+        "marks": 3
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "30m",
+    "variant": "g2048",
+    "case": "w4",
+    "estimated_rows": 30000000,
+    "selected_marks": 14649,
+    "selected_parts": 1,
+    "total_marks": 14649,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2main_v2_20261117",
+        "table": "granularity_30m_g2048",
+        "parts": 1,
+        "rows": 30000000,
+        "marks": 14649
+      }
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "status": "PASS_PILOT_ONLY",
+  "rows": 1000000,
+  "measured": 250,
+  "warmups": 50,
+  "unique_query_ids": 300,
+  "ch_queryfinish": 120,
+  "latency_cells_recomputed": 25,
+  "whole_row_fingerprints_match": true,
+  "answers_match": true,
+  "note": "Pilot crossdb-v2 predates ch_pruning.csv/report_tables.json; raw plans are preserved. Not a formal 30M performance conclusion."
+}

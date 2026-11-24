@@ -1,0 +1,73 @@
+{
+  "recorded_at": "2026-11-16T16:56:01.646495+00:00",
+  "metadata": [
+    {
+      "engine": "MergeTree",
+      "sorting_key": "CounterID, EventDate",
+      "primary_key": "CounterID, EventDate",
+      "partition_key": ""
+    }
+  ],
+  "columns": [
+    {
+      "name": "WatchID",
+      "type": "Int64",
+      "compression_codec": "CODEC(LZ4)"
+    },
+    {
+      "name": "UserID",
+      "type": "Int64",
+      "compression_codec": "CODEC(LZ4)"
+    },
+    {
+      "name": "CounterID",
+      "type": "Int32",
+      "compression_codec": "CODEC(LZ4)"
+    },
+    {
+      "name": "EventDate",
+      "type": "Date",
+      "compression_codec": "CODEC(LZ4)"
+    },
+    {
+      "name": "EventTime",
+      "type": "DateTime('UTC')",
+      "compression_codec": "CODEC(LZ4)"
+    },
+    {
+      "name": "RegionID",
+      "type": "Int32",
+      "compression_codec": "CODEC(LZ4)"
+    },
+    {
+      "name": "AdvEngineID",
+      "type": "Int16",
+      "compression_codec": "CODEC(LZ4)"
+    },
+    {
+      "name": "IsRefresh",
+      "type": "Int16",
+      "compression_codec": "CODEC(LZ4)"
+    },
+    {
+      "name": "ResolutionWidth",
+      "type": "Int16",
+      "compression_codec": "CODEC(LZ4)"
+    },
+    {
+      "name": "ResolutionHeight",
+      "type": "Int16",
+      "compression_codec": "CODEC(LZ4)"
+    },
+    {
+      "name": "DontCountHits",
+      "type": "Int16",
+      "compression_codec": "CODEC(LZ4)"
+    },
+    {
+      "name": "ResponseEndTiming",
+      "type": "Int32",
+      "compression_codec": "CODEC(LZ4)"
+    }
+  ]
+}

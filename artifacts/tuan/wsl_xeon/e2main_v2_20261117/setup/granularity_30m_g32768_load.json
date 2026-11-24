@@ -1,0 +1,187 @@
+{
+  "rows": 30000000,
+  "ingest_ack_s": 14.872274738999295,
+  "throughput_rows_s": 2017176.2912186894,
+  "batches": [
+    {
+      "query_id": "mtr_insert_16adb1639423492a95ccfb0cf53d0c85",
+      "batch": 0,
+      "rows": 1000000,
+      "client_ms": 221.23119499974564
+    },
+    {
+      "query_id": "mtr_insert_b10bbf69b6bc4b5686790a151d7884a5",
+      "batch": 1,
+      "rows": 1000000,
+      "client_ms": 303.589192999425
+    },
+    {
+      "query_id": "mtr_insert_1c2ff1f10e844f108b81406c1f861062",
+      "batch": 2,
+      "rows": 1000000,
+      "client_ms": 500.88365900046483
+    },
+    {
+      "query_id": "mtr_insert_d7cb07ae5dea48c8914fb29f08fb07fb",
+      "batch": 3,
+      "rows": 1000000,
+      "client_ms": 329.65877300011925
+    },
+    {
+      "query_id": "mtr_insert_450355ca8cd74af79797eeddd10fca10",
+      "batch": 4,
+      "rows": 1000000,
+      "client_ms": 372.385869000027
+    },
+    {
+      "query_id": "mtr_insert_496305f2db624fa3811fd28a5fcb2c83",
+      "batch": 5,
+      "rows": 1000000,
+      "client_ms": 541.4374559995849
+    },
+    {
+      "query_id": "mtr_insert_e205f967b6df4661b391f75f39878a07",
+      "batch": 6,
+      "rows": 1000000,
+      "client_ms": 448.99056399935944
+    },
+    {
+      "query_id": "mtr_insert_520f1d5e16864f8d968d931fe3917939",
+      "batch": 7,
+      "rows": 1000000,
+      "client_ms": 413.8142659994628
+    },
+    {
+      "query_id": "mtr_insert_3e1b8894fbcc4fbe99545e16438d51aa",
+      "batch": 8,
+      "rows": 1000000,
+      "client_ms": 463.764562000506
+    },
+    {
+      "query_id": "mtr_insert_96627ee636a74f15afe68188c0d7bccf",
+      "batch": 9,
+      "rows": 1000000,
+      "client_ms": 392.3642680001649
+    },
+    {
+      "query_id": "mtr_insert_d577a28a2ecd4b99ad600f6eb1c27d7c",
+      "batch": 10,
+      "rows": 1000000,
+      "client_ms": 253.43647899990174
+    },
+    {
+      "query_id": "mtr_insert_3e6108d53c4941faaae548ed89ae2bd8",
+      "batch": 11,
+      "rows": 1000000,
+      "client_ms": 249.72417899971333
+    },
+    {
+      "query_id": "mtr_insert_c67532b38f78421c9f7af1afa88a3d35",
+      "batch": 12,
+      "rows": 1000000,
+      "client_ms": 624.6599489995788
+    },
+    {
+      "query_id": "mtr_insert_55dcb635f76c4da3a05159c5dd7de809",
+      "batch": 13,
+      "rows": 1000000,
+      "client_ms": 435.24036399958277
+    },
+    {
+      "query_id": "mtr_insert_e89674797a294edf967ae145c8574da6",
+      "batch": 14,
+      "rows": 1000000,
+      "client_ms": 280.0080770002751
+    },
+    {
+      "query_id": "mtr_insert_1af299a4159a4bc9aeabe105748b3d2e",
+      "batch": 15,
+      "rows": 1000000,
+      "client_ms": 251.53047900039383
+    },
+    {
+      "query_id": "mtr_insert_91209406170041a7bd7800b5b6578e55",
+      "batch": 16,
+      "rows": 1000000,
+      "client_ms": 440.7080629998745
+    },
+    {
+      "query_id": "mtr_insert_e88a1129f6994e57b604a389c7de4253",
+      "batch": 17,
+      "rows": 1000000,
+      "client_ms": 333.93358899957093
+    },
+    {
+      "query_id": "mtr_insert_c0b5ec08a76740f49148c27b687536cc",
+      "batch": 18,
+      "rows": 1000000,
+      "client_ms": 504.5970010005476
+    },
+    {
+      "query_id": "mtr_insert_a26f2f4ac71340b2a6fc1e3c38f6eb70",
+      "batch": 19,
+      "rows": 1000000,
+      "client_ms": 369.6148009994431
+    },
+    {
+      "query_id": "mtr_insert_5c44ddf0bcfe42e18297e97d52e889f1",
+      "batch": 20,
+      "rows": 1000000,
+      "client_ms": 314.9252009998236
+    },
+    {
+      "query_id": "mtr_insert_c20fb685469c4d44b370e7a633183b42",
+      "batch": 21,
+      "rows": 1000000,
+      "client_ms": 493.6299010005314
+    },
+    {
+      "query_id": "mtr_insert_102064a8175a493fbeb9ebc13b4ffce4",
+      "batch": 22,
+      "rows": 1000000,
+      "client_ms": 407.0549010002651
+    },
+    {
+      "query_id": "mtr_insert_ea88855e978a49958bcc329785633055",
+      "batch": 23,
+      "rows": 1000000,
+      "client_ms": 311.17770099990594
+    },
+    {
+      "query_id": "mtr_insert_e50fcf66d3e34bf2b7b6ffbf08dce96a",
+      "batch": 24,
+      "rows": 1000000,
+      "client_ms": 460.7585009998729
+    },
+    {
+      "query_id": "mtr_insert_198f5a3806134d9aa4334d0069e7ee6f",
+      "batch": 25,
+      "rows": 1000000,
+      "client_ms": 363.6447010003394
+    },
+    {
+      "query_id": "mtr_insert_b5d39a3e0d014297b6f73f19770a781c",
+      "batch": 26,
+      "rows": 1000000,
+      "client_ms": 352.2722010002326
+    },
+    {
+      "query_id": "mtr_insert_43ba12b96ee8415088be0a18d1bf0eb5",
+      "batch": 27,
+      "rows": 1000000,
+      "client_ms": 254.5258999998623
+    },
+    {
+      "query_id": "mtr_insert_28b4f53dedda4c79ae2a35c53a8d0622",
+      "batch": 28,
+      "rows": 1000000,
+      "client_ms": 280.117901000267
+    },
+    {
+      "query_id": "mtr_insert_4524e4748a004fda878eb3e955c0c904",
+      "batch": 29,
+      "rows": 1000000,
+      "client_ms": 245.51380100001552
+    }
+  ]
+}

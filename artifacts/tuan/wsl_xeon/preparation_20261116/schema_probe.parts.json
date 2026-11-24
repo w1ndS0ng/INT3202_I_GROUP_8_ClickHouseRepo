@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-11-16T16:56:40.295717+00:00",
+  "parts": [
+    {
+      "name": "all_1_1_0",
+      "part_type": "Wide",
+      "rows": 1,
+      "marks": 1
+    }
+  ],
+  "scope": "one real source row; configuration check only, excluded from formal benchmark"
+}

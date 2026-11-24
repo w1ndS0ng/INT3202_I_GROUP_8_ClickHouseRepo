@@ -10,8 +10,8 @@ Giữ lề theo mẫu/giảng viên; nếu quy định giãn dòng/lề khác, r
 | Bìa, tóm tắt/viết tắt, mục lục | 3 | Mỗi phần1trang; không tạo danh mục riêng không cần thiết |
 | Chương1 | 2 | Giới thiệu/bài toán, đặc điểm còn lại liệt kê ngắn |
 | Chương2 | 7 | 2.1:0,5; 2.2:1,5; 2.3:1,5; 2.4:1,5; 2.5:1,5; 2.6:0,5 |
-| Chương3 | 5 | 3.1:0,5; 3.2:1,5; 3.3–3.5:mỗi0,75; 3.6:0,75 |
-| Chương4 | 8 | 4.1:2; 4.2:1,5; 4.3:1,5; 4.4:2; 4.5:1 |
+| Chương3 | 8 | 3.1:0,5; 3.2:1,5; 3.3:1,5; 3.4:1,25; 3.5:1,5; 3.6:1,75 |
+| Chương4 | 5 | Đối chiếu PostgreSQL; phân bổ khi ghép 4.1–4.5, tránh lặp bảng |
 | Chương5 | 2 | Khuyến nghị thực tế/hạn chế; MV/Kafka/cluster chỉ giới thiệu |
 | Tài liệu tham khảo | 2 | Nguồn thiết yếu, định dạng nhất quán |
 | Dự phòng | 1 | Dùng cho xuống trang, hình/bảng và mục lục cập nhật |

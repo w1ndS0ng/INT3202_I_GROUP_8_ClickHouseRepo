@@ -1,0 +1,21 @@
+{
+  "status": "PASS_PILOT_ONLY",
+  "completed_at": "2026-11-23T09:25:49.605572+00:00",
+  "rows": 1000000,
+  "configurations": [
+    "ch0",
+    "ch1",
+    "pg0",
+    "pg1",
+    "pg2"
+  ],
+  "whole_row_fingerprints_match": true,
+  "answers_match": true,
+  "normal_select_measured": 250,
+  "warmups": 50,
+  "parts_unchanged": true,
+  "ch_queryfinish_covered": 120,
+  "pg_prepare_threshold": null,
+  "formal_30m_executed": false,
+  "independent_review": false
+}

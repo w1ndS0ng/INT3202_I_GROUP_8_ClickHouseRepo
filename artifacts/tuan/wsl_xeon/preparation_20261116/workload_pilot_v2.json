@@ -1,0 +1,58 @@
+{
+  "recorded_at": "2026-11-16T17:01:24.168251+00:00",
+  "protocol_version": "mergetree-v2",
+  "parameters": {
+    "counter_id": 3258,
+    "date_start": "2013-07-15",
+    "date_end": "2013-07-23",
+    "region_id": 229
+  },
+  "selection_reason": "minimal date extension to first observed CounterID3258 day after date_start; most frequent nonzero RegionID in pilot; no latency used",
+  "records": [
+    {
+      "case": "w0",
+      "sql": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM mtr_tuan_wsl_xeon_pilot_v2_20261117.preparation_1m_baseline",
+      "answer": {
+        "matched": 1000000,
+        "checksum": 1506948466
+      },
+      "selectivity": 1.0
+    },
+    {
+      "case": "w1",
+      "sql": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM mtr_tuan_wsl_xeon_pilot_v2_20261117.preparation_1m_baseline WHERE CounterID=3258",
+      "answer": {
+        "matched": 1294,
+        "checksum": 2016337
+      },
+      "selectivity": 0.001294
+    },
+    {
+      "case": "w2",
+      "sql": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM mtr_tuan_wsl_xeon_pilot_v2_20261117.preparation_1m_baseline WHERE EventDate >= toDate('2013-07-15') AND EventDate < toDate('2013-07-23')",
+      "answer": {
+        "matched": 382135,
+        "checksum": 578763427
+      },
+      "selectivity": 0.382135
+    },
+    {
+      "case": "w3",
+      "sql": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM mtr_tuan_wsl_xeon_pilot_v2_20261117.preparation_1m_baseline WHERE CounterID=3258 AND EventDate >= toDate('2013-07-15') AND EventDate < toDate('2013-07-23')",
+      "answer": {
+        "matched": 134,
+        "checksum": 208800
+      },
+      "selectivity": 0.000134
+    },
+    {
+      "case": "w4",
+      "sql": "SELECT count() AS matched, sum(ResolutionWidth) AS checksum FROM mtr_tuan_wsl_xeon_pilot_v2_20261117.preparation_1m_baseline WHERE RegionID=229",
+      "answer": {
+        "matched": 205725,
+        "checksum": 311007162
+      },
+      "selectivity": 0.205725
+    }
+  ]
+}

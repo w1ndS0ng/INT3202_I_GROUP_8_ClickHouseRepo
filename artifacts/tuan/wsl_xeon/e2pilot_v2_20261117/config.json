@@ -1,0 +1,167 @@
+{
+  "member": "tuan",
+  "machine": "wsl_xeon",
+  "run": "e2pilot_v2_20261117",
+  "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+  "protocol": {
+    "protocol_version": "mergetree-v2",
+    "expected_clickhouse_version": "26.10.3.7",
+    "clickbench_commit": "b0b7dd8f11a2a719211cc41d8c7ebbada267df66",
+    "schema": [
+      [
+        "WatchID",
+        "Int64",
+        8
+      ],
+      [
+        "UserID",
+        "Int64",
+        8
+      ],
+      [
+        "CounterID",
+        "Int32",
+        4
+      ],
+      [
+        "EventDate",
+        "Date",
+        2
+      ],
+      [
+        "EventTime",
+        "DateTime('UTC')",
+        4
+      ],
+      [
+        "RegionID",
+        "Int32",
+        4
+      ],
+      [
+        "AdvEngineID",
+        "Int16",
+        2
+      ],
+      [
+        "IsRefresh",
+        "Int16",
+        2
+      ],
+      [
+        "ResolutionWidth",
+        "Int16",
+        2
+      ],
+      [
+        "ResolutionHeight",
+        "Int16",
+        2
+      ],
+      [
+        "DontCountHits",
+        "Int16",
+        2
+      ],
+      [
+        "ResponseEndTiming",
+        "Int32",
+        4
+      ]
+    ],
+    "shards": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      1,
+      11,
+      21,
+      31,
+      41,
+      51,
+      61,
+      71,
+      81,
+      91,
+      2,
+      12,
+      22,
+      32,
+      42,
+      52,
+      62,
+      72,
+      82,
+      92
+    ],
+    "scales": {
+      "1m": 1,
+      "3m": 3,
+      "10m": 10,
+      "30m": 30
+    },
+    "keys": {
+      "k0": "tuple()",
+      "k1": "(CounterID, EventDate)",
+      "k2": "(EventDate, CounterID)"
+    },
+    "granularities": [
+      2048,
+      8192,
+      32768
+    ],
+    "batch_rows": [
+      10000,
+      100000,
+      1000000
+    ],
+    "query_rounds": 10,
+    "warmups": 2,
+    "ingest_rounds": 3,
+    "seed": 20261116,
+    "stable_samples": 3,
+    "stable_interval_seconds": 10,
+    "stable_timeout_seconds": 1200,
+    "parameters": {
+      "counter_id": 3258,
+      "date_start": "2013-07-15",
+      "date_end": "2013-07-23",
+      "region_id": 229
+    },
+    "settings": {
+      "max_threads": 4,
+      "max_insert_threads": 1,
+      "max_memory_usage": 2000000000,
+      "use_query_cache": 0,
+      "use_query_condition_cache": 0,
+      "use_skip_indexes": 0,
+      "use_skip_indexes_on_data_read": 0,
+      "optimize_move_to_prewhere": 0,
+      "optimize_trivial_count_query": 0,
+      "optimize_aggregation_in_order": 0,
+      "optimize_read_in_order": 0,
+      "async_insert": 0,
+      "log_queries": 1,
+      "log_queries_probability": 1,
+      "log_queries_min_query_duration_ms": 0,
+      "log_query_settings": 1,
+      "max_block_size": 16384,
+      "min_insert_block_size_rows": 1000000,
+      "min_insert_block_size_bytes": 0,
+      "max_insert_block_size": 1000000
+    }
+  },
+  "protocol_hash": "5127ff92b278bfbc3534ce91fe6a54616d36ee35dfcddae31d04bcdf2e94cc1d",
+  "data_dir": "/home/anhtuan/mergetree-study-data",
+  "manifest_hash": "626a638c930b00165219870137d5b240cdef079576c38e2d02a565991e7b29b3",
+  "git_commit": "2e65b9d32fdb610a83a1d7ada14cc0d9d2e4fe98",
+  "git_dirty": false,
+  "created_at": "2026-11-16T18:36:44.442508+00:00"
+}

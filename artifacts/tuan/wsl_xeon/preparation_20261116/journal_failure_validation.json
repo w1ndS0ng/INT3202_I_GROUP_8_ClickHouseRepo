@@ -1,0 +1,18 @@
+{
+  "recorded_at": "2026-11-16T17:06:13.107227+00:00",
+  "scope": "intentional failure injection only; excluded from benchmark",
+  "record": {
+    "experiment": "journalcheck",
+    "scale": "1m",
+    "variant": "baseline",
+    "case": "w0",
+    "round": -2,
+    "position": 0,
+    "query_id": "mtr_query_aa2c5fe8f57342d6a52133825b2e73bb",
+    "started_at": "2026-11-16T17:06:13.090138+00:00",
+    "warmup": true,
+    "status": "error",
+    "error": "intentional journal validation: no benchmark query submitted"
+  },
+  "passed": true
+}

@@ -1,6 +1,6 @@
 {
   "protocol_version": "mergetree-v2",
-  "expected_clickhouse_version": "26.10.4.207",
+  "expected_clickhouse_version": "26.10.3.7",
   "clickbench_commit": "b0b7dd8f11a2a719211cc41d8c7ebbada267df66",
   "schema": [
     ["WatchID", "Int64", 8], ["UserID", "Int64", 8],

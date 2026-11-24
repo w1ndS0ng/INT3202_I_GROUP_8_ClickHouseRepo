@@ -5,7 +5,9 @@ Nghiên cứu một node ClickHouse: **sorting key → sparse index/granule prun
 **batch INSERT → data parts/background merges → tốc độ ghi và dung lượng**.
 
 Đây là thực nghiệm tùy biến từ ClickBench, không phải điểm ClickBench chính thức.
-Phạm vi mới không triển khai PostgreSQL, vectorization benchmark, MV, Kafka hay cluster.
+Các thí nghiệm chương 3 không triển khai PostgreSQL, vectorization benchmark, MV, Kafka hay cluster.
+Đối chiếu PostgreSQL ở mục 4.2–4.3 được tách riêng trong `configs/comparison.json` và
+`scripts/compare_databases.py`, với run pilot 1M và run chính thức 30M độc lập.
 
 ## Bắt đầu
 
@@ -22,110 +24,8 @@ python3 scripts/study.py status
 python3 -m unittest discover -s tests -v
 ```
 
-## Cấu hình kết nối ClickHouse
-
-`client.xml` là **file đăng nhập/kết nối**, khác với file cấu hình thí nghiệm
-`configs/protocol.json`. Đặt file kết nối riêng ngoài repo, ví dụ:
-
-```text
-~/.config/mergetree-study/client.xml
-```
-
-Các thông số kết nối cho môi trường local:
-
-| Thành phần | Giá trị | Ý nghĩa |
-|---|---|---|
-| Môi trường | Ubuntu trên WSL2 | Chạy lệnh trong terminal Ubuntu |
-| Host trong XML | `127.0.0.1` | ClickHouse trên cùng máy |
-| User trong XML | `default` | Tài khoản ClickHouse, không phải user Ubuntu |
-| Password trong XML | Mật khẩu riêng đã lưu tại máy | Script đọc trực tiếp từ file |
-| Quyền file | `0600`, thuộc tài khoản Ubuntu đang sử dụng | Chỉ chủ file được đọc/ghi |
-| Cổng native của `clickhouse-client` | `9000` mặc định | XML hiện tại không khai báo riêng trường `port` |
-| Cổng HTTP của script Python | `8123` mặc định | Runner dùng HTTP, điều chỉnh bằng `CH_HTTP_PORT` |
-
-Cấu trúc tối thiểu của file như sau; `YOUR_LOCAL_PASSWORD` chỉ là chỗ giữ chỗ,
-cần thay bằng mật khẩu ClickHouse trên máy đang sử dụng:
-
-```xml
-<config>
-    <host>127.0.0.1</host>
-    <user>default</user>
-    <password>YOUR_LOCAL_PASSWORD</password>
-</config>
-```
-
-Nếu đã có file cấu hình, trỏ `CH_CONFIG` đến đúng đường dẫn của file đó.
-Chạy các lệnh sau từ thư mục repo; điều chỉnh đường dẫn nếu lưu file ở vị trí khác:
-
-```bash
-export CH_CONFIG="$HOME/.config/mergetree-study/client.xml"
-export CH_HOST=127.0.0.1
-export CH_HTTP_PORT=8123
-python3 scripts/study.py status
-```
-
-Trong phiên bản runner hiện tại, `CH_CONFIG` cung cấp **user/password** từ XML;
-host/port HTTP lấy từ `CH_HOST`/`CH_HTTP_PORT`, mặc định `127.0.0.1:8123`.
-Trường `host` hoặc `port` trong XML dành cho native client không tự thay host/port
-của runner. Cổng `9000` và `8123` thuộc hai giao thức khác nhau.
-
-Có thể kiểm tra native client bằng cùng file, không cần viết mật khẩu vào lệnh:
-
-```bash
-clickhouse-client --config-file="$CH_CONFIG" --query "SELECT version(), timezone()"
-```
-
-Sử dụng thông tin đăng nhập trên máy của mình. Nếu chưa có file, sao chép
-[mẫu không chứa mật khẩu thật](configs/client.example.xml) ra ngoài repo, chỉnh
-trực tiếp bằng editor và đặt quyền file:
-
-```bash
-mkdir -p ~/.config/mergetree-study
-cp configs/client.example.xml ~/.config/mergetree-study/client.xml
-chmod 600 ~/.config/mergetree-study/client.xml
-nano ~/.config/mergetree-study/client.xml
-export CH_CONFIG="$HOME/.config/mergetree-study/client.xml"
-python3 scripts/study.py status
-```
-
-Thay `YOUR_LOCAL_PASSWORD` trong editor bằng mật khẩu ClickHouse của chính máy đó.
-Mật khẩu không cần giống nhau giữa ba thành viên. Không đưa mật khẩu thật vào
-lệnh, GitHub, Docs hay file kết quả; chỉ file mẫu ở trên được đưa vào repo.
-
-## Cấu hình thực nghiệm dùng chung
-
-Nguồn cấu hình là [`configs/protocol.json`](configs/protocol.json); runner lưu
-bản chụp vào `results/<member>/<machine>/<run>/config.json`. Không đặt các tham số
-benchmark dưới đây vào file đăng nhập `client.xml`.
-
-| Tham số | Giá trị trong protocol hiện tại |
-|---|---|
-| ClickHouse server/client/local | `26.10.3.7` |
-| Dataset chính | `30.000.000` sự kiện, `12` cột, RowBinary `44` byte/dòng |
-| Tập hiệu chỉnh | `1M`, `3M`, `10M`; mẫu lồng nhau trên toàn bộ 30 shard |
-| Engine / codec / part type | `MergeTree` / `LZ4` / `Wide` |
-| Partition | Không khai báo `PARTITION BY` |
-| Primary key | Mặc định theo `ORDER BY`, không phải ràng buộc duy nhất |
-| Khóa E1 | `tuple()`, `(CounterID, EventDate)`, `(EventDate, CounterID)` |
-| `max_threads` | `4` luồng truy vấn |
-| `max_insert_threads` | `1` luồng nạp |
-| `max_memory_usage` | `2.000.000.000` byte cho mỗi query, khoảng `1,86 GiB` |
-| `index_granularity` | E1/E3: `8192`; E2: `2048`, `8192`, `32768` |
-| `index_granularity_bytes` / `write_final_mark` | `0` / `0`, đặt trong DDL |
-| `async_insert` / `fsync_after_insert` | `0` / `1`; `fsync_after_insert` đặt trong DDL |
-| Query cache / query condition cache | Tắt: `use_query_cache=0`, `use_query_condition_cache=0` |
-| Tối ưu đọc bổ sung | Tắt skip indexes, tự động PREWHERE, read/aggregation-in-order trong đối chứng |
-| Batch E3 | `10.000`, `100.000`, `1.000.000` dòng/request |
-| Lặp query | `2` warmups + `10` lượt đo/cell |
-| Lặp ingestion | `3` vòng cho mỗi batch, luân phiên thứ tự |
-| Kiểm tra ổn định | `3` quan sát, cách `10s`, tối đa `1200s` |
-| Seed đảo thứ tự query | `20261116` |
-| Lưu thời gian sự kiện | `EventTime DateTime('UTC')` trong schema |
-
-Các thành viên giữ chung protocol nhưng mỗi máy có host, tài khoản và đường dẫn riêng.
-Kết quả luôn tách theo thành viên/máy/run; mọi đối chứng và speedup được tính trên
-cùng máy. Đây là thiết lập nghiên cứu có kiểm soát; thay đổi sau pilot phải được
-ghi vào protocol chung trước khi bắt đầu run chính mới.
+Máy Tài đã có cấu hình tại `/home/anhtai06/clickhouse-project/config/client.xml`.
+Không đưa mật khẩu vào lệnh, GitHub, Docs hay file kết quả.
 
 ## Dữ liệu chung
 
@@ -164,9 +64,9 @@ Không tiếp tục run đã lỗi bằng cách nạp lại hoặc ghi đè jour
 
 | Thành viên | Thí nghiệm | Chương 2 | Chương 3 | Chương 4 |
 |---|---|---|---|---|
-| Hà | Sorting key, hiệu chỉnh/dự đoán thời gian | 2.1–2.2 | 3.1, 3.3 | 4.1 |
-| Tuấn | Dataset chung, granularity/index size | 2.3–2.4 | 3.2, 3.4 | 4.2 |
-| Tài | Batch INSERT, parts và background merge | 2.5–2.6 | 3.5–3.6 | 4.3–4.5 |
+| Hà | Sorting key, hiệu chỉnh/dự đoán thời gian | 2.1–2.2 | 3.1, 3.3 | — |
+| Tuấn | Dataset chung, granularity/index size | 2.3–2.4 | 3.2, 3.4 | 4.2, 4.3.1–4.3.2, 4.5 |
+| Tài | Batch INSERT, parts và background merge | 2.5–2.6 | 3.5–3.6 | 4.1, 4.3.3–4.3.4, 4.4 |
 
 Sau pilot và chốt protocol, mỗi người dùng **một trong** các lệnh sau, thay nhãn máy/run:
 
@@ -182,7 +82,7 @@ trước khi đo 30M. Script Tuấn chạy 3 granularity; Tài chạy 9 lần n�
 không chạy lại toàn bộ lệnh với cùng run ID.
 
 Xem từng bước, SQL, số liệu, công thức và tiêu chí nghiệm thu trong
-[hướng dẫn thực nghiệm](docs/PROTOCOL_VI.md) và [kế hoạch báo cáo](docs/REPORT_PLAN_VI.md).
+[hướng dẫn thực nghiệm](docs/PROTOCOL_VI.md) và [Outline Báo cáo hiện hành](https://docs.google.com/document/d/1eA1XSvGx-8YbP02ilUgHmPeRKYKhRwCHg_8KZZysm3o/edit?tab=t.le5tjknhw5zq).
 Bản nộp tối đa30trang toàn bộ, Times New Roman13; xem
 [ngân sách từng chương](docs/PAGE_BUDGET_VI.md). Checklist/SQL/log đầy đủ nằm trong repo,
 không chép nguyên vào bản nộp. Script vẽ hình dùng Times New Roman13 từ font có trên máy.
@@ -211,8 +111,46 @@ python3 scripts/study.py package --member ha --machine laptop1 --run main01
 `share_results.zip` chứa hồ sơ thực nghiệm, không chứa dataset hay cấu hình mật khẩu.
 Thư mục `results/` mặc định không được Git theo dõi. Chỉ đưa bộ kết quả đã rà soát
 vào `artifacts/<member>/<machine>/<run>/`; giữ ZIP lớn ở Release nếu cần.
+Tra cứu [minh chứng theo từng phần báo cáo của Tuấn](artifacts/tuan/README.md),
+gồm hình Chương 2, dữ liệu/kiểm tra Chương 3 và đối chiếu Chương 4.
 
 ## Cộng tác
+
+### Đối chiếu PostgreSQL (mục 4.2–4.3)
+
+Workflow này dùng hai instance nghiên cứu riêng, ClickHouse 26.10.3.7 và PostgreSQL
+18.6; không dùng lại các bảng/kết quả chương 3 làm baseline thời gian. Cài dependency
+tùy chọn bằng `pip install -r requirements-comparison.txt`. Trên Linux, client và
+server đều dùng CPU affinity 0–3; cấu hình PostgreSQL và chính sách RAM/cache được
+ghi trong hồ sơ chạy. Các tham số RAM hai hệ không phải hai giới hạn tổng tương đương.
+Instance ClickHouse dành riêng đặt `keep_alive_timeout=3600` để kết nối HTTP không
+đóng trong lúc các cấu hình PostgreSQL đang được đo; runner kiểm thiết lập này.
+
+```bash
+CH_HTTP_PORT=18124 taskset -c 0-3 python scripts/compare_databases.py \
+  --data /path/to/locked/dataset --derived /path/to/derived-input \
+  --pg-socket /path/to/private/pgsocket --pg-port 55432 \
+  --machine wsl_xeon --run pilot42_new --scale 1m
+```
+
+Lệnh trên chạy pilot 1M: giữ nguồn gốc, chuyển sang PostgreSQL COPY BINARY ngoài
+thời gian đo, dựng CH0/CH1/PG0/PG1/PG2, kiểm toàn bộ 12 cột và COUNT/SUM, lưu
+DDL/EXPLAIN/settings, 50 warmup và 250 lượt SELECT. Kết quả mang nhãn
+`PASS_PILOT_ONLY`; không dùng làm kết luận hiệu năng 30M. Đo chính thức bằng
+`--scale 30m` với một run ID mới; runner kiểm SHA-256 cả 30 shard trước nạp và chỉ
+ghi `PASS_FORMAL` khi kiểm dữ liệu, đáp án, QueryFinish và trạng thái parts đạt.
+Dùng `python scripts/audit_comparison.py results/tuan/<machine>/<run>` để tính lại
+thống kê và sinh bảng đối chiếu từ số đo gốc, không truy vấn lại database. Dùng run ID mới mỗi lần;
+runner không tự xóa hoặc ghi đè database/schema/thư mục kết quả đã tồn tại.
+
+Hồ sơ đã công bố của Tuấn (CSV từng lượt, QueryFinish, SQL/DDL/EXPLAIN, cấu hình,
+kiểm dữ liệu, dung lượng, thời gian chuẩn bị và SHA-256; không chứa dataset):
+
+- [Pilot 1M, crossdb-v2](artifacts/tuan/wsl_xeon/pilot42_v2_20261123/): kiểm tra quy trình, không dùng kết luận hiệu năng 30M.
+- [Formal 30M, crossdb-v3](artifacts/tuan/wsl_xeon/formal43_v3_20261123/): 250 lượt đo và 50 warmup; bảng kết quả ở `report_tables.json`, chi phí chuẩn bị ở `setup.json`, dung lượng ở `ch_storage.json` và `pg_storage.json`.
+
+`files.sha256.json` kiểm tra toàn vẹn tệp; `audit.json` ghi kết quả đối chiếu tự động.
+Trạng thái này không thay thế tái lập độc lập, hiện vẫn chưa thực hiện.
 
 Mỗi người dùng nhánh `ha/sorting-key`, `tuan/granularity`, `tai/batch-merge`.
 Sửa protocol/schema/workload chung phải qua PR và tăng phiên bản protocol **trước khi đo**.

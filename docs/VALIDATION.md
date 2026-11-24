@@ -1,5 +1,9 @@
 # Kiểm tra trước bàn giao
 
+Đây là ghi nhận các đợt kiểm tra trước đây, gồm E2 ngày 17/11/2026; các số test
+và trạng thái phần mềm bên dưới thuộc thời điểm đó. Tra [mục lục minh chứng](../artifacts/tuan/README.md)
+để tìm các hồ sơ Chương 2–4 hiện được công bố.
+
 - Unit tests: chia batch giữ đúng byte/thứ tự qua ranh giới file; mẫu hệ thống lồng nhau;
   fit hồi phục được α/β đã biết, không sinh thời gian âm khi dữ liệu không phù hợp;
   phát hiện trường hợp không đủ biến thiên để fit; kiểm tra schema44byte/dòng.
@@ -10,10 +14,36 @@
   khớp; kiểm tra định dạng Date/DateTime và độ rộng44byte. Shard0 chỉ có một ngày và các
   literal3258/225 không xuất hiện, nên calibration dùng mẫu rải trên cả30shard, không lấy
   các shard đầu làm sample. Runner kiểm tra workload không rỗng trước measured queries.
-- Bước chuẩn bị đã xác minh10shard cũ và một shard bổ sung. Tải đủ30shard, khóa manifest
-  và chạy pilot1M với literals hiện tại là cổng bắt buộc trước formal run; chưa gọi các kết quả
-  synthetic hoặc thao tác cài đặt là kết quả nghiên cứu30M.
+- Dữ liệu dùng cho E2 của Tuấn gồm đủ 30 shard tải ngày 16/11/2026. SHA-256 của
+  Parquet, RowBinary và ba mẫu lồng nhau khớp bản kê đã khóa; tổng cộng 30M dòng,
+  12 cột, 44 byte/dòng. Các tệp synthetic không được dùng làm kết quả báo cáo.
 
-Ngày bàn giao16/11/2026. Chưa chạy benchmark chính thức30M trên ba máy; độ ổn định/tài nguyên
-và thời gian chạy thực tế phải được pilot xác minh. Kết quả plot/package được kiểm tra riêng
-trên smoke run; không đẩy smoke CSV thành số liệu report.
+## Rà soát E2 của Tuấn ngày 17/11/2026
+
+Run pilot `e2pilot_v2_20261117` và run chính `e2main_v2_20261117` sử dụng protocol
+`mergetree-v2`. Run chính có ba bảng 30M dòng, khóa K1, LZ4 và một active Wide part;
+DDL chỉ khác `index_granularity`. Mã nguồn đo ở commit `2e65b9d`; mã xuất Hình 3.1
+ở commit `c47338a`. Không sử dụng số đo pilot thay cho kết quả chính thức.
+
+Đợt rà soát đã thực hiện:
+
+- Kiểm lại checksum của 30 Parquet, 30 RowBinary và ba mẫu; đối chiếu từng byte mẫu
+  với quy tắc vị trí toàn cục modulo 30 trên đủ 30M dòng. Tính lại phân bố ngày,
+  CounterID và RegionID ở cả bốn quy mô, cùng sai lệch tỷ trọng lấy mẫu.
+- Kiểm tra trực tiếp ba bảng E2: part, fingerprint và DDL khớp hồ sơ đã lưu;
+  20 thiết lập truy vấn có hiệu lực khớp protocol.
+- Đối chiếu đủ 150 lượt đo và 30 warmup của từng run pilot/chính với lịch seed;
+  150 QueryFinish mỗi run khớp query_id và các chỉ số. Tính lại độc lập trung vị,
+  Q1, Q3 và IQR; các giá trị số trong bảng kết quả khớp CSV ở độ làm tròn công bố.
+- Kiểm tra trace ổn định, phép thử lưu journal lỗi, chỉ số nạp pilot và hồ sơ gói
+  kết quả. Lỗi thiếu matplotlib khi xuất hình đã được khắc phục; nhật ký vẫn được giữ.
+- Chạy lại `python -m unittest discover -s tests -v`: cả 5 test đạt. Việc kiểm tra
+  báo cáo không tạo thêm lượt benchmark hoặc sửa số đo gốc.
+
+Hồ sơ minh chứng E2 đã rà soát nằm tại
+[`artifacts/tuan/wsl_xeon/e2main_v2_20261117/`](../artifacts/tuan/wsl_xeon/e2main_v2_20261117/).
+Bản báo cáo hiện hành nằm trong [tab Tuấn 3.2–3.4](https://docs.google.com/document/d/1eA1XSvGx-8YbP02ilUgHmPeRKYKhRwCHg_8KZZysm3o/edit?tab=t.rbdlbanesg5d);
+hai bản Markdown/PDF cũ đã được bỏ khỏi cây hiện hành vì khác nội dung Docs.
+T32-15 còn bước tái lập ít nhất một cặp đối chứng trên máy thứ hai. Trạng thái review
+độc lập là **chưa thực hiện**; kiểm tra nội bộ không thay thế bước này. Tài liệu này
+không xác nhận đã hoàn tất E1, E3 hoặc benchmark chính thức trên cả ba máy.

@@ -1,0 +1,21 @@
+{
+  ".gitattributes": "993555d4c90ca31e8e0fe87215d985913ddea95aa5a9b56c316f0f63b8880eed",
+  "connection.json": "19b19bbee848f90dd647dacd8ea4758c63b7587616d6ff962bd82013fc608662",
+  "effective_settings.json": "6837c6bd8023a8af376dfb7c30350a8efc8ce613e914ffaeeeff90da6d093cf0",
+  "environment.linux.json": "1183876d3115ce13b4ae12d4e84d7a2de1f4003231c2c89df2a8cf047c1fd5fb",
+  "environment.windows.json": "cc8f4e5c5ab2b64a7c821de29b982c7f7e569c8c5279d1b928bec94ccfc77070",
+  "ingestion_metrics_pilot.json": "a6ec37a313e7e2627e290816233809d468c795f94a59f552d5bbb73818c54550",
+  "journal_failure_validation.json": "8377fca848eba2480e1359bba1a027c99490d6d6ec19b701ff2afe0b7675845d",
+  "query_metrics_pilot.json": "2f8f595d7193a9d4f70739cc71d6c9b9481ab12a30c71e3d608ba019949f299e",
+  "query_run_plan_v2.json": "a856b0eae5b500970fe65294f33bb2e7d5b05a9bff530f2ddc543c80d4bca7a6",
+  "reproducibility.json": "69c5a43b95f7c50d9cf3ac0e9b5fe4a786ab7af4b8643c0b044e46b727725a0c",
+  "schema_probe.actual.sql": "f594b3d3ffff023547716cfd12407136330d61c3d1c13ded7393f3067e8eef2f",
+  "schema_probe.audit.json": "b098cffec449c6b6cbddfa5a4bf001765b46999d511917feeb880b29cb793969",
+  "schema_probe.parts.json": "6e08af4d123f25d9d710dabd898481dd9c663ee0dfc28493d3679db96956f2d9",
+  "schema_probe.requested.sql": "9c34302eb7f3713e0852f5e309df8e22e49c6fab8edb0932d8c0a7736b74a13f",
+  "settings_query_log.json": "8a0b71513c8133f3c3c60b7f2c4b17c391fe9749a897d260b393453b36325853",
+  "stability_validation.json": "ebea48f508ddcdc287b2f77369d8777c9451c0bed6ab28de753cc00deb65c014",
+  "storage_metrics_pilot.json": "d06fdf0a34550c8067fb5e5667d4bc2c7a63fbe64e521bf40c8ec81b4009b015",
+  "workload_pilot_original.json": "04e8f9ea95e749a702819225cccd775a077b789ac4e701cbe04191b62516cd3e",
+  "workload_pilot_v2.json": "784c9d71ee3f59b6e932af856af943f90f53477a49737bf9e7a8c6f3a1eeb81e"
+}

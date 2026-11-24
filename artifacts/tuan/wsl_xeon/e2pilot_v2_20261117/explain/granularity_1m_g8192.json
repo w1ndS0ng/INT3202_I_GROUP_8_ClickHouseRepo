@@ -1,0 +1,97 @@
+[
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g8192",
+    "case": "w0",
+    "estimated_rows": 1000000,
+    "selected_marks": 123,
+    "selected_parts": 1,
+    "total_marks": 123,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g8192",
+        "parts": 1,
+        "rows": 1000000,
+        "marks": 123
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g8192",
+    "case": "w1",
+    "estimated_rows": 8192,
+    "selected_marks": 1,
+    "selected_parts": 1,
+    "total_marks": 123,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g8192",
+        "parts": 1,
+        "rows": 8192,
+        "marks": 1
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g8192",
+    "case": "w2",
+    "estimated_rows": 787008,
+    "selected_marks": 97,
+    "selected_parts": 1,
+    "total_marks": 123,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g8192",
+        "parts": 1,
+        "rows": 787008,
+        "marks": 97
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g8192",
+    "case": "w3",
+    "estimated_rows": 8192,
+    "selected_marks": 1,
+    "selected_parts": 1,
+    "total_marks": 123,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g8192",
+        "parts": 1,
+        "rows": 8192,
+        "marks": 1
+      }
+    ]
+  },
+  {
+    "experiment": "granularity",
+    "scale": "1m",
+    "variant": "g8192",
+    "case": "w4",
+    "estimated_rows": 1000000,
+    "selected_marks": 123,
+    "selected_parts": 1,
+    "total_marks": 123,
+    "raw": [
+      {
+        "database": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117",
+        "table": "granularity_1m_g8192",
+        "parts": 1,
+        "rows": 1000000,
+        "marks": 123
+      }
+    ]
+  }
+]

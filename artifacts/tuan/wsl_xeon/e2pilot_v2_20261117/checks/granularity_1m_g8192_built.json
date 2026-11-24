@@ -1,0 +1,25 @@
+{
+  "table": "mtr_tuan_wsl_xeon_e2pilot_v2_20261117.granularity_1m_g8192",
+  "n": 1000000,
+  "fingerprint": {
+    "n": 1000000,
+    "hash_sum": 8910158936815733278,
+    "hash_xor": 16054429064133781808
+  },
+  "parts": [
+    {
+      "name": "all_1_1_1",
+      "rows": 1000000,
+      "marks": 123,
+      "bytes_on_disk": 25326703,
+      "data_compressed_bytes": 25320191,
+      "data_uncompressed_bytes": 40188358,
+      "marks_bytes": 4745,
+      "primary_key_bytes_in_memory": 738,
+      "part_type": "Wide"
+    }
+  ],
+  "optimize_setup_ms": 131.61751199913851,
+  "observed_stable_wait_s": 20.050230568000188,
+  "created_at": "2026-11-16T18:37:35.796531+00:00"
+}

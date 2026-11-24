@@ -1,0 +1,141 @@
+{
+  "recorded_at": "2026-11-16T16:57:33.405469+00:00",
+  "query": {
+    "query_id": "mtr_settings_d6c49eed2b144ac4b43937684387b1f4",
+    "Settings": {
+      "max_block_size": "16384",
+      "max_insert_block_size": "1000000",
+      "min_insert_block_size_rows": "1000000",
+      "min_insert_block_size_bytes": "0",
+      "max_insert_threads": "1",
+      "max_threads": "4",
+      "optimize_move_to_prewhere": "0",
+      "use_skip_indexes": "0",
+      "use_skip_indexes_on_data_read": "0",
+      "max_memory_usage": "2000000000",
+      "optimize_read_in_order": "0",
+      "optimize_trivial_count_query": "0",
+      "use_query_condition_cache": "0",
+      "async_insert": "0"
+    },
+    "exception_code": 0
+  },
+  "effective": [
+    {
+      "name": "async_insert",
+      "value": "0",
+      "changed": 1
+    },
+    {
+      "name": "log_queries",
+      "value": "1",
+      "changed": 0
+    },
+    {
+      "name": "log_queries_min_query_duration_ms",
+      "value": "0",
+      "changed": 0
+    },
+    {
+      "name": "log_queries_probability",
+      "value": "1",
+      "changed": 0
+    },
+    {
+      "name": "log_query_settings",
+      "value": "1",
+      "changed": 0
+    },
+    {
+      "name": "max_block_size",
+      "value": "16384",
+      "changed": 1
+    },
+    {
+      "name": "max_insert_block_size",
+      "value": "1000000",
+      "changed": 1
+    },
+    {
+      "name": "max_insert_threads",
+      "value": "1",
+      "changed": 1
+    },
+    {
+      "name": "max_memory_usage",
+      "value": "2000000000",
+      "changed": 1
+    },
+    {
+      "name": "max_threads",
+      "value": "4",
+      "changed": 1
+    },
+    {
+      "name": "min_insert_block_size_bytes",
+      "value": "0",
+      "changed": 1
+    },
+    {
+      "name": "min_insert_block_size_rows",
+      "value": "1000000",
+      "changed": 1
+    },
+    {
+      "name": "optimize_aggregation_in_order",
+      "value": "0",
+      "changed": 0
+    },
+    {
+      "name": "optimize_move_to_prewhere",
+      "value": "0",
+      "changed": 1
+    },
+    {
+      "name": "optimize_read_in_order",
+      "value": "0",
+      "changed": 1
+    },
+    {
+      "name": "optimize_trivial_count_query",
+      "value": "0",
+      "changed": 1
+    },
+    {
+      "name": "use_query_cache",
+      "value": "0",
+      "changed": 0
+    },
+    {
+      "name": "use_query_condition_cache",
+      "value": "0",
+      "changed": 1
+    },
+    {
+      "name": "use_skip_indexes",
+      "value": "0",
+      "changed": 1
+    },
+    {
+      "name": "use_skip_indexes_on_data_read",
+      "value": "0",
+      "changed": 1
+    }
+  ],
+  "explicitly_verified_query_log_settings": [
+    "max_threads",
+    "max_insert_threads",
+    "max_memory_usage",
+    "use_query_condition_cache",
+    "use_skip_indexes",
+    "optimize_move_to_prewhere",
+    "optimize_trivial_count_query",
+    "optimize_read_in_order",
+    "async_insert"
+  ],
+  "table_constants": {
+    "index_granularity_bytes": 0,
+    "write_final_mark": 0,
+    "fsync_after_insert": 1
+  }
+}
