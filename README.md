@@ -64,9 +64,9 @@ Không tiếp tục run đã lỗi bằng cách nạp lại hoặc ghi đè jour
 
 | Thành viên | Thí nghiệm | Chương 2 | Chương 3 | Chương 4 |
 |---|---|---|---|---|
-| Hà | Sorting key, hiệu chỉnh/dự đoán thời gian | 2.1–2.2 | 3.1, 3.3 | 4.1 |
-| Tuấn | Dataset chung, granularity/index size | 2.3–2.4 | 3.2, 3.4 | 4.2 |
-| Tài | Batch INSERT, parts và background merge | 2.5–2.6 | 3.5–3.6 | 4.3–4.5 |
+| Hà | Sorting key, hiệu chỉnh/dự đoán thời gian | 2.1–2.2 | 3.1, 3.3 | — |
+| Tuấn | Dataset chung, granularity/index size | 2.3–2.4 | 3.2, 3.4 | 4.2, 4.3.1–4.3.2, 4.5 |
+| Tài | Batch INSERT, parts và background merge | 2.5–2.6 | 3.5–3.6 | 4.1, 4.3.3–4.3.4, 4.4 |
 
 Sau pilot và chốt protocol, mỗi người dùng **một trong** các lệnh sau, thay nhãn máy/run:
 
@@ -82,7 +82,7 @@ trước khi đo 30M. Script Tuấn chạy 3 granularity; Tài chạy 9 lần n�
 không chạy lại toàn bộ lệnh với cùng run ID.
 
 Xem từng bước, SQL, số liệu, công thức và tiêu chí nghiệm thu trong
-[hướng dẫn thực nghiệm](docs/PROTOCOL_VI.md) và [kế hoạch báo cáo](docs/REPORT_PLAN_VI.md).
+[hướng dẫn thực nghiệm](docs/PROTOCOL_VI.md) và [Outline Báo cáo hiện hành](https://docs.google.com/document/d/1eA1XSvGx-8YbP02ilUgHmPeRKYKhRwCHg_8KZZysm3o/edit?tab=t.le5tjknhw5zq).
 Bản nộp tối đa30trang toàn bộ, Times New Roman13; xem
 [ngân sách từng chương](docs/PAGE_BUDGET_VI.md). Checklist/SQL/log đầy đủ nằm trong repo,
 không chép nguyên vào bản nộp. Script vẽ hình dùng Times New Roman13 từ font có trên máy.
@@ -111,6 +111,8 @@ python3 scripts/study.py package --member ha --machine laptop1 --run main01
 `share_results.zip` chứa hồ sơ thực nghiệm, không chứa dataset hay cấu hình mật khẩu.
 Thư mục `results/` mặc định không được Git theo dõi. Chỉ đưa bộ kết quả đã rà soát
 vào `artifacts/<member>/<machine>/<run>/`; giữ ZIP lớn ở Release nếu cần.
+Tra cứu [minh chứng theo từng phần báo cáo của Tuấn](artifacts/tuan/README.md),
+gồm hình Chương 2, dữ liệu/kiểm tra Chương 3 và đối chiếu Chương 4.
 
 ## Cộng tác
 
