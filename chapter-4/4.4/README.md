@@ -3,15 +3,14 @@
 - **Phụ trách:** Tài
 - **Mô tả:** Tổng hợp đa chiều đặt độ trễ (W0–W4), dung lượng lưu trữ/chỉ mục và chi phí chuẩn bị cạnh nhau để phân tích đánh đổi.
 
-## Cấu trúc thư mục
+## Nội dung
 
-- `scripts/`: Mã nguồn thực thi / kiểm chứng của mục này:
+- **Scripts:**
   - [`synthesize_4_4_tradeoffs.py`](scripts/synthesize_4_4_tradeoffs.py)
   - [`analysis_audit_comparison_ver1.py`](scripts/analysis_audit_comparison_ver1.py)
-- `results/`: Chứa **1 tệp** kết quả/minh chứng (kèm [`files.sha256.json`](results/files.sha256.json)).
-  - Các tệp/phiên bản bổ sung theo thời gian được gắn hậu tố `_ver1`, `_ver2` theo thứ tự thời điểm đưa vào nghiên cứu.
+- **Results:** **1 tệp** minh chứng ([`files.sha256.json`](results/files.sha256.json)).
 
-## Chạy kiểm tra nhanh từ thư mục gốc repo
+## Kiểm tra
 
 ```bash
 python chapter-4/4.4/scripts/synthesize_4_4_tradeoffs.py

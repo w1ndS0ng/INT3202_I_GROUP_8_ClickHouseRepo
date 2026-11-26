@@ -3,14 +3,13 @@
 - **Phụ trách:** Tài
 - **Mô tả:** Định nghĩa cấu trúc bảng/chỉ mục thực tế của ClickHouse MergeTree (CH0, CH1) và PostgreSQL 18.6 Heap + BRIN/B-tree (PG0, PG1, PG2).
 
-## Cấu trúc thư mục
+## Nội dung
 
-- `scripts/`: Mã nguồn thực thi / kiểm chứng của mục này:
+- **Scripts:**
   - [`inspect_storage_and_index_defs.py`](scripts/inspect_storage_and_index_defs.py)
-- `results/`: Chứa **1 tệp** kết quả/minh chứng (kèm [`files.sha256.json`](results/files.sha256.json)).
-  - Các tệp/phiên bản bổ sung theo thời gian được gắn hậu tố `_ver1`, `_ver2` theo thứ tự thời điểm đưa vào nghiên cứu.
+- **Results:** **1 tệp** minh chứng ([`files.sha256.json`](results/files.sha256.json)).
 
-## Chạy kiểm tra nhanh từ thư mục gốc repo
+## Kiểm tra
 
 ```bash
 python chapter-4/4.1/scripts/inspect_storage_and_index_defs.py

@@ -3,14 +3,13 @@
 - **Phụ trách:** Hà
 - **Mô tả:** DDL thực tế, cấu hình chạy, kiểm chứng toàn vẹn fingerprint, đáp án COUNT/SUM và trạng thái 1 active part cho K0, K1, K2.
 
-## Cấu trúc thư mục
+## Nội dung
 
-- `scripts/`: Mã nguồn thực thi / kiểm chứng của mục này:
+- **Scripts:**
   - [`run_e1_build_and_checks.py`](scripts/run_e1_build_and_checks.py)
-- `results/`: Chứa **60 tệp** kết quả/minh chứng (kèm [`files.sha256.json`](results/files.sha256.json)).
-  - Các tệp/phiên bản bổ sung theo thời gian được gắn hậu tố `_ver1`, `_ver2` theo thứ tự thời điểm đưa vào nghiên cứu.
+- **Results:** **60 tệp** minh chứng ([`files.sha256.json`](results/files.sha256.json)).
 
-## Chạy kiểm tra nhanh từ thư mục gốc repo
+## Kiểm tra
 
 ```bash
 python chapter-3/3.3.1/scripts/run_e1_build_and_checks.py

@@ -3,14 +3,13 @@
 - **Phụ trách:** Hà
 - **Mô tả:** Thời gian nạp/OPTIMIZE chuẩn bị (setup), câu lệnh SQL từng tổ hợp và nhật ký thực thi 150 lượt đo mỗi quy mô (tổng 600 lượt chính).
 
-## Cấu trúc thư mục
+## Nội dung
 
-- `scripts/`: Mã nguồn thực thi / kiểm chứng của mục này:
+- **Scripts:**
   - [`run_e1_queries.py`](scripts/run_e1_queries.py)
-- `results/`: Chứa **84 tệp** kết quả/minh chứng (kèm [`files.sha256.json`](results/files.sha256.json)).
-  - Các tệp/phiên bản bổ sung theo thời gian được gắn hậu tố `_ver1`, `_ver2` theo thứ tự thời điểm đưa vào nghiên cứu.
+- **Results:** **84 tệp** minh chứng ([`files.sha256.json`](results/files.sha256.json)).
 
-## Chạy kiểm tra nhanh từ thư mục gốc repo
+## Kiểm tra
 
 ```bash
 python chapter-3/3.3.2/scripts/run_e1_queries.py

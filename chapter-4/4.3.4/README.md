@@ -3,14 +3,13 @@
 - **Phụ trách:** Tài (Bảng 4.7 i5 — ver2) & Tuấn (hồ sơ Xeon đối chiếu — ver1)
 - **Mô tả:** Thời gian INSERT/COPY BINARY, OPTIMIZE FINAL, CREATE INDEX (BRIN/B-tree) và VACUUM (ANALYZE) trên máy Xeon (ver1) và máy Core i5 (ver2).
 
-## Cấu trúc thư mục
+## Nội dung
 
-- `scripts/`: Mã nguồn thực thi / kiểm chứng của mục này:
+- **Scripts:**
   - [`compare_4_3_4_setup_costs.py`](scripts/compare_4_3_4_setup_costs.py)
-- `results/`: Chứa **11 tệp** kết quả/minh chứng (kèm [`files.sha256.json`](results/files.sha256.json)).
-  - Các tệp/phiên bản bổ sung theo thời gian được gắn hậu tố `_ver1`, `_ver2` theo thứ tự thời điểm đưa vào nghiên cứu.
+- **Results:** **11 tệp** minh chứng ([`files.sha256.json`](results/files.sha256.json)).
 
-## Chạy kiểm tra nhanh từ thư mục gốc repo
+## Kiểm tra
 
 ```bash
 python chapter-4/4.3.4/scripts/compare_4_3_4_setup_costs.py

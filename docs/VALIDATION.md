@@ -1,49 +1,17 @@
-# Kiểm tra trước bàn giao
+# Tổng hợp kiểm chứng mã nguồn và dữ liệu E2
 
-Đây là ghi nhận các đợt kiểm tra trước đây, gồm E2 ngày 17/11/2026; các số test
-và trạng thái phần mềm bên dưới thuộc thời điểm đó. Tra [mục lục Chương 2–4](../README.md#cấu-trúc-theo-chương-và-tiểu-mục-chapter-2-chapter-3-chapter-4)
-để tìm các hồ sơ Chương 2–4 hiện được công bố.
+Toàn bộ kết quả và mã kiểm chứng hiện được lập chỉ mục theo từng mục báo cáo tại [`chapter-2/`](../chapter-2/README.md), [`chapter-3/`](../chapter-3/README.md) và [`chapter-4/`](../chapter-4/README.md).
 
-- Unit tests: chia batch giữ đúng byte/thứ tự qua ranh giới file; mẫu hệ thống lồng nhau;
-  fit hồi phục được α/β đã biết, không sinh thời gian âm khi dữ liệu không phù hợp;
-  phát hiện trường hợp không đủ biến thiên để fit; kiểm tra schema44byte/dòng.
-- Integration trên ClickHouse26.10.3.7: pipeline keys ở4scale, fit→forecast→holdout,
-  granularity3cấu hình, ingestion9case, correctness và summary. Dữ liệu synthetic tối đa
-  30.000dòng, marker SMOKE_ONLY; các nhãn1m/30m chỉ là test label trong smoke test.
-- Dữ liệu thật: chuyển shard0 đủ1.000.000dòng, fingerprint12cột của Parquet và RowBinary
-  khớp; kiểm tra định dạng Date/DateTime và độ rộng44byte. Shard0 chỉ có một ngày và các
-  literal3258/225 không xuất hiện, nên calibration dùng mẫu rải trên cả30shard, không lấy
-  các shard đầu làm sample. Runner kiểm tra workload không rỗng trước measured queries.
-- Dữ liệu dùng cho E2 của Tuấn gồm đủ 30 shard tải ngày 16/11/2026. SHA-256 của
-  Parquet, RowBinary và ba mẫu lồng nhau khớp bản kê đã khóa; tổng cộng 30M dòng,
-  12 cột, 44 byte/dòng. Các tệp synthetic không được dùng làm kết quả báo cáo.
+## Kiểm thử tự động
 
-## Rà soát E2 của Tuấn ngày 17/11/2026
+- **Unit tests (`tests/`):** Kiểm tra logic chia lô `RowBinary` giữ đúng biên và thứ tự bản ghi qua ranh giới tệp; kiểm tra quy tắc phân mẫu hệ thống lồng nhau (`ordinal mod 30`); kiểm chứng hồi quy bình phương tối thiểu có ràng buộc ($\alpha, \beta \ge 0$); kiểm tra ánh xạ kiểu dữ liệu và ngữ nghĩa đối chiếu ClickHouse–PostgreSQL.
+- **Kiểm tra toàn vẹn dữ liệu đầu vào:** Xác minh SHA-256 trên toàn bộ `30` tệp Parquet nguồn, `30` tệp `RowBinary` (`44` byte/dòng, `1.320.000.000` byte) và các mẫu lồng nhau `1M`, `3M`, `10M`.
 
-Run pilot `e2pilot_v2_20261117` và run chính `e2main_v2_20261117` sử dụng protocol
-`mergetree-v2`. Run chính có ba bảng 30M dòng, khóa K1, LZ4 và một active Wide part;
-DDL chỉ khác `index_granularity`. Mã nguồn đo ở commit `2e65b9d`; mã xuất Hình 3.1
-ở commit `c47338a`. Không sử dụng số đo pilot thay cho kết quả chính thức.
+## Kiểm chứng thực nghiệm E2 (17/11/2026)
 
-Đợt rà soát đã thực hiện:
-
-- Kiểm lại checksum của 30 Parquet, 30 RowBinary và ba mẫu; đối chiếu từng byte mẫu
-  với quy tắc vị trí toàn cục modulo 30 trên đủ 30M dòng. Tính lại phân bố ngày,
-  CounterID và RegionID ở cả bốn quy mô, cùng sai lệch tỷ trọng lấy mẫu.
-- Kiểm tra trực tiếp ba bảng E2: part, fingerprint và DDL khớp hồ sơ đã lưu;
-  20 thiết lập truy vấn có hiệu lực khớp protocol.
-- Đối chiếu đủ 150 lượt đo và 30 warmup của từng run pilot/chính với lịch seed;
-  150 QueryFinish mỗi run khớp query_id và các chỉ số. Tính lại độc lập trung vị,
-  Q1, Q3 và IQR; các giá trị số trong bảng kết quả khớp CSV ở độ làm tròn công bố.
-- Kiểm tra trace ổn định, phép thử lưu journal lỗi, chỉ số nạp pilot và hồ sơ gói
-  kết quả. Lỗi thiếu matplotlib khi xuất hình đã được khắc phục; nhật ký vẫn được giữ.
-- Chạy lại `python -m unittest discover -s tests -v`: cả 5 test đạt. Việc kiểm tra
-  báo cáo không tạo thêm lượt benchmark hoặc sửa số đo gốc.
-
-Hồ sơ minh chứng E2 đã rà soát hiện được tổ chức theo tiểu mục tại
-[`chapter-3/3.4.1/`](../chapter-3/3.4.1/), [`chapter-3/3.4.2/`](../chapter-3/3.4.2/), [`chapter-3/3.4.3/results/ver2_formal_30m/`](../chapter-3/3.4.3/results/ver2_formal_30m/) và [`chapter-3/3.4.4/`](../chapter-3/3.4.4/).
-Bản báo cáo hiện hành nằm trong [tab Tuấn 3.2–3.4](https://docs.google.com/document/d/1eA1XSvGx-8YbP02ilUgHmPeRKYKhRwCHg_8KZZysm3o/edit?tab=t.rbdlbanesg5d);
-hai bản Markdown/PDF cũ đã được bỏ khỏi cây hiện hành vì khác nội dung Docs.
-T32-15 còn bước tái lập ít nhất một cặp đối chứng trên máy thứ hai. Trạng thái review
-độc lập là **chưa thực hiện**; kiểm tra nội bộ không thay thế bước này. Tài liệu này
-không xác nhận đã hoàn tất E1, E3 hoặc benchmark chính thức trên cả ba máy.
+- **Phạm vi đối chiếu:** Pilot 1M (`e2pilot_v2_20261117`) và lần chạy chính thức 30M (`e2main_v2_20261117`) theo protocol `mergetree-v2`, thực hiện trên ba bảng khóa `K1`, `CODEC(LZ4)` với một active Wide part (`index_granularity` lần lượt là `2048`, `8192`, `32768`; commit đo `2e65b9d`).
+- **Nội dung đã xác minh:**
+  - Khớp SHA-256 của `30` phân đoạn nguồn, đối chiếu từng byte quy tắc phân mẫu `ordinal mod 30` và phân bố `EventDate`, `CounterID`, `RegionID`.
+  - Xác minh DDL thực tế, `20` thiết lập truy vấn có hiệu lực và trạng thái `1` active Wide part trước/sau khi đo của cả ba bảng `30M`.
+  - Đối chiếu đủ `150` lượt đo chính và `30` lượt làm nóng trong `system.query_log` (`150/150` `QueryFinish`), tính lại độc lập trung vị, `Q1`, `Q3` và `IQR` khớp hoàn toàn với bảng CSV tổng hợp.
+- **Hồ sơ lưu trữ:** [`chapter-3/3.4.1/`](../chapter-3/3.4.1/), [`chapter-3/3.4.2/`](../chapter-3/3.4.2/), [`chapter-3/3.4.3/`](../chapter-3/3.4.3/) và [`chapter-3/3.4.4/`](../chapter-3/3.4.4/).

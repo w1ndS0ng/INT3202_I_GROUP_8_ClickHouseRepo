@@ -3,14 +3,13 @@
 - **Phụ trách:** Tài (Bảng 4.6 i5 — ver2) & Tuấn (hồ sơ Xeon đối chiếu — ver1)
 - **Mô tả:** Số đo dung lượng bảng nén, marks, chỉ mục trên đĩa và RAM cho 5 cấu hình trên máy Xeon (ver1) và máy Core i5 (ver2).
 
-## Cấu trúc thư mục
+## Nội dung
 
-- `scripts/`: Mã nguồn thực thi / kiểm chứng của mục này:
+- **Scripts:**
   - [`compare_4_3_3_storage.py`](scripts/compare_4_3_3_storage.py)
-- `results/`: Chứa **7 tệp** kết quả/minh chứng (kèm [`files.sha256.json`](results/files.sha256.json)).
-  - Các tệp/phiên bản bổ sung theo thời gian được gắn hậu tố `_ver1`, `_ver2` theo thứ tự thời điểm đưa vào nghiên cứu.
+- **Results:** **7 tệp** minh chứng ([`files.sha256.json`](results/files.sha256.json)).
 
-## Chạy kiểm tra nhanh từ thư mục gốc repo
+## Kiểm tra
 
 ```bash
 python chapter-4/4.3.3/scripts/compare_4_3_3_storage.py

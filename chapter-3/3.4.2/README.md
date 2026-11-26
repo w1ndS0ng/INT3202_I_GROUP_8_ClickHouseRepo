@@ -3,14 +3,13 @@
 - **Phụ trách:** Tuấn
 - **Mô tả:** Thời gian nạp/OPTIMIZE chuẩn bị, câu lệnh SQL, nhật ký 150 lượt đo và kiểm chứng công thức M_est, I_key_est (ver1: 1M, ver2: 30M).
 
-## Cấu trúc thư mục
+## Nội dung
 
-- `scripts/`: Mã nguồn thực thi / kiểm chứng của mục này:
+- **Scripts:**
   - [`run_e2_queries_and_formulas.py`](scripts/run_e2_queries_and_formulas.py)
-- `results/`: Chứa **48 tệp** kết quả/minh chứng (kèm [`files.sha256.json`](results/files.sha256.json)).
-  - Các tệp/phiên bản bổ sung theo thời gian được gắn hậu tố `_ver1`, `_ver2` theo thứ tự thời điểm đưa vào nghiên cứu.
+- **Results:** **48 tệp** minh chứng ([`files.sha256.json`](results/files.sha256.json)).
 
-## Chạy kiểm tra nhanh từ thư mục gốc repo
+## Kiểm tra
 
 ```bash
 python chapter-3/3.4.2/scripts/run_e2_queries_and_formulas.py
