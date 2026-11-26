@@ -1,0 +1,19 @@
+{
+  "version": "v7_ver4",
+  "dpi": 450,
+  "figsize_inches": [
+    6.5,
+    6.55
+  ],
+  "panel_a_scale": "broken_linear_y",
+  "q1_q3_caps": true,
+  "legend_layout": "shared_external_top_2row",
+  "median_points": 9,
+  "quartile_intervals": 9,
+  "font": "Times New Roman",
+  "experimental_data_unchanged": true,
+  "source_csvs": [
+    "ver2_formal_30m/summary/queries_ver2.csv",
+    "ver2_formal_30m/summary/granularity_cost_ver2.csv"
+  ]
+}

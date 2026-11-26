@@ -177,6 +177,8 @@ def plot(run):
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     from matplotlib import font_manager
+    from matplotlib.collections import LineCollection
+    from matplotlib.container import ErrorbarContainer
     from matplotlib.lines import Line2D
     from matplotlib.patches import FancyBboxPatch, Patch
     # Use the user's installed Windows font under WSL or Windows; font files are never
@@ -241,84 +243,129 @@ def plot(run):
         costs=[r for r in csv_read(cost_path) if r['scale']=='30m']
         query_rows=[r for r in csv_read(qpath) if r['experiment']=='granularity' and r['scale']=='30m']
         if costs and query_rows:
-            # Match usable A4 text width (6.5 in = 468 pt) at 450 DPI with a shared external legend.
-            fig=plt.figure(figsize=(6.5,6.45))
-            gs=fig.add_gridspec(3,2,height_ratios=[0.42,1.0,1.0],hspace=0.44,wspace=0.28,
-                                left=0.085,right=0.98,top=0.975,bottom=0.085)
+            # Match usable A4 text width (6.5 in = 468 pt) at 450 DPI with broken y-axis in (a) and shared legend.
+            fig=plt.figure(figsize=(6.5,6.55))
+            gs=fig.add_gridspec(3,2,height_ratios=[0.42,1.08,1.0],hspace=0.44,wspace=0.28,
+                                left=0.095,right=0.98,top=0.975,bottom=0.085)
             leg_ax=fig.add_subplot(gs[0,:])
             leg_ax.axis('off')
-            axes=[fig.add_subplot(gs[1,0]),fig.add_subplot(gs[1,1]),
-                  fig.add_subplot(gs[2,0]),fig.add_subplot(gs[2,1])]
+            top_ratio,bot_ratio=0.85,1.15
+            gs_a=gs[1,0].subgridspec(2,1,height_ratios=[top_ratio,bot_ratio],hspace=0.15)
+            ax_a_top=fig.add_subplot(gs_a[0])
+            ax_a_bot=fig.add_subplot(gs_a[1],sharex=ax_a_top)
+            ax_b=fig.add_subplot(gs[1,1])
+            ax_c=fig.add_subplot(gs[2,0])
+            ax_d=fig.add_subplot(gs[2,1])
             variants=[r['variant'] for r in costs]
             x=list(range(len(variants)))
             styles={
-                'w1':{'marker':'o','ls':'-','color':'#1B4F72','ms':7.0,'label':'W1'},
-                'w2':{'marker':'s','ls':'--','color':'#A93226','ms':6.6,'label':'W2'},
-                'w3':{'marker':'^','ls':':','color':'#117864','ms':7.4,'label':'W3'},
+                'w1':{'marker':'o','ls':'-','color':'#1B4F72','ms':5.0,'label':'W1'},
+                'w2':{'marker':'s','ls':'--','color':'#A93226','ms':5.0,'label':'W2'},
+                'w3':{'marker':'^','ls':':','color':'#117864','ms':5.2,'label':'W3'},
             }
-            offsets={'w1':-0.15,'w2':0.0,'w3':0.15}
-            q_gray='#7A7A7A'
+            q_gray='#64748B'
             halo=dict(boxstyle='round,pad=0.08',facecolor='white',edgecolor='none',alpha=0.88)
-            for case in ['w1','w2','w3']:
+            st_w2=styles['w2']
+            g_w2=[next(r for r in query_rows if r['variant']==v and r['case']=='w2') for v in variants]
+            med_w2=[float(r['client_ms_median']) for r in g_w2]
+            err_w2=[[m-float(r['client_ms_q1']) for r,m in zip(g_w2,med_w2)],
+                    [float(r['client_ms_q3'])-m for r,m in zip(g_w2,med_w2)]]
+            ax_a_top.plot(x,med_w2,linestyle=st_w2['ls'],linewidth=1.25,color=st_w2['color'],alpha=0.85,zorder=2)
+            ax_a_top.errorbar(x,med_w2,yerr=err_w2,fmt='none',ecolor=q_gray,
+                              elinewidth=1.5,capsize=4.0,capthick=1.35,zorder=3.5)
+            ax_a_top.plot(x,med_w2,linestyle='none',marker=st_w2['marker'],markersize=st_w2['ms'],
+                          markerfacecolor='white',markeredgecolor=st_w2['color'],markeredgewidth=1.55,zorder=4)
+            ax_a_top.set(ylim=(29.0,44.0),yticks=[30,36,42])
+            ax_a_top.set_yticklabels(['30','36','42'])
+            ax_a_top.spines['bottom'].set_visible(False)
+            ax_a_top.tick_params(axis='x',which='both',bottom=False,top=False,labelbottom=False)
+            ax_a_top.set_title('(a) Độ trễ client_ms W1–W3 (ms)',pad=8,fontweight='bold')
+            offsets={'w1':-0.13,'w3':0.13}
+            for case in ['w1','w3']:
                 st=styles[case]
                 group=[next(r for r in query_rows if r['variant']==variant and r['case']==case)
                        for variant in variants]
                 med=[float(r['client_ms_median']) for r in group]
-                positions=[position+offsets[case] for position in x]
-                for px,r in zip(positions,group):
-                    axes[0].plot([px,px],[float(r['client_ms_q1']),float(r['client_ms_q3'])],
-                                 color=q_gray,linewidth=2.0,solid_capstyle='butt',zorder=2)
-                axes[0].plot(positions,med,linestyle='none',marker=st['marker'],markersize=st['ms'],
-                             markerfacecolor='white',markeredgecolor=st['color'],markeredgewidth=1.65,zorder=4)
+                err=[[m-float(r['client_ms_q1']) for r,m in zip(group,med)],
+                     [float(r['client_ms_q3'])-m for r,m in zip(group,med)]]
+                pos=[position+offsets[case] for position in x]
+                ax_a_bot.plot(pos,med,linestyle=st['ls'],linewidth=1.25,color=st['color'],alpha=0.85,zorder=2)
+                ax_a_bot.errorbar(pos,med,yerr=err,fmt='none',ecolor=q_gray,
+                                  elinewidth=1.5,capsize=4.0,capthick=1.35,zorder=3.5)
+                ax_a_bot.plot(pos,med,linestyle='none',marker=st['marker'],markersize=st['ms'],
+                              markerfacecolor='white',markeredgecolor=st['color'],markeredgewidth=1.55,zorder=4)
+            ax_a_bot.set(ylim=(2.50,4.85),yticks=[2.8,3.6,4.4])
+            ax_a_bot.set_yticklabels(['2,8','3,6','4,4'])
+            ax_a_bot.spines['top'].set_visible(False)
+            dx,dy_base=0.024,0.032
+            dy_top=dy_base*(bot_ratio/top_ratio)
+            dy_bot=dy_base
+            kb=dict(color='black',linewidth=0.95,clip_on=False,zorder=10)
+            for x0 in (0.0,1.0):
+                for shift in (-0.014,0.014):
+                    ax_a_top.plot((x0-dx,x0+dx),(shift-dy_top,shift+dy_top),transform=ax_a_top.transAxes,**kb)
+                    ax_a_bot.plot((x0-dx,x0+dx),(1.0+shift-dy_bot,1.0+shift+dy_bot),transform=ax_a_bot.transAxes,**kb)
+            for case in ['w1','w3']:
+                st=styles[case]
+                group=[next(r for r in query_rows if r['variant']==variant and r['case']==case)
+                       for variant in variants]
                 pruning=[100*float(r['pruning_ratio']) for r in group]
-                target=axes[2] if case=='w2' else axes[1]
-                target.plot(x,pruning,linestyle=st['ls'],linewidth=1.6,color=st['color'],
-                            marker=st['marker'],markersize=st['ms'],markerfacecolor='white',
-                            markeredgecolor=st['color'],markeredgewidth=1.65,zorder=4)
+                ax_b.plot(x,pruning,linestyle=st['ls'],linewidth=1.6,color=st['color'],
+                          marker=st['marker'],markersize=7.0 if case=='w1' else 7.4,
+                          markerfacecolor='white',markeredgecolor=st['color'],markeredgewidth=1.65,zorder=4)
                 for position,value in zip(x,pruning):
-                    decimals=1 if case=='w2' else 2
-                    dy=8 if case in ('w2','w3') else -15
-                    target.annotate(f'{value:.{decimals}f}'.replace('.',','),(position,value),
-                                    xytext=(0,dy),textcoords='offset points',ha='center',
-                                    fontsize=11 if case=='w2' else 10.5,color=st['color'],bbox=halo,zorder=5)
-            axes[0].set(yscale='log',ylim=(2.3,52),yticks=[3,5,10,20,40])
-            axes[0].set_yticklabels(['3','5','10','20','40'])
-            axes[0].minorticks_off()
-            axes[0].set_title('(a) Độ trễ client_ms (ms, log)',pad=8,fontweight='bold')
-            axes[1].set(ylim=(99.58,100.09),yticks=[99.6,99.8,100.0])
-            axes[1].set_yticklabels(['99,6','99,8','100,0'])
-            axes[1].set_title('(b) Pruning W1, W3 (%)',pad=8,fontweight='bold')
-            axes[2].set(ylim=(0,100),yticks=[0,50,100])
-            axes[2].set_yticklabels(['0','50','100'])
-            axes[2].set_title('(c) Pruning W2 (%)',pad=8,fontweight='bold')
-            axes[2].set_xlabel('index_granularity (g)')
+                    dy=8 if case=='w3' else -15
+                    ax_b.annotate(f'{value:.2f}'.replace('.',','),(position,value),
+                                  xytext=(0,dy),textcoords='offset points',ha='center',
+                                  fontsize=10.5,color=st['color'],bbox=halo,zorder=5)
+            ax_b.set(ylim=(99.58,100.09),yticks=[99.6,99.8,100.0])
+            ax_b.set_yticklabels(['99,6','99,8','100,0'])
+            ax_b.set_title('(b) Pruning W1, W3 (%)',pad=8,fontweight='bold')
+            pruning_w2=[100*float(r['pruning_ratio']) for r in g_w2]
+            ax_c.plot(x,pruning_w2,linestyle=st_w2['ls'],linewidth=1.6,color=st_w2['color'],
+                      marker=st_w2['marker'],markersize=6.6,markerfacecolor='white',
+                      markeredgecolor=st_w2['color'],markeredgewidth=1.65,zorder=4)
+            for position,value in zip(x,pruning_w2):
+                ax_c.annotate(f'{value:.1f}'.replace('.',','),(position,value),
+                              xytext=(0,8),textcoords='offset points',ha='center',
+                              fontsize=11,color=st_w2['color'],bbox=halo,zorder=5)
+            ax_c.set(ylim=(0,100),yticks=[0,50,100])
+            ax_c.set_yticklabels(['0','50','100'])
+            ax_c.set_title('(c) Pruning W2 (%)',pad=8,fontweight='bold')
+            ax_c.set_xlabel('index_granularity (g)')
             pk_kib=[float(r['primary_key_bytes_in_memory'])/1024 for r in costs]
             mk_kib=[float(r['marks_bytes'])/1024 for r in costs]
-            bars_pk=axes[3].bar([v-.175 for v in x],pk_kib,width=.35,facecolor='#D6E6F4',
-                                edgecolor='#1B4F72',linewidth=1.1,hatch='///',zorder=3)
-            bars_mk=axes[3].bar([v+.175 for v in x],mk_kib,width=.35,facecolor='#FAE5D3',
-                                edgecolor='#873600',linewidth=1.1,hatch='..',zorder=3)
+            bars_pk=ax_d.bar([v-.175 for v in x],pk_kib,width=.35,facecolor='#D6E6F4',
+                             edgecolor='#1B4F72',linewidth=1.1,hatch='///',zorder=3)
+            bars_mk=ax_d.bar([v+.175 for v in x],mk_kib,width=.35,facecolor='#FAE5D3',
+                             edgecolor='#873600',linewidth=1.1,hatch='..',zorder=3)
             for bar,val,col in [(b,v,'#1B4F72') for b,v in zip(bars_pk,pk_kib)]+[(b,v,'#873600') for b,v in zip(bars_mk,mk_kib)]:
-                axes[3].annotate(f'{val:.1f}'.replace('.',','),(bar.get_x()+bar.get_width()/2,val),
-                                 xytext=(0,3),textcoords='offset points',ha='center',va='bottom',
-                                 fontsize=10.5,color=col,bbox=halo,zorder=5)
-            axes[3].set(ylim=(0,288),yticks=[0,125,250])
-            axes[3].set_yticklabels(['0','125','250'])
-            axes[3].set_title('(d) Chỉ mục & marks (KiB)',pad=8,fontweight='bold')
-            axes[3].set_xlabel('index_granularity (g)')
-            for ax in axes:
-                ax.set_xticks(x,[v[1:] for v in variants])
+                ax_d.annotate(f'{val:.1f}'.replace('.',','),(bar.get_x()+bar.get_width()/2,val),
+                              xytext=(0,3),textcoords='offset points',ha='center',va='bottom',
+                              fontsize=10.5,color=col,bbox=halo,zorder=5)
+            ax_d.set(ylim=(0,288),yticks=[0,125,250])
+            ax_d.set_yticklabels(['0','125','250'])
+            ax_d.set_title('(d) Chỉ mục & marks (KiB)',pad=8,fontweight='bold')
+            ax_d.set_xlabel('index_granularity (g)')
+            for ax in [ax_a_top,ax_a_bot,ax_b,ax_c,ax_d]:
                 ax.set_xlim(-.52,len(variants)-.48)
                 ax.grid(axis='y',color='#D5D8DC',linewidth=0.7,alpha=.85,zorder=0)
+            for ax in [ax_a_bot,ax_b,ax_c,ax_d]:
+                ax.set_xticks(x,[v[1:] for v in variants])
             row1=[Line2D([],[],color=styles[c]['color'],linestyle=styles[c]['ls'],linewidth=1.6,
-                         marker=styles[c]['marker'],markersize=styles[c]['ms'],markerfacecolor='white',
+                         marker=styles[c]['marker'],markersize=6.6 if c=='w2' else 7.0,markerfacecolor='white',
                          markeredgecolor=styles[c]['color'],markeredgewidth=1.65,label=styles[c]['label'])
                   for c in ['w1','w2','w3']]
-            row1.append(Line2D([],[],color=q_gray,linestyle='none',marker='|',markersize=12,
-                               markeredgewidth=2.0,label='Khoảng Q1–Q3'))
+            eb_handle=ErrorbarContainer(
+                (Line2D([0],[0],linestyle='none',marker='none'),
+                 (Line2D([0],[0],color=q_gray,marker='_',markersize=8.0,markeredgewidth=1.4,linestyle='none'),
+                  Line2D([0],[0],color=q_gray,marker='_',markersize=8.0,markeredgewidth=1.4,linestyle='none')),
+                 (LineCollection([[(0,0),(0,1)]],colors=[q_gray],linewidths=1.5),)),
+                has_xerr=False,has_yerr=True)
+            row1.append(eb_handle)
             row2=[Patch(facecolor='#D6E6F4',edgecolor='#1B4F72',linewidth=1.1,hatch='///',label='Primary index (RAM)'),
                   Patch(facecolor='#FAE5D3',edgecolor='#873600',linewidth=1.1,hatch='..',label='Marks (đĩa)')]
-            leg1=leg_ax.legend(handles=row1,loc='center',bbox_to_anchor=(0.5,0.73),ncol=4,
+            leg1=leg_ax.legend(row1,['W1','W2','W3','Khoảng Q1–Q3'],loc='center',bbox_to_anchor=(0.5,0.73),ncol=4,
                                frameon=False,columnspacing=1.8,handlelength=2.1,handletextpad=0.5,fontsize=12)
             leg_ax.add_artist(leg1)
             leg_ax.legend(handles=row2,loc='center',bbox_to_anchor=(0.5,0.27),ncol=2,
@@ -327,7 +374,7 @@ def plot(run):
                              boxstyle='round,pad=0.015,rounding_size=0.03',facecolor='#F8FAFC',
                              edgecolor='#CBD5E1',linewidth=0.9,zorder=-1,clip_on=False))
             for suffix,dpi_val in [('png',450),('svg',None),('pdf',None)]:
-                fig.savefig(folder/('e2_granularity_tradeoff_v6.'+suffix),
+                fig.savefig(folder/('e2_granularity_tradeoff_v7.'+suffix),
                             dpi=dpi_val,bbox_inches='tight',pad_inches=0.06)
             plt.close(fig)
     ep=run.path('summary','estimated_vs_actual.csv')
