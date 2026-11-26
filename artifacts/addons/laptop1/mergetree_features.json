@@ -1,0 +1,337 @@
+{
+  "recorded_at": "2026-11-26T18:58:33.054370+00:00",
+  "server_version": "26.10.4.207",
+  "source_30m": "mtr_ha_laptop1_main01.keys_30m_k1",
+  "rare_region": {
+    "RegionID": 106539,
+    "rows": 200
+  },
+  "w4_variants": [
+    {
+      "label": "k1_baseline",
+      "table": "mtr_ha_laptop1_main01.keys_30m_k1",
+      "region_id": 229,
+      "desc": "W4 (RegionID=229, 20.6%)",
+      "answer": {
+        "matched": 6185519,
+        "checksum": 9351769274
+      },
+      "explain": "Output: count(), sum(ResolutionWidth)\n\nAggregating\n│  Keys:\n│  Aggregates: count(), sum(ResolutionWidth)\n│  Skip merging: 0\n└──Filter ((WHERE + Change column names to column identifiers))\n   │  Filter column: RegionID = 229\n   └──ReadFromMergeTree (mtr_ha_laptop1_main01.keys_30m_k1)\n         Read type: Default\n         Parts: 1 | Granules: 3663\n         Output: ResolutionWidth, RegionID\n         Indexes:\n           PrimaryKey\n             Condition: true\n             Parts: 1/1\n             Granules: 3663/3663\n           Ranges: 1\n",
+      "client_ms": {
+        "n": 10,
+        "median": 50.3908519999996,
+        "q1": 47.45016575000349,
+        "q3": 58.8676017499985,
+        "iqr": 11.417435999995007
+      },
+      "server_ms": {
+        "n": 10,
+        "median": 48.5,
+        "q1": 45.5,
+        "q3": 56.25,
+        "iqr": 10.75
+      },
+      "read_rows_median": 30000000.0,
+      "read_bytes_median": 180000000.0,
+      "memory_bytes_median": 4923857.0,
+      "raw_client_ms": [
+        62.30937500000522,
+        53.563091000000895,
+        60.6357719999977,
+        47.11888300000311,
+        40.583227999995586,
+        48.77603999999991,
+        52.005663999999285,
+        73.94588199999674,
+        41.856061000004274,
+        48.44401400000464
+      ]
+    },
+    {
+      "label": "skip_w4_scattered",
+      "table": "mtr_addon_exp.hits_skip",
+      "region_id": 229,
+      "desc": "W4 (RegionID=229, 20.6%)",
+      "answer": {
+        "matched": 6185519,
+        "checksum": 9351769274
+      },
+      "explain": "Output: count(), sum(ResolutionWidth)\n\nAggregating\n│  Keys:\n│  Aggregates: count(), sum(ResolutionWidth)\n│  Skip merging: 0\n└──Filter ((WHERE + Change column names to column identifiers))\n   │  Filter column: RegionID = 229\n   └──ReadFromMergeTree (mtr_addon_exp.hits_skip)\n         Read type: Default\n         Parts: 1 | Granules: 3662\n         Output: ResolutionWidth, RegionID\n         Indexes:\n           PrimaryKey\n             Condition: true\n             Parts: 1/1\n             Granules: 3663/3663\n           Skip\n             Name: idx_reg_mm\n             Description: minmax GRANULARITY 4\n             Condition: (RegionID in [229, 229])\n             Parts: 1/1\n             Granules: 3663/3663\n           Skip\n             Name: idx_reg_bf\n             Description: bloom_filter GRANULARITY 1\n             Parts: 1/1\n             Granules: 3662/3663\n           Ranges: 2\n",
+      "client_ms": {
+        "n": 10,
+        "median": 60.617633000003224,
+        "q1": 51.62369299999803,
+        "q3": 68.71593625000472,
+        "iqr": 17.09224325000669
+      },
+      "server_ms": {
+        "n": 10,
+        "median": 58.5,
+        "q1": 50.0,
+        "q3": 66.75,
+        "iqr": 16.75
+      },
+      "read_rows_median": 29991808.0,
+      "read_bytes_median": 179950848.0,
+      "memory_bytes_median": 4937069.0,
+      "raw_client_ms": [
+        66.04315600000632,
+        57.50198800000561,
+        72.3904829999995,
+        54.7640059999992,
+        42.390720999996745,
+        69.60686300000418,
+        74.83987900000244,
+        63.73327800000084,
+        49.577639000006,
+        50.57692199999764
+      ]
+    },
+    {
+      "label": "k1_rare_noskip",
+      "table": "mtr_ha_laptop1_main01.keys_30m_k1",
+      "region_id": 106539,
+      "desc": "Rare RegionID=106539 (200 rows)",
+      "answer": {
+        "matched": 200,
+        "checksum": 308406
+      },
+      "explain": "Output: count(), sum(ResolutionWidth)\n\nAggregating\n│  Keys:\n│  Aggregates: count(), sum(ResolutionWidth)\n│  Skip merging: 0\n└──Filter ((WHERE + Change column names to column identifiers))\n   │  Filter column: RegionID = 106539\n   └──ReadFromMergeTree (mtr_ha_laptop1_main01.keys_30m_k1)\n         Read type: Default\n         Parts: 1 | Granules: 3663\n         Output: ResolutionWidth, RegionID\n         Indexes:\n           PrimaryKey\n             Condition: true\n             Parts: 1/1\n             Granules: 3663/3663\n           Ranges: 1\n",
+      "client_ms": {
+        "n": 10,
+        "median": 47.00966800000117,
+        "q1": 42.4374799999967,
+        "q3": 53.75032675000213,
+        "iqr": 11.312846750005434
+      },
+      "server_ms": {
+        "n": 10,
+        "median": 45.5,
+        "q1": 40.75,
+        "q3": 51.75,
+        "iqr": 11.0
+      },
+      "read_rows_median": 30000000.0,
+      "read_bytes_median": 180000000.0,
+      "memory_bytes_median": 5177857.0,
+      "raw_client_ms": [
+        54.208278000004384,
+        52.37647299999537,
+        58.8945960000018,
+        46.53229800000247,
+        37.38203300000009,
+        38.2148930000028,
+        47.48703799999987,
+        69.11235100000113,
+        41.64260799999653,
+        44.8220959999972
+      ]
+    },
+    {
+      "label": "skip_rare_region",
+      "table": "mtr_addon_exp.hits_skip",
+      "region_id": 106539,
+      "desc": "Rare RegionID=106539 (200 rows)",
+      "answer": {
+        "matched": 200,
+        "checksum": 308406
+      },
+      "explain": "Output: count(), sum(ResolutionWidth)\n\nAggregating\n│  Keys:\n│  Aggregates: count(), sum(ResolutionWidth)\n│  Skip merging: 0\n└──Filter ((WHERE + Change column names to column identifiers))\n   │  Filter column: RegionID = 106539\n   └──ReadFromMergeTree (mtr_addon_exp.hits_skip)\n         Read type: Default\n         Parts: 1 | Granules: 95\n         Output: ResolutionWidth, RegionID\n         Indexes:\n           PrimaryKey\n             Condition: true\n             Parts: 1/1\n             Granules: 3663/3663\n           Skip\n             Name: idx_reg_mm\n             Description: minmax GRANULARITY 4\n             Condition: (RegionID in [106539, 106539])\n             Parts: 1/1\n             Granules: 3507/3663\n           Skip\n             Name: idx_reg_bf\n             Description: bloom_filter GRANULARITY 1\n             Parts: 1/1\n             Granules: 95/3507\n           Ranges: 87\n",
+      "client_ms": {
+        "n": 10,
+        "median": 15.037822000000034,
+        "q1": 12.454640500003222,
+        "q3": 15.801730749995357,
+        "iqr": 3.347090249992135
+      },
+      "server_ms": {
+        "n": 10,
+        "median": 13.5,
+        "q1": 11.25,
+        "q3": 14.0,
+        "iqr": 2.75
+      },
+      "read_rows_median": 778240.0,
+      "read_bytes_median": 4669440.0,
+      "memory_bytes_median": 4904349.0,
+      "raw_client_ms": [
+        15.861908999994512,
+        15.42461300000042,
+        15.621195999997894,
+        10.818536999998685,
+        11.579632999996647,
+        12.041872000004616,
+        18.114088000004358,
+        16.79278099999948,
+        13.69294599999904,
+        14.651030999999648
+      ]
+    },
+    {
+      "label": "proj_order_w4",
+      "table": "mtr_addon_exp.hits_proj_order",
+      "region_id": 229,
+      "desc": "W4 (RegionID=229, 20.6%)",
+      "answer": {
+        "matched": 6185519,
+        "checksum": 9351769274
+      },
+      "explain": "Output: count(), sum(ResolutionWidth)\n\nAggregating\n│  Keys:\n│  Aggregates: count(), sum(ResolutionWidth)\n│  Skip merging: 0\n└──ReadFromMergeTree (p_reg_order)\n      Read type: Default\n      Parts: 1 | Granules: 756\n      Output: RegionID, ResolutionWidth\n      Prewhere filter\n      Prewhere filter column:  RegionID = 229\n      Indexes:\n        PrimaryKey\n          Keys:\n            RegionID\n          Condition: (RegionID in [229, 229])\n          Parts: 1/1\n          Granules: 756/3663\n          Search Algorithm: binary search\n        Ranges: 1\n",
+      "client_ms": {
+        "n": 10,
+        "median": 14.3927620000035,
+        "q1": 13.517688750001255,
+        "q3": 17.41486575000195,
+        "iqr": 3.8971770000006956
+      },
+      "server_ms": {
+        "n": 10,
+        "median": 12.5,
+        "q1": 12.0,
+        "q3": 15.75,
+        "iqr": 3.75
+      },
+      "read_rows_median": 6193152.0,
+      "read_bytes_median": 37158912.0,
+      "memory_bytes_median": 4169558.0,
+      "raw_client_ms": [
+        14.665137000001494,
+        27.35207199999934,
+        17.573150000004034,
+        14.120387000005508,
+        13.513199000001919,
+        11.472050999998373,
+        17.826842999994597,
+        16.9400129999957,
+        13.235634000004382,
+        13.531157999999266
+      ]
+    },
+    {
+      "label": "proj_agg_w4",
+      "table": "mtr_addon_exp.hits_proj_agg",
+      "region_id": 229,
+      "desc": "W4 (RegionID=229, 20.6%)",
+      "answer": {
+        "matched": 6185519,
+        "checksum": 9351769274
+      },
+      "explain": "Output: count(), sum(ResolutionWidth)\n\nAggregating\n│  Keys:\n│  Aggregates: count(), sum(ResolutionWidth)\n│  Skip merging: 0\n└──Filter\n   │  Filter column: RegionID = 229\n   └──ReadFromMergeTree (p_reg_agg)\n         Read type: Default\n         Parts: 1 | Granules: 1\n         Output: RegionID, count(), sum(ResolutionWidth)\n         Indexes:\n           PrimaryKey\n             Keys:\n               RegionID\n             Condition: (RegionID in [229, 229])\n             Parts: 1/1\n             Granules: 1/1\n             Search Algorithm: binary search\n           Ranges: 1\n",
+      "client_ms": {
+        "n": 10,
+        "median": 7.297349999998204,
+        "q1": 6.5880335000017,
+        "q3": 8.268474499999456,
+        "iqr": 1.6804409999977565
+      },
+      "server_ms": {
+        "n": 10,
+        "median": 5.5,
+        "q1": 5.0,
+        "q3": 6.75,
+        "iqr": 1.75
+      },
+      "read_rows_median": 6834.0,
+      "read_bytes_median": 246024.0,
+      "memory_bytes_median": 3637299.0,
+      "raw_client_ms": [
+        8.020580000000166,
+        7.786832000000743,
+        8.980212000004428,
+        5.884175999995023,
+        6.10205100000627,
+        6.793117999997378,
+        8.35110599999922,
+        8.707842000006849,
+        6.5196720000031405,
+        6.807867999995665
+      ]
+    }
+  ],
+  "memory_spill": {
+    "guard": {
+      "blocked": true,
+      "error": "HTTP 500: Code: 241. DB::Exception: Query memory limit exceeded: would use 77.62 MiB (attempt to allocate chunk of 4.50 MiB), maximum: 76.29 MiB: While executing AggregatingTransform. (MEMORY_LIMIT_EXCEEDED) (version 26.10.4.207 (official build))\n"
+    },
+    "spill": {
+      "completed": true,
+      "client_ms": 1334.8864330000013,
+      "server_ms": 1348,
+      "read_rows": 10000000,
+      "memory_usage_bytes": 151724697,
+      "external_events": {
+        "ExternalAggregationWritePart": 33,
+        "ExternalAggregationMerge": 1,
+        "ExternalAggregationCompressedBytes": 169138419,
+        "ExternalAggregationUncompressedBytes": 181038080
+      }
+    }
+  },
+  "storage": {
+    "parts": [
+      {
+        "table": "hits_proj_agg",
+        "rows": 30000000,
+        "marks": 3663,
+        "bytes_on_disk": 522437905,
+        "data_compressed_bytes": 522267725,
+        "part_type": "Wide"
+      },
+      {
+        "table": "hits_proj_order",
+        "rows": 30000000,
+        "marks": 3663,
+        "bytes_on_disk": 949266440,
+        "data_compressed_bytes": 522269689,
+        "part_type": "Wide"
+      },
+      {
+        "table": "hits_skip",
+        "rows": 30000000,
+        "marks": 3663,
+        "bytes_on_disk": 523538844,
+        "data_compressed_bytes": 522271963,
+        "part_type": "Wide"
+      }
+    ],
+    "skip_indices": [
+      {
+        "name": "idx_reg_mm",
+        "type_full": "minmax",
+        "marks_bytes": 975,
+        "data_compressed_bytes": 1532,
+        "data_uncompressed_bytes": 7328
+      },
+      {
+        "name": "idx_reg_bf",
+        "type_full": "bloom_filter(0.01)",
+        "marks_bytes": 7826,
+        "data_compressed_bytes": 1132847,
+        "data_uncompressed_bytes": 1167197
+      }
+    ],
+    "projections": [
+      {
+        "table": "hits_proj_agg",
+        "name": "p_reg_agg",
+        "rows": 6834,
+        "bytes_on_disk": 46536,
+        "data_compressed_bytes": 46141,
+        "marks_bytes": 126
+      },
+      {
+        "table": "hits_proj_order",
+        "name": "p_reg_order",
+        "rows": 30000000,
+        "bytes_on_disk": 426872664,
+        "data_compressed_bytes": 426767611,
+        "marks_bytes": 102426
+      }
+    ],
+    "build_s": {
+      "t_skip": 7.7352182549999995,
+      "t_proj_order": 14.212771028000002,
+      "t_proj_agg": 7.2027771409999986
+    }
+  }
+}
