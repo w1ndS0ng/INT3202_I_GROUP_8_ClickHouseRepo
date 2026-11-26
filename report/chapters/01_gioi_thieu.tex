@@ -1,0 +1,26 @@
+\section{GIỚI THIỆU VÀ BÀI TOÁN NGHIÊN CỨU}
+\label{sec:gioi_thieu}
+
+% Ngân sách: tối đa 2 trang (theo docs/PAGE_BUDGET_VI.md)
+% Nội dung: Giới thiệu bài toán phân tích clickstream, đặc trưng dữ liệu append-only,
+% thách thức độ trễ truy vấn và vai trò của storage engine MergeTree.
+
+\subsection{Bối cảnh phân tích Clickstream quy mô lớn}
+Trong các hệ thống phân tích dữ liệu trực tuyến hiện đại (OLAP), dữ liệu sự kiện người dùng (clickstream) có đặc thù phát sinh liên tục với tốc độ cao, tính chất append-only và khối lượng lên đến hàng triệu sự kiện mỗi ngày. Việc truy vấn các chỉ số như số lượng người dùng duy nhất, thời gian lưu trang hay tỷ lệ chuyển đổi đòi hỏi hệ quản trị cơ sở dữ liệu phải đáp ứng đồng thời hai mục tiêu đối nghịch: tốc độ nạp dữ liệu cao và độ trễ truy vấn tính bằng mili-giây.
+
+\subsection{Bài toán và Động lực nghiên cứu}
+ClickHouse là hệ quản trị cơ sở dữ liệu hướng cột mã nguồn mở được thiết kế riêng cho các tác vụ OLAP thời gian thực. Trái tim của ClickHouse là dòng bảng động cơ \textbf{MergeTree}. Mặc dù MergeTree mang lại hiệu năng vượt trội, hiệu quả thực tế phụ thuộc mật thiết vào các quyết định thiết kế vật lý:
+\begin{itemize}
+    \item \textbf{Sorting key (ORDER BY):} Quyết định thứ tự vật lý của các dòng dữ liệu trên đĩa, chi phối trực tiếp khả năng nén cột và tính hiệu quả của chỉ mục thưa (sparse index).
+    \item \textbf{Index granularity ($g$):} Quy định kích thước mỗi granule (mặc định 8.192 dòng), tạo ra sự đánh đổi giữa kích thước chỉ mục lưu trong RAM và độ chính xác khi loại bỏ các vùng dữ liệu không liên quan (granule pruning).
+    \item \textbf{Cơ chế nạp và Background Merges:} Sự cân bằng giữa kích thước lô nạp (batch size), số lượng part sinh ra và chi phí hợp nhất nền (I/O amplification).
+\end{itemize}
+
+\subsection{Mục tiêu và Đóng góp của đề tài}
+Nghiên cứu này tập trung phân tích sâu cơ chế hoạt động nội tại của MergeTree trên một node ClickHouse với tập dữ liệu thực tế \textbf{Hits 30M}. Các đóng góp chính bao gồm:
+\begin{enumerate}
+    \item Đánh giá định lượng ảnh hưởng của cấu hình sorting key (K0, K1, K2) trên 5 dạng workload truy vấn từ đơn giản đến phức tạp.
+    \item Khảo sát thực nghiệm sự đánh đổi của tham số $index\_granularity$ ($g \in \{2048, 8192, 32768\}$) đối với dung lượng bộ nhớ, dung lượng đĩa và độ trễ truy vấn.
+    \item Định lượng mối quan hệ giữa kích thước lô nạp, số lượng parts và hệ số khuếch đại ghi khi hợp nhất nền.
+    \item Xây dựng và kiểm chứng mô hình tuyến tính ước lượng thời gian thực thi truy vấn dựa trên số hàng đọc ước tính ($N_{\text{est}}$) từ sparse index.
+\end{enumerate}

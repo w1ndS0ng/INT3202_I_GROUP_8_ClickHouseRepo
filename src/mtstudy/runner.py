@@ -77,18 +77,26 @@ def initialize(args, protocol):
 class Run:
     def __init__(self,args):
         self.args=args
-        self.out=ROOT/'results'/identifier(args.member)/identifier(args.machine)/identifier(args.run)
+        candidate=ROOT/'results'/identifier(args.member)/identifier(args.machine)/identifier(args.run)
+        if not candidate.exists():
+            art=ROOT/'artifacts'/identifier(args.member)/identifier(args.machine)/identifier(args.run)
+            if art.exists():
+                candidate=art
+        self.out=candidate
         self.c=read(self.out/'config.json')
         self.p=self.c['protocol']
         self.db=self.c['database']
         if not self.db.startswith('mtr_'):
             raise RuntimeError('Unexpected database namespace')
-        self.client=Client(self.p['settings'],args.client_config)
         self.manifest=read(self.out/'input_manifest.json')
         if object_sha(self.manifest)!=self.c['manifest_hash']:
             raise RuntimeError('Run input manifest changed')
-        if self.client.scalar('SELECT version()')!=self.p['expected_clickhouse_version']:
-            raise RuntimeError('ClickHouse version changed during this run')
+        if getattr(args,'command',None) in ('build','queries','ingest'):
+            self.client=Client(self.p['settings'],args.client_config)
+            if self.client.scalar('SELECT version()')!=self.p['expected_clickhouse_version']:
+                raise RuntimeError('ClickHouse version changed during this run')
+        else:
+            self.client=None
         self.row_bytes=sum(x[2] for x in self.p['schema'])
 
     def path(self,*parts):

@@ -1,0 +1,46 @@
+\section{THIẾT KẾ VÀ TRIỂN KHAI THỰC NGHIỆM}
+\label{sec:thiet_ke_thuc_nghiem}
+
+% Ngân sách: tối đa 5 trang
+% Nội dung: Protocol, Dataset Hits 30M, Thiết kế E1, E2, E3, Mô hình ước lượng
+
+\subsection{Mục tiêu Thực nghiệm và Môi trường Chuẩn mực}
+Thực nghiệm được triển khai nghiêm ngặt theo giao thức nghiên cứu chuẩn (Protocol v2) trên nền tảng ClickHouse phiên bản 26.10.3.7. Các tham số bộ nhớ đệm, luồng thực thi và cài đặt phần cứng được cố định và giám sát qua \texttt{system.settings} và \texttt{environment.json}.
+
+\subsection{Bộ dữ liệu Thực nghiệm Hits 30M}
+Tập dữ liệu sử dụng là bộ dữ liệu web analytics thực tế \textbf{Hits} bao gồm 30 triệu dòng, được trích xuất và kiểm định toàn vẹn qua checksum SHA-256 (\texttt{hits30m.lock.json}). Dữ liệu bao gồm 44 cột với độ rộng trung bình 44 bytes/dòng khi chuyển đổi sang định dạng \texttt{RowBinary}.
+Để phục vụ việc huấn luyện và kiểm định mô hình, dữ liệu được chia theo các quy mô lồng nhau: 1M, 3M, 10M và 30M (holdout set).
+
+\subsection{Thiết kế Thí nghiệm E1: Sorting Keys}
+Khảo sát 3 biến thể sắp xếp trên 5 dạng workload truy vấn ($W_0$ đến $W_4$):
+\begin{itemize}
+    \item $W_0$: Full scan tính tổng (\texttt{sum(ResolutionWidth)}).
+    \item $W_1$: Lọc chính xác theo \texttt{CounterID} có độ chọn lọc cao.
+    \item $W_2$: Lọc theo khoảng thời gian \texttt{EventDate}.
+    \item $W_3$: Lọc kết hợp \texttt{CounterID} và \texttt{EventDate}.
+    \item $W_4$: Lọc theo cột không nằm trong sorting key (\texttt{UserID}).
+\end{itemize}
+
+\subsection{Thiết kế Thí nghiệm E2: Index Granularity}
+Cố định khóa sắp xếp tối ưu, vô hiệu hóa kích thước thích ứng (\texttt{index\_granularity\_bytes = 0}) và thay đổi $g \in \{2048, 8192, 32768\}$ để cô lập chính xác ảnh hưởng của kích thước granule lên:
+\begin{enumerate}
+    \item Dung lượng primary key nạp trên RAM (\texttt{primary\_key\_bytes\_in\_memory}).
+    \item Dung lượng tệp marks trên đĩa (\texttt{marks\_bytes}).
+    \item Tỷ lệ granule bị cắt tỉa (pruning ratio) và thời gian phản hồi của client.
+\end{enumerate}
+
+\subsection{Thiết kế Thí nghiệm E3: Ingestion Batch Size và Merge Amplification}
+Khảo sát quá trình nạp dữ liệu với các kích thước batch khác nhau từ $10^3$ đến $10^6$ dòng/lô. Tiến trình đo lường độc lập:
+\begin{itemize}
+    \item Thời gian xác nhận ghi (\texttt{ingest\_ack\_s}).
+    \item Thông lượng nạp (\texttt{throughput\_rows\_s}).
+    \item Số lượng part ổn định sau khi ngừng ghi (\texttt{parts\_stable}).
+    \item Tổng thời gian và số dòng đọc khi hợp nhất nền (\texttt{part\_log}).
+\end{itemize}
+
+\subsection{Mô hình Ước lượng Thời gian Truy vấn (Query Time Model)}
+Xây dựng mô hình tuyến tính đơn giản:
+\begin{equation}
+    \hat{T}_{\text{ms}} = \alpha + \beta \times N_{\text{est}}
+\end{equation}
+Trong đó $\alpha \ge 0$ là chi phí cố định (overheads kết nối, phân tích cú pháp, nạp metadata), $\beta \ge 0$ là chi phí quét và giải nén trên mỗi dòng dữ liệu ước tính. Mô hình được fit trên tập 1M, 3M, 10M và kiểm định độc lập trên tập holdout 30M.

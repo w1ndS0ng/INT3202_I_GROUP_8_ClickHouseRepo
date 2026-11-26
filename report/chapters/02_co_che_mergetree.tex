@@ -1,0 +1,52 @@
+\section{CƠ CHẾ NỘI TẠI CỦA MERGETREE}
+\label{sec:co_che_mergetree}
+
+% Ngân sách: tối đa 7 trang (2.1: 0.5, 2.2: 1.5, 2.3: 1.5, 2.4: 1.5, 2.5: 1.5, 2.6: 0.5)
+% Nguồn tài liệu: ClickHouse Docs, Alexey Milovidov, VLDB
+
+\subsection{Bối cảnh ClickHouse và Vị trí của MergeTree}
+Trong kiến trúc ClickHouse, MergeTree đóng vai trò là storage engine cốt lõi. Khác với các hệ thống OLTP sử dụng B-tree và lưu trữ hướng dòng, MergeTree tổ chức dữ liệu theo cột, phân chia thành các phần bất biến (data parts) và nén thành các compressed blocks độc lập.
+
+\subsection{Data Parts và Tiến trình Ghi Dữ liệu}
+Khi thực hiện thao tác \texttt{INSERT}, dữ liệu được phân chia theo phân vùng (\texttt{PARTITION BY}), sắp xếp theo khóa (\texttt{ORDER BY}) và ghi xuống đĩa thành một part bất biến mới. Part bao gồm:
+\begin{itemize}
+    \item Tệp dữ liệu nén của từng cột (\texttt{.bin}).
+    \item Tệp mốc đánh dấu (\texttt{.mrk2} hoặc \texttt{.mrk3}) ghi nhận vị trí offset của từng granule trong file nén.
+    \item Tệp chỉ mục chính (\texttt{primary.idx}) chứa giá trị khóa tại dòng đầu tiên của mỗi granule.
+\end{itemize}
+
+\subsection{Sorting Key và Sparse Primary Index}
+Khóa chính (\texttt{PRIMARY KEY}) trong MergeTree mặc định kế thừa từ \texttt{ORDER BY}. Điểm khác biệt căn bản là chỉ mục này là \textbf{chỉ mục thưa (sparse index)}, không đánh chỉ mục từng dòng riêng lẻ mà chỉ lưu giá trị đầu tiên của mỗi granule.
+
+Với bộ dữ liệu clickstream, việc lựa chọn thứ tự cột trong sorting key quyết định thứ tự từ điển (lexicographical order):
+\begin{itemize}
+    \item \textbf{K0 (\texttt{tuple()}):} Không sắp xếp, tương ứng với full table scan.
+    \item \textbf{K1 (\texttt{CounterID, EventDate}):} Tối ưu cho các truy vấn lọc theo website (\texttt{CounterID}).
+    \item \textbf{K2 (\texttt{EventDate, CounterID}):} Tối ưu cho các truy vấn quét theo khoảng thời gian (\texttt{EventDate}).
+\end{itemize}
+
+\subsection{Granules, Marks và Quá trình Granule Pruning}
+Một granule là đơn vị dữ liệu logic tối thiểu được đọc từ đĩa. Với kích thước granule cố định $g$:
+\begin{equation}
+    M \approx \left\lceil \frac{N}{g} \right\rceil
+\end{equation}
+Trong đó $M$ là tổng số marks, $N$ là số dòng trong part.
+
+Khi một truy vấn có điều kiện lọc thực thi, bộ tối ưu hóa đối soát điều kiện lọc với \texttt{primary.idx} để loại bỏ các granule không thỏa mãn (granule pruning). Số dòng ước tính đọc được xác định theo:
+\begin{equation}
+    R_{\text{est}} \approx \min(N, \text{selected\_marks} \times g)
+\end{equation}
+
+\subsection{Background Merges và Đánh đổi trong Nạp Dữ liệu}
+Để tránh bùng nổ số lượng part (\textit{too many parts}), ClickHouse kích hoạt tiến trình nền định kỳ gộp các part nhỏ thuộc cùng một partition thành part lớn hơn theo thuật toán heuristic. Chi phí hợp nhất được đo đạc qua hệ số khuếch đại dòng:
+\begin{equation}
+    \text{Merge Row Amplification} = \frac{\sum \text{MergeParts.read\_rows}}{N}
+\end{equation}
+
+\subsection{Phạm vi Áp dụng và Ánh xạ sang Thực nghiệm}
+Các cơ chế lý thuyết trên được ánh xạ trực tiếp vào 3 bài toán thực nghiệm của đề tài:
+\begin{itemize}
+    \item Sorting key và Sparse Index $\rightarrow$ Thí nghiệm E1.
+    \item Index Granularity và Kích thước chỉ mục $\rightarrow$ Thí nghiệm E2.
+    \item Batch size và Background Merges $\rightarrow$ Thí nghiệm E3.
+\end{itemize}

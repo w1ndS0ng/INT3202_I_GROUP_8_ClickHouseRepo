@@ -1,0 +1,21 @@
+\section{KHUYẾN NGHỊ THỰC TẾ VÀ KẾT LUẬN}
+\label{sec:ket_luan}
+
+% Ngân sách: tối đa 2 trang (theo docs/PAGE_BUDGET_VI.md)
+% Nội dung: Khuyến nghị thực tế cho kỹ sư hạ tầng/dữ liệu; Hạn chế và hướng phát triển
+
+\subsection{Khuyến nghị Thực tế khi Triển khai MergeTree}
+Dựa trên kết quả đo đạc thực nghiệm trên tập dữ liệu Hits 30M, nhóm nghiên cứu đề xuất các nguyên tắc sau:
+\begin{enumerate}
+    \item \textbf{Thiết kế Sorting Key theo Workload trọng tâm:} Luôn đặt các cột xuất hiện nhiều nhất trong mệnh đề \texttt{WHERE} với tính chọn lọc cao lên đầu khóa. Tránh dùng \texttt{tuple()} trừ trường hợp bảng tạm hoặc bảng tra cứu cực nhỏ.
+    \item \textbf{Cân nhắc Index Granularity:} Giá trị mặc định $g = 8192$ là điểm cân bằng lý tưởng cho hầu hết workload phân tích. Chỉ nên giảm xuống $g = 2048$ hoặc $1024$ khi bảng có yêu cầu truy vấn phạm vi rất hẹp và server có dồi dào dung lượng RAM.
+    \item \textbf{Gom Lô khi Nạp (Batch Ingestion):} Tuyệt đối tránh ghi từng dòng hoặc các lô nạp dưới $10.000$ dòng. Kích thước lô nạp khuyến nghị từ $100.000$ đến $500.000$ dòng để hạn chế chi phí background merges.
+\end{enumerate}
+
+\subsection{Hạn chế của Đề tài và Hướng phát triển}
+Nghiên cứu được thực hiện trên môi trường single-node với tập dữ liệu tĩnh clickstream append-only. Các hướng nghiên cứu mở rộng trong tương lai bao gồm:
+\begin{itemize}
+    \item Đánh giá cơ chế deduplication của \texttt{ReplacingMergeTree} trong các kịch bản nạp dữ liệu trùng lặp.
+    \item Đo lường hiệu năng của \texttt{ReplicatedMergeTree} trên cụm phân tán có mạng chịu tải cao.
+    \item Phân tích chi phí cập nhật của Materialized Views khi nạp dữ liệu streaming theo thời gian thực.
+\end{itemize}

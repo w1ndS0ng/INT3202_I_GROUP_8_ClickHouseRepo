@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bản xem trước Báo cáo Nghiên cứu ClickHouse MergeTree</title>
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm 20mm 20mm 30mm;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 13pt;
+            line-height: 1.15;
+            color: #111;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .page {
+            background: #fff;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm 20mm 20mm 30mm;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            box-sizing: border-box;
+            position: relative;
+        }
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                min-height: auto;
+                padding: 0;
+                page-break-after: always;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            height: 250mm;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Times New Roman', Times, serif;
+            color: #000;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+        }
+        h1 {
+            font-size: 15pt;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        h2 {
+            font-size: 13.5pt;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 4px;
+        }
+        h3 {
+            font-size: 13pt;
+            font-weight: bold;
+        }
+        p {
+            text-indent: 1.27cm;
+            margin: 0.4em 0;
+            text-align: justify;
+        }
+        .no-indent {
+            text-indent: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2em 0;
+            font-size: 11.5pt;
+        }
+        th, td {
+            padding: 6px 10px;
+            text-align: left;
+        }
+        th {
+            border-top: 2px solid #000;
+            border-bottom: 1px solid #000;
+            font-weight: bold;
+        }
+        tr:last-child td {
+            border-bottom: 2px solid #000;
+        }
+        td.num, th.num {
+            text-align: right;
+        }
+        .caption {
+            font-weight: bold;
+            font-size: 12pt;
+            text-align: center;
+            margin: 0.8em 0 0.3em 0;
+        }
+        .figure {
+            text-align: center;
+            margin: 1.5em 0;
+        }
+        .figure img {
+            max-width: 95%;
+            height: auto;
+            border: 1px solid #eee;
+        }
+        .toc-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.3em 0;
+            text-indent: 0;
+        }
+        .toolbar {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: #2b3a42;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            z-index: 1000;
+        }
+        .toolbar button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .toolbar button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+    <span>Xem trước Báo cáo A4 (Times New Roman 13pt) &nbsp;</span>
+    <button onclick="window.print()">In hoặc Lưu PDF (Ctrl + P)</button>
+</div>
+
+<!-- TRANG BÌA -->
+<div class="page cover">
+    <div>
+        <p class="no-indent" style="font-size: 14pt; font-weight: bold;">BÁO CÁO NGHIÊN CỨU HỌC PHẦN</p>
+        <p class="no-indent" style="font-size: 13pt;">HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU PHÂN TÍCH</p>
+    </div>
+    
+    <div style="margin: 40mm 0;">
+        <h1 style="font-size: 16pt; line-height: 1.4;">
+            MERGETREE INTERNALS IN CLICKHOUSE:<br>
+            EVALUATING SORTING KEYS, INDEX GRANULARITY AND BACKGROUND MERGES ON CLICKSTREAM DATA
+        </h1>
+        <p class="no-indent" style="font-size: 12pt; font-style: italic; margin-top: 15px;">
+            Nghiên cứu thực nghiệm cơ chế nội tại MergeTree trên tập dữ liệu Hits 30M
+        </p>
+    </div>
+
+    <div>
+        <p class="no-indent" style="font-size: 13pt;">Nhóm tác giả thực hiện:</p>
+        <p class="no-indent" style="font-size: 13.5pt; font-weight: bold; margin: 8px 0;">
+            Nguyễn Thị Ngọc Hà &nbsp;—&nbsp; Tuấn &nbsp;—&nbsp; Tài
+        </p>
+        <p class="no-indent" style="font-size: 12pt; margin-top: 25mm;">THÁNG 11 / 2026</p>
+    </div>
+</div>
+
+<!-- MỤC LỤC & TÓM TẮT -->
+<div class="page">
+    <h2>MỤC LỤC TỔNG QUAN</h2>
+    <div style="margin-top: 20px;">
+        <div class="toc-item"><span><strong>CHƯƠNG 1. GIỚI THIỆU VÀ BÀI TOÁN NGHIÊN CỨU</strong></span><span>1</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;1.1. Bối cảnh phân tích Clickstream quy mô lớn</span><span>1</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;1.2. Bài toán và Động lực nghiên cứu</span><span>1</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;1.3. Mục tiêu và Đóng góp của đề tài</span><span>2</span></div>
+        
+        <div class="toc-item" style="margin-top: 8px;"><span><strong>CHƯƠNG 2. CƠ CHẾ NỘI TẠI CỦA MERGETREE</strong></span><span>3</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;2.1. Bối cảnh ClickHouse và Vị trí của MergeTree</span><span>3</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;2.2. Data Parts và Tiến trình Ghi Dữ liệu</span><span>4</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;2.3. Sorting Key và Sparse Primary Index</span><span>5</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;2.4. Granules, Marks và Quá trình Granule Pruning</span><span>6</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;2.5. Background Merges và Đánh đổi trong Nạp Dữ liệu</span><span>7</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;2.6. Phạm vi Áp dụng và Ánh xạ sang Thực nghiệm</span><span>9</span></div>
+        
+        <div class="toc-item" style="margin-top: 8px;"><span><strong>CHƯƠNG 3. THIẾT KẾ VÀ TRIỂN KHAI THỰC NGHIỆM</strong></span><span>10</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;3.1. Mục tiêu Thực nghiệm và Môi trường Chuẩn mực</span><span>10</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;3.2. Bộ dữ liệu Thực nghiệm Hits 30M</span><span>10</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;3.3. Thiết kế Thí nghiệm E1: Sorting Keys</span><span>11</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;3.4. Thiết kế Thí nghiệm E2: Index Granularity</span><span>12</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;3.5. Thiết kế Thí nghiệm E3: Ingestion & Merges</span><span>13</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;3.6. Mô hình Ước lượng Thời gian Truy vấn</span><span>14</span></div>
+        
+        <div class="toc-item" style="margin-top: 8px;"><span><strong>CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM VÀ PHÂN TÍCH</strong></span><span>15</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;4.1. Kết quả Thí nghiệm E1: Tác động của Sorting Key</span><span>15</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;4.2. Kết quả Thí nghiệm E2: Đánh đổi của Granularity</span><span>18</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;4.3. Kết quả Thí nghiệm E3: Ingestion Batch Size</span><span>20</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;4.4. Kiểm chứng Mô hình Ước lượng Thời gian</span><span>21</span></div>
+        
+        <div class="toc-item" style="margin-top: 8px;"><span><strong>CHƯƠNG 5. KHUYẾN NGHỊ THỰC TẾ VÀ KẾT LUẬN</strong></span><span>23</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;5.1. Khuyến nghị Thực tế khi Triển khai MergeTree</span><span>23</span></div>
+        <div class="toc-item"><span>&nbsp;&nbsp;&nbsp;&nbsp;5.2. Hạn chế của Đề tài và Hướng phát triển</span><span>24</span></div>
+        
+        <div class="toc-item" style="margin-top: 8px;"><span><strong>TÀI LIỆU THAM KHẢO</strong></span><span>25</span></div>
+    </div>
+</div>
+
+<!-- NỘI DUNG CHƯƠNG 1 & 2 -->
+<div class="page">
+    <h2>CHƯƠNG 1. GIỚI THIỆU VÀ BÀI TOÁN NGHIÊN CỨU</h2>
+    
+    <h3>1.1. Bối cảnh phân tích Clickstream quy mô lớn</h3>
+    <p>Trong các hệ thống phân tích dữ liệu trực tuyến hiện đại (OLAP), dữ liệu sự kiện người dùng (clickstream) có đặc thù phát sinh liên tục với tốc độ cao, tính chất append-only và khối lượng lên đến hàng triệu sự kiện mỗi ngày. Việc truy vấn các chỉ số như số lượng người dùng duy nhất, thời gian lưu trang hay tỷ lệ chuyển đổi đòi hỏi hệ quản trị cơ sở dữ liệu phải đáp ứng đồng thời hai mục tiêu đối nghịch: tốc độ nạp dữ liệu cao và độ trễ truy vấn tính bằng mili-giây.</p>
+
+    <h3>1.2. Bài toán và Động lực nghiên cứu</h3>
+    <p>ClickHouse là hệ quản trị cơ sở dữ liệu hướng cột mã nguồn mở được thiết kế riêng cho các tác vụ OLAP thời gian thực. Trái tim của ClickHouse là dòng bảng động cơ <strong>MergeTree</strong>. Hiệu năng thực tế của MergeTree phụ thuộc mật thiết vào các quyết định thiết kế vật lý:</p>
+    <ul>
+        <li><strong>Sorting key (ORDER BY):</strong> Quyết định thứ tự vật lý của các dòng dữ liệu trên đĩa, chi phối trực tiếp khả năng nén cột và tính hiệu quả của chỉ mục thưa (sparse index).</li>
+        <li><strong>Index granularity (\(g\)):</strong> Quy định kích thước mỗi granule (mặc định 8.192 dòng), tạo ra sự đánh đổi giữa kích thước chỉ mục lưu trong RAM và độ chính xác khi loại bỏ các vùng dữ liệu không liên quan (granule pruning).</li>
+        <li><strong>Cơ chế nạp và Background Merges:</strong> Sự cân bằng giữa kích thước lô nạp (batch size), số lượng part sinh ra và chi phí hợp nhất nền (I/O amplification).</li>
+    </ul>
+
+    <h2>CHƯƠNG 2. CƠ CHẾ NỘI TẠI CỦA MERGETREE</h2>
+    <h3>2.4. Granules, Marks và Quá trình Granule Pruning</h3>
+    <p>Một granule là đơn vị dữ liệu logic tối thiểu được đọc từ đĩa. Với kích thước granule cố định \(g\), số lượng marks được tính theo:</p>
+    <p class="no-indent" style="text-align: center; margin: 10px 0;">
+        \[ M \approx \left\lceil \frac{N}{g} \right\rceil \]
+    </p>
+    <p>Khi truy vấn có điều kiện lọc thực thi, bộ tối ưu hóa đối soát điều kiện với <code>primary.idx</code> để loại bỏ các granule không thỏa mãn. Số dòng ước tính đọc được xác định theo:</p>
+    <p class="no-indent" style="text-align: center; margin: 10px 0;">
+        \[ R_{\text{est}} \approx \min(N, \text{selected\_marks} \times g) \]
+    </p>
+</div>
+
+<!-- NỘI DUNG CHƯƠNG 4: KẾT QUẢ THỰC NGHIỆM VÀ CÁC BẢNG TỰ ĐỘNG -->
+<div class="page">
+    <h2>CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM VÀ PHÂN TÍCH</h2>
+
+    <h3>4.1. Tác động của Sorting Key trên quy mô 30M</h3>
+    <p>Dưới đây là bảng trích xuất tự động từ kết quả thực tế (file <code>queries.csv</code> trên tập 30M) thông qua lệnh <code>python scripts/study.py export-latex</code>:</p>
+
+    <div class="caption">Bảng 1: Kết quả độ trễ và khả năng cắt tỉa của các biến thể truy vấn (Tập 30M)</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Khóa</th>
+                <th>Workload</th>
+                <th class="num">Client (ms)</th>
+                <th class="num">IQR (ms)</th>
+                <th class="num">Dòng đọc</th>
+                <th class="num">Cắt tỉa (%)</th>
+                <th class="num">Speedup</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>K0</td><td>W0</td><td class="num">21.4</td><td class="num">2.1</td><td class="num">30,000,000</td><td class="num">0.00%</td><td class="num">1.00x</td></tr>
+            <tr><td>K1</td><td>W0</td><td class="num">20.9</td><td class="num">0.5</td><td class="num">30,000,000</td><td class="num">0.00%</td><td class="num">1.02x</td></tr>
+            <tr><td>K2</td><td>W0</td><td class="num">21.6</td><td class="num">0.6</td><td class="num">30,000,000</td><td class="num">0.00%</td><td class="num">0.99x</td></tr>
+            <tr style="background-color: #f9f9f9;"><td><strong>K1</strong></td><td><strong>W1 (CounterID)</strong></td><td class="num"><strong>3.5</strong></td><td class="num">0.4</td><td class="num"><strong>49,152</strong></td><td class="num"><strong>99.84%</strong></td><td class="num"><strong>7.76x</strong></td></tr>
+            <tr><td>K2</td><td>W1 (CounterID)</td><td class="num">5.1</td><td class="num">0.6</td><td class="num">222,080</td><td class="num">99.24%</td><td class="num">5.29x</td></tr>
+            <tr><td>K0</td><td>W1 (CounterID)</td><td class="num">26.9</td><td class="num">2.2</td><td class="num">30,000,000</td><td class="num">0.00%</td><td class="num">1.00x</td></tr>
+            <tr style="background-color: #f9f9f9;"><td><strong>K2</strong></td><td><strong>W2 (EventDate)</strong></td><td class="num"><strong>15.5</strong></td><td class="num">0.7</td><td class="num"><strong>11,468,800</strong></td><td class="num"><strong>61.78%</strong></td><td class="num"><strong>1.86x</strong></td></tr>
+            <tr><td>K1</td><td>W2 (EventDate)</td><td class="num">20.9</td><td class="num">1.0</td><td class="num">14,377,856</td><td class="num">52.06%</td><td class="num">1.38x</td></tr>
+            <tr><td>K0</td><td>W2 (EventDate)</td><td class="num">28.8</td><td class="num">0.5</td><td class="num">30,000,000</td><td class="num">0.00%</td><td class="num">1.00x</td></tr>
+            <tr style="background-color: #f9f9f9;"><td><strong>K1</strong></td><td><strong>W3 (Kết hợp)</strong></td><td class="num"><strong>4.2</strong></td><td class="num">1.3</td><td class="num"><strong>16,384</strong></td><td class="num"><strong>99.95%</strong></td><td class="num"><strong>7.44x</strong></td></tr>
+            <tr><td>K2</td><td>W3 (Kết hợp)</td><td class="num">4.9</td><td class="num">0.9</td><td class="num">40,960</td><td class="num">99.86%</td><td class="num">6.37x</td></tr>
+            <tr><td>K0</td><td>W4 (Non-key)</td><td class="num">44.2</td><td class="num">3.6</td><td class="num">30,000,000</td><td class="num">0.00%</td><td class="num">1.00x</td></tr>
+            <tr><td>K1</td><td>W4 (Non-key)</td><td class="num">43.5</td><td class="num">3.3</td><td class="num">30,000,000</td><td class="num">0.00%</td><td class="num">1.02x</td></tr>
+        </tbody>
+    </table>
+
+    <div class="figure">
+        <img src="../artifacts/ha/laptop1/main01/figures/keys_30m.png" alt="Biểu đồ so sánh Sorting Keys 30M">
+        <div class="caption">Hình 1: Độ trễ truy vấn, số dòng đọc và tỷ lệ cắt tỉa giữa K0, K1, K2 trên 30M</div>
+    </div>
+</div>
+
+<!-- NỘI DUNG CHƯƠNG 4: KIỂM CHỨNG MÔ HÌNH -->
+<div class="page">
+    <h3>4.4. Kiểm chứng Mô hình Hồi quy Tuyến tính Thời gian Truy vấn</h3>
+    <p>Mô hình \(\hat{T}_{\text{ms}} = \alpha + \beta \times N_{\text{est}}\) được hiệu chỉnh từ các tập 1M, 3M, 10M và dự đoán độc lập trên tập 30M:</p>
+
+    <div class="caption">Bảng 2: Kiểm chứng độ chính xác của mô hình hồi quy trên tập 30M</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Khóa</th>
+                <th>Workload</th>
+                <th class="num">Dự đoán (ms)</th>
+                <th class="num">Thực tế (ms)</th>
+                <th class="num">Sai số tuyệt đối (ms)</th>
+                <th class="num">Sai số (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>K0</td><td>W0</td><td class="num">24.33</td><td class="num">21.40</td><td class="num">2.93</td><td class="num">13.7%</td></tr>
+            <tr><td>K0</td><td>W1</td><td class="num">30.81</td><td class="num">26.94</td><td class="num">3.87</td><td class="num">14.4%</td></tr>
+            <tr><td>K0</td><td>W2</td><td class="num">30.02</td><td class="num">28.83</td><td class="num">1.20</td><td class="num">4.2%</td></tr>
+            <tr><td>K0</td><td>W3</td><td class="num">31.84</td><td class="num">31.03</td><td class="num">0.80</td><td class="num">2.6%</td></tr>
+            <tr style="background-color: #f9f9f9;"><td>K1</td><td>W0</td><td class="num">23.07</td><td class="num">20.93</td><td class="num">2.14</td><td class="num">10.2%</td></tr>
+            <tr style="background-color: #f9f9f9;"><td>K1</td><td>W1</td><td class="num">3.89</td><td class="num">3.47</td><td class="num">0.42</td><td class="num">12.1%</td></tr>
+            <tr style="background-color: #f9f9f9;"><td>K1</td><td>W2</td><td class="num">20.59</td><td class="num">20.87</td><td class="num">0.28</td><td class="num"><strong>1.3%</strong></td></tr>
+            <tr style="background-color: #f9f9f9;"><td>K1</td><td>W3</td><td class="num">4.43</td><td class="num">4.17</td><td class="num">0.26</td><td class="num"><strong>6.3%</strong></td></tr>
+            <tr><td>K2</td><td>W2</td><td class="num">15.88</td><td class="num">15.47</td><td class="num">0.40</td><td class="num"><strong>2.6%</strong></td></tr>
+            <tr><td>K2</td><td>W3</td><td class="num">4.69</td><td class="num">4.87</td><td class="num">0.18</td><td class="num"><strong>3.8%</strong></td></tr>
+        </tbody>
+    </table>
+
+    <div class="figure">
+        <img src="../artifacts/ha/laptop1/main01/figures/estimated_vs_actual.png" alt="Biểu đồ so sánh Estimated vs Actual">
+        <div class="caption">Hình 2: So sánh độ trễ dự đoán bởi mô hình lý thuyết so với thời gian thực thi thực tế</div>
+    </div>
+
+    <h2>CHƯƠNG 5. KHUYẾN NGHỊ THỰC TẾ VÀ KẾT LUẬN</h2>
+    <p>1. <strong>Tối ưu Sorting Key:</strong> Thứ tự cột phải tuân thủ nghiêm ngặt tính chọn lọc từ cao xuống thấp và phản ánh trực tiếp mẫu truy vấn trọng tâm. Khóa K1 mang lại speedup tới 7.76x cho lọc website.</p>
+    <p>2. <strong>Index Granularity:</strong> Cấu hình \(g = 8192\) là điểm cân bằng tối ưu giữa kích thước chỉ mục trên RAM và tốc độ quét.</p>
+</div>
+
+</body>
+</html>

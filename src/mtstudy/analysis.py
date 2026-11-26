@@ -2,7 +2,7 @@ from collections import defaultdict
 from pathlib import Path
 import statistics
 
-from .common import csv_read, csv_write, distribution, read, save, sha, utc
+from .common import ROOT, csv_read, csv_write, distribution, read, save, sha, utc
 from .model import fit, predict
 
 
@@ -353,9 +353,153 @@ def package(run):
         source=run.out/name
         if source.exists():
             shutil.copy2(source,destination/name)
-    for name in ['ddl','sql','explain','checks','queries','ingest','model','summary','figures','setup']:
+    for name in ['ddl','sql','explain','checks','queries','ingest','model','summary','figures','latex','setup']:
         source=run.out/name
         if source.exists():
             shutil.copytree(source,destination/name)
     archive=shutil.make_archive(str(run.out/'share_results'),'zip',destination)
     print(f'Share {archive}; results stay isolated by member/machine/run.')
+
+
+def export_latex(run):
+    """Export benchmark summaries to standard LaTeX booktabs tables."""
+    folders = [run.path('latex')]
+    report_tables = ROOT / 'report' / 'tables'
+    if report_tables.parent.exists():
+        report_tables.mkdir(parents=True, exist_ok=True)
+        folders.append(report_tables)
+
+    def write_tex(filename, content):
+        for folder in folders:
+            folder.mkdir(parents=True, exist_ok=True)
+            (folder / filename).write_text(content, encoding='utf-8')
+
+    qpath = run.path('summary', 'queries.csv')
+    if qpath.exists():
+        all_rows = csv_read(qpath)
+        for scale in sorted({r['scale'] for r in all_rows}):
+            rows = [r for r in all_rows if r['scale'] == scale]
+            if not rows:
+                continue
+            tex = [
+                f"% Queries summary table ({scale})",
+                "\\begin{table}[htbp]",
+                "\\centering",
+                f"\\caption{{Kết quả độ trễ và khả năng cắt tỉa của các biến thể truy vấn ({scale})}}",
+                f"\\label{{tab:queries_{scale}}}",
+                "\\begin{tabular}{llrrrrr}",
+                "\\toprule",
+                "\\textbf{Khóa} & \\textbf{Case} & \\textbf{Client (ms)} & \\textbf{IQR (ms)} & \\textbf{Dòng đọc} & \\textbf{Cắt tỉa (\\%)} & \\textbf{Speedup} \\\\",
+                "\\midrule"
+            ]
+            for r in rows:
+                c_ms = f"{float(r['client_ms_median']):.1f}"
+                iqr = f"{float(r['client_ms_iqr']):.1f}"
+                read_r = f"{int(float(r['read_rows_median'])):,}"
+                prune = f"{float(r['pruning_ratio'])*100:.2f}\\%" if r.get('pruning_ratio') else "-"
+                speedup = f"{float(r['speedup_client']):.2f}x" if r.get('speedup_client') else "-"
+                tex.append(f"    {r['variant']} & {r['case'].upper()} & {c_ms} & {iqr} & {read_r} & {prune} & {speedup} \\\\")
+            tex.extend([
+                "\\bottomrule",
+                "\\end{tabular}",
+                "\\end{table}\n"
+            ])
+            write_tex(f'table_queries_{scale}.tex', '\n'.join(tex))
+            if scale == '30m':
+                write_tex('table_queries_summary.tex', '\n'.join(tex))
+
+    cost_path = run.path('summary', 'granularity_cost.csv')
+    if cost_path.exists():
+        costs = csv_read(cost_path)
+        for scale in sorted({r['scale'] for r in costs}):
+            c_rows = [r for r in costs if r['scale'] == scale]
+            if not c_rows:
+                continue
+            tex = [
+                f"% Granularity memory and disk cost ({scale})",
+                "\\begin{table}[htbp]",
+                "\\centering",
+                f"\\caption{{Chi phí Primary Key (RAM) và Marks (Đĩa) theo Index Granularity ({scale})}}",
+                f"\\label{{tab:granularity_cost_{scale}}}",
+                "\\begin{tabular}{lrrrrr}",
+                "\\toprule",
+                "\\textbf{Granularity ($g$)} & \\textbf{Số marks} & \\textbf{PK RAM (KiB)} & \\textbf{Marks đĩa (KiB)} & \\textbf{Dữ liệu nén (MiB)} & \\textbf{Kích thước đĩa (MiB)} \\\\",
+                "\\midrule"
+            ]
+            for r in c_rows:
+                g = r['variant'][1:]
+                marks = f"{int(r['actual_marks']):,}"
+                pk_kib = f"{int(r['primary_key_bytes_in_memory'])/1024:.1f}"
+                marks_kib = f"{int(r['marks_bytes'])/1024:.1f}"
+                data_mib = f"{int(r['data_compressed_bytes'])/(2**20):.1f}"
+                disk_mib = f"{int(r['bytes_on_disk'])/(2**20):.1f}"
+                tex.append(f"    $g = {g}$ & {marks} & {pk_kib} & {marks_kib} & {data_mib} & {disk_mib} \\\\")
+            tex.extend([
+                "\\bottomrule",
+                "\\end{tabular}",
+                "\\end{table}\n"
+            ])
+            write_tex(f'table_granularity_cost_{scale}.tex', '\n'.join(tex))
+            if scale == '30m':
+                write_tex('table_granularity_cost.tex', '\n'.join(tex))
+
+    model_path = run.path('summary', 'estimated_vs_actual.csv')
+    if model_path.exists():
+        rows = [r for r in csv_read(model_path) if r.get('predicted_client_ms')]
+        if rows:
+            tex = [
+                "% Model validation (predicted vs actual) on 30M holdout",
+                "\\begin{table}[htbp]",
+                "\\centering",
+                "\\caption{Kiểm chứng mô hình hồi quy tuyến tính thời gian truy vấn trên tập 30M}",
+                "\\label{tab:model_validation}",
+                "\\begin{tabular}{llrrrr}",
+                "\\toprule",
+                "\\textbf{Khóa} & \\textbf{Workload} & \\textbf{Dự đoán (ms)} & \\textbf{Thực tế (ms)} & \\textbf{Sai số tuyệt đối (ms)} & \\textbf{Sai số (\\%)} \\\\",
+                "\\midrule"
+            ]
+            for r in rows:
+                var = r['variant'].upper()
+                case = r['case'].upper()
+                pred = f"{float(r['predicted_client_ms']):.2f}"
+                act = f"{float(r['actual_client_ms']):.2f}"
+                abs_err = f"{float(r['absolute_error_ms']):.2f}"
+                pct_err = f"{float(r['absolute_percentage_error']):.1f}\\%"
+                tex.append(f"    {var} & {case} & {pred} & {act} & {abs_err} & {pct_err} \\\\")
+            tex.extend([
+                "\\bottomrule",
+                "\\end{tabular}",
+                "\\end{table}\n"
+            ])
+            write_tex('table_model_validation.tex', '\n'.join(tex))
+
+    spath = run.path('summary', 'storage.csv')
+    if spath.exists():
+        s_rows = csv_read(spath)
+        tex = [
+            "% Storage summary table",
+            "\\begin{table}[htbp]",
+            "\\centering",
+            "\\caption{Kích thước lưu trữ và tỷ lệ nén của các bảng thực nghiệm}",
+            "\\label{tab:storage_summary}",
+            "\\begin{tabular}{lrrrrr}",
+            "\\toprule",
+            "\\textbf{Bảng} & \\textbf{Số dòng} & \\textbf{Parts} & \\textbf{Nén (MiB)} & \\textbf{Gốc (MiB)} & \\textbf{Tỷ lệ nén} \\\\",
+            "\\midrule"
+        ]
+        for r in s_rows:
+            tbl = r['table'].split('.')[-1]
+            rows_cnt = f"{int(r['rows']):,}"
+            parts_cnt = r['parts']
+            comp_mib = f"{int(r['data_compressed_bytes'])/(2**20):.1f}"
+            uncomp_mib = f"{int(r['data_uncompressed_bytes'])/(2**20):.1f}"
+            frac = f"{float(r['compressed_fraction'])*100:.1f}\\%" if r.get('compressed_fraction') else "-"
+            tex.append(f"    \\texttt{{{tbl}}} & {rows_cnt} & {parts_cnt} & {comp_mib} & {uncomp_mib} & {frac} \\\\")
+        tex.extend([
+            "\\bottomrule",
+            "\\end{tabular}",
+            "\\end{table}\n"
+        ])
+        write_tex('table_storage_summary.tex', '\n'.join(tex))
+
+    print(f"Exported LaTeX tables to {run.path('latex')} and report/tables/")

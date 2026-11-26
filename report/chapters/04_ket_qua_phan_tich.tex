@@ -1,0 +1,43 @@
+\section{KẾT QUẢ THỰC NGHIỆM VÀ PHÂN TÍCH}
+\label{sec:ket_qua}
+
+% Ngân sách: tối đa 8 trang
+% Nội dung: Kết quả E1, E2, E3, Đánh giá mô hình hồi quy, Trực quan hóa
+
+\subsection{Kết quả Thí nghiệm E1: Tác động của Sorting Key}
+Kết quả thực nghiệm trên tập dữ liệu 30M cho thấy sự khác biệt vượt bậc giữa các lựa chọn khóa sắp xếp:
+\begin{itemize}
+    \item Với $W_1$ (lọc theo \texttt{CounterID}), khóa K1 (\texttt{CounterID, EventDate}) cho phép cắt tỉa hơn 99,8\% số marks, mang lại tốc độ truy vấn vượt trội so với K0.
+    \item Với $W_2$ (lọc theo \texttt{EventDate}), khóa K2 phát huy hiệu quả khi đưa cột ngày lên đầu, trong khi K1 phải quét toàn bộ bảng do \texttt{EventDate} đứng ở vị trí thứ hai trong thứ tự từ điển và \texttt{CounterID} có cardinality lớn.
+\end{itemize}
+
+% Chèn bảng tổng hợp kết quả (được sinh tự động từ script)
+\IfFileExists{tables/table_queries_summary.tex}{
+    \input{tables/table_queries_summary.tex}
+}{
+    \textit{(Bảng tóm tắt kết quả truy vấn sẽ được chèn tại đây sau khi chạy lệnh export-latex)}
+}
+
+\subsection{Kết quả Thí nghiệm E2: Đánh đổi của Index Granularity}
+Khi giảm $g$ từ 32.768 xuống 2.048, số lượng marks tăng lên 16 lần. Điều này giúp bộ lọc thu hẹp phạm vi quét chính xác hơn, giảm lượng dòng đọc thừa đối với các truy vấn điểm (point query). Tuy nhiên, cái giá phải trả là dung lượng \texttt{primary.idx} trong RAM tăng tuyến tính.
+
+\IfFileExists{tables/table_granularity_cost.tex}{
+    \input{tables/table_granularity_cost.tex}
+}{
+    \textit{(Bảng chi phí bộ nhớ và đĩa cho Granularity sẽ được chèn tại đây)}
+}
+
+\subsection{Kết quả Thí nghiệm E3: Kích thước Lô nạp và Quá trình Merge}
+Thực nghiệm khẳng định việc nạp dữ liệu với kích thước batch quá nhỏ ($< 10.000$ dòng) dẫn đến tình trạng phân mảnh part nghiêm trọng, kích hoạt số lượng lớn các tiến trình background merge và làm tăng đáng kể hệ số khuếch đại dòng. Ngược lại, kích thước batch từ $100.000$ đến $1.000.000$ dòng mang lại thông lượng nạp tối ưu và giảm thiểu áp lực I/O cho hệ thống lưu trữ.
+
+\subsection{Kiểm chứng Mô hình Ước lượng Thời gian Truy vấn}
+Mô hình tuyến tính được hiệu chỉnh trước trên các tập 1M--10M đã được đối chiếu với kết quả thực tế đo đạc trên tập 30M.
+
+\IfFileExists{tables/table_model_validation.tex}{
+    \input{tables/table_model_validation.tex}
+}{
+    \textit{(Bảng đối chiếu thời gian dự đoán và thực tế sẽ được chèn tại đây)}
+}
+
+\subsection{Thảo luận và Đánh giá Tổng hợp}
+Từ các kết quả đo đạc định lượng, nhóm nghiên cứu nhận thấy hiệu năng của ClickHouse MergeTree không đơn thuần là tốc độ thực thi của thuật toán, mà là kết quả cộng hưởng từ việc tổ chức dữ liệu vật lý tối ưu, tận dụng triệt để sparse index để hạn chế tối đa việc đọc I/O từ đĩa.

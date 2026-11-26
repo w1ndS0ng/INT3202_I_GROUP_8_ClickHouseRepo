@@ -1,0 +1,119 @@
+% ============================================================================
+% BÁO CÁO NGHIÊN CỨU: CLICKHOUSE MERGETREE INTERNALS
+% Chuẩn trần 30 trang, A4, Times New Roman 13pt, Giãn dòng 1.15
+% Tuân thủ nghiêm ngặt theo docs/PAGE_BUDGET_VI.md và docs/REPORT_PLAN_VI.md
+%
+% Trình biên dịch đề xuất: XeLaTeX hoặc LuaLaTeX
+% ============================================================================
+
+\documentclass[13pt,a4paper]{extarticle}
+
+% --- Font chữ Times New Roman hỗ trợ tiếng Việt ---
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman}
+
+% --- Căn lề chuẩn văn bản: Trái 30mm, Phải 20mm, Trên 20mm, Dưới 20mm ---
+\usepackage[
+    a4paper,
+    top=20mm,
+    bottom=20mm,
+    left=30mm,
+    right=20mm
+]{geometry}
+
+% --- Giãn dòng 1.15 theo đúng quy định ---
+\usepackage{setspace}
+\setstretch{1.15}
+
+% --- Các gói toán học, bảng biểu và đồ họa ---
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{hyperref}
+
+% Cấu hình caption font 13pt
+\captionsetup{font={normalsize,bf}, skip=8pt}
+
+% Định dạng tiêu đề các chương (font 13pt, in đậm, phân cấp)
+\titleformat{\section}
+    {\normalfont\bfseries\fontsize{13}{16}\selectfont}
+    {CHƯƠNG~\arabic{section}.}{0.5em}{\MakeUppercase}
+\titleformat{\subsection}
+    {\normalfont\bfseries\fontsize{13}{15}\selectfont}
+    {\arabic{section}.\arabic{subsection}.}{0.5em}{}
+\titleformat{\subsubsection}
+    {\normalfont\bfseries\fontsize{13}{15}\selectfont}
+    {\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.}{0.5em}{}
+
+\titlespacing*{\section}{0pt}{1.2\baselineskip}{0.5\baselineskip}
+\titlespacing*{\subsection}{0pt}{0.8\baselineskip}{0.3\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{0.6\baselineskip}{0.2\baselineskip}
+
+\setlength{\parindent}{1.27cm}
+\setlength{\parskip}{0pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=blue,
+    urlcolor=blue,
+    pdftitle={MergeTree Internals in ClickHouse: Evaluating Sorting Keys, Index Granularity and Background Merges},
+    pdfauthor={Nhóm Nghiên cứu}
+}
+
+\begin{document}
+
+% --- TRANG BÌA ---
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    {\bfseries\fontsize{14}{17}\selectfont BÁO CÁO NGHIÊN CỨU HỌC PHẦN\par}
+    \vspace{1.5cm}
+    {\bfseries\fontsize{16}{20}\selectfont ĐỀ TÀI: MERGETREE INTERNALS IN CLICKHOUSE: EVALUATING SORTING KEYS, INDEX GRANULARITY AND BACKGROUND MERGES ON CLICKSTREAM DATA\par}
+    \vspace{2cm}
+    {\fontsize{13}{16}\selectfont Nhóm tác giả thực hiện:\par}
+    \vspace{0.3cm}
+    {\bfseries\fontsize{13}{16}\selectfont Nguyễn Thị Ngọc Hà -- Tuấn -- Tài\par}
+    \vfill
+    {\fontsize{13}{16}\selectfont THÁNG 11 / 2026\par}
+\end{titlepage}
+
+% --- MỤC LỤC ---
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\listoftables
+\newpage
+\listoffigures
+\newpage
+
+% --- NỘI DUNG 5 CHƯƠNG ---
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{chapters/01_gioi_thieu}
+\newpage
+
+\input{chapters/02_co_che_mergetree}
+\newpage
+
+\input{chapters/03_thiet_ke_thuc_nghiem}
+\newpage
+
+\input{chapters/04_ket_qua_phan_tich}
+\newpage
+
+\input{chapters/05_khuyen_nghi_ket_luan}
+\newpage
+
+% --- TÀI LIỆU THAM KHẢO ---
+\addcontentsline{toc}{section}{TÀI LIỆU THAM KHẢO}
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

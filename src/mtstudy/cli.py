@@ -21,7 +21,7 @@ def main():
     d.add_argument('--reuse-dir')
     d.add_argument('--lock',help='Shared curator manifest to verify all files')
     d.add_argument('--publish-lock',help='Create a new shared manifest after verified preparation')
-    for name in ['init','build','queries','ingest','summarize','fit','forecast','compare','plot','package']:
+    for name in ['init','build','queries','ingest','summarize','fit','forecast','compare','plot','package','export-latex']:
         p=sub.add_parser(name)
         p.add_argument('--member',required=True,choices=['ha','tuan','tai'])
         p.add_argument('--machine',required=True,help='Stable anonymous machine tag, e.g. laptop1')
@@ -52,7 +52,8 @@ def main():
             else:
                 function={'fit':analysis.calibrate, 'forecast':analysis.forecast,
                           'compare':analysis.compare, 'summarize':analysis.summarize,
-                          'plot':analysis.plot,'package':analysis.package}[args.command]
+                          'plot':analysis.plot,'package':analysis.package,
+                          'export-latex':analysis.export_latex}[args.command]
                 function(run)
     except Exception as exc:
         if run:
