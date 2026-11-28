@@ -1,0 +1,274 @@
+{
+  "recorded_at": "2026-11-26T18:59:34.098288+00:00",
+  "compact_to_wide_stream": {
+    "total_stream_s": 11.877487695,
+    "batches": 20,
+    "raw_events": 100000,
+    "seed_events": 15000000,
+    "concurrent_readers": 16,
+    "total_reads": 8831,
+    "read_ms_p50": 19.823019000000386,
+    "read_ms_p95": 35.67341449999617,
+    "read_ms_p99": 46.107567099993304,
+    "ingest_commit_ms_p50": 26.416987999994035,
+    "ingest_commit_ms_p95": 38.30251284999946,
+    "part_log_summary": [
+      {
+        "event_type": "NewPart",
+        "part_type": "Compact",
+        "cnt": 20,
+        "sum_rows": 20000,
+        "sum_read_rows": 0,
+        "max_bytes": 26028,
+        "sum_dur_ms": 106
+      },
+      {
+        "event_type": "NewPart",
+        "part_type": "Wide",
+        "cnt": 5,
+        "sum_rows": 300000,
+        "sum_read_rows": 0,
+        "max_bytes": 16410453,
+        "sum_dur_ms": 3545
+      },
+      {
+        "event_type": "MergeParts",
+        "part_type": "Compact",
+        "cnt": 3,
+        "sum_rows": 33000,
+        "sum_read_rows": 33000,
+        "max_bytes": 357569,
+        "sum_dur_ms": 55
+      },
+      {
+        "event_type": "MergeParts",
+        "part_type": "Wide",
+        "cnt": 1,
+        "sum_rows": 300000,
+        "sum_read_rows": 300000,
+        "max_bytes": 81339708,
+        "sum_dur_ms": 3991
+      },
+      {
+        "event_type": "MergePartsStart",
+        "part_type": "Unknown",
+        "cnt": 4,
+        "sum_rows": 0,
+        "sum_read_rows": 0,
+        "max_bytes": 0,
+        "sum_dur_ms": 0
+      }
+    ],
+    "final_parts": [
+      {
+        "name": "202611_1_5_2",
+        "part_type": "Wide",
+        "rows": 300000,
+        "bytes_on_disk": 81339708
+      },
+      {
+        "name": "202611_22_22_1",
+        "part_type": "Compact",
+        "rows": 1000,
+        "bytes_on_disk": 26010
+      },
+      {
+        "name": "202611_23_23_1",
+        "part_type": "Compact",
+        "rows": 1000,
+        "bytes_on_disk": 26027
+      },
+      {
+        "name": "202611_24_24_1",
+        "part_type": "Compact",
+        "rows": 1000,
+        "bytes_on_disk": 26015
+      },
+      {
+        "name": "202611_25_25_1",
+        "part_type": "Compact",
+        "rows": 1000,
+        "bytes_on_disk": 26019
+      },
+      {
+        "name": "202611_6_21_4",
+        "part_type": "Compact",
+        "rows": 16000,
+        "bytes_on_disk": 357569
+      }
+    ],
+    "timeline": [
+      {
+        "batch": 1,
+        "n_parts": 6,
+        "wide_parts": 5,
+        "compact_parts": 1,
+        "disk_bytes": 82054475
+      },
+      {
+        "batch": 2,
+        "n_parts": 7,
+        "wide_parts": 5,
+        "compact_parts": 2,
+        "disk_bytes": 82080497
+      },
+      {
+        "batch": 3,
+        "n_parts": 8,
+        "wide_parts": 5,
+        "compact_parts": 3,
+        "disk_bytes": 82106514
+      },
+      {
+        "batch": 4,
+        "n_parts": 9,
+        "wide_parts": 5,
+        "compact_parts": 4,
+        "disk_bytes": 82132534
+      },
+      {
+        "batch": 5,
+        "n_parts": 10,
+        "wide_parts": 5,
+        "compact_parts": 5,
+        "disk_bytes": 82158551
+      },
+      {
+        "batch": 6,
+        "n_parts": 11,
+        "wide_parts": 5,
+        "compact_parts": 6,
+        "disk_bytes": 82184564
+      },
+      {
+        "batch": 7,
+        "n_parts": 7,
+        "wide_parts": 5,
+        "compact_parts": 2,
+        "disk_bytes": 82189237
+      },
+      {
+        "batch": 8,
+        "n_parts": 8,
+        "wide_parts": 5,
+        "compact_parts": 3,
+        "disk_bytes": 82215254
+      },
+      {
+        "batch": 9,
+        "n_parts": 9,
+        "wide_parts": 5,
+        "compact_parts": 4,
+        "disk_bytes": 82241275
+      },
+      {
+        "batch": 10,
+        "n_parts": 10,
+        "wide_parts": 5,
+        "compact_parts": 5,
+        "disk_bytes": 82267291
+      },
+      {
+        "batch": 11,
+        "n_parts": 7,
+        "wide_parts": 1,
+        "compact_parts": 6,
+        "disk_bytes": 81604564
+      },
+      {
+        "batch": 12,
+        "n_parts": 3,
+        "wide_parts": 1,
+        "compact_parts": 2,
+        "disk_bytes": 81612567
+      },
+      {
+        "batch": 13,
+        "n_parts": 4,
+        "wide_parts": 1,
+        "compact_parts": 3,
+        "disk_bytes": 81638586
+      },
+      {
+        "batch": 14,
+        "n_parts": 5,
+        "wide_parts": 1,
+        "compact_parts": 4,
+        "disk_bytes": 81664591
+      },
+      {
+        "batch": 15,
+        "n_parts": 6,
+        "wide_parts": 1,
+        "compact_parts": 5,
+        "disk_bytes": 81690587
+      },
+      {
+        "batch": 16,
+        "n_parts": 7,
+        "wide_parts": 1,
+        "compact_parts": 6,
+        "disk_bytes": 81716605
+      },
+      {
+        "batch": 17,
+        "n_parts": 3,
+        "wide_parts": 1,
+        "compact_parts": 2,
+        "disk_bytes": 81723287
+      },
+      {
+        "batch": 18,
+        "n_parts": 4,
+        "wide_parts": 1,
+        "compact_parts": 3,
+        "disk_bytes": 81749314
+      },
+      {
+        "batch": 19,
+        "n_parts": 5,
+        "wide_parts": 1,
+        "compact_parts": 4,
+        "disk_bytes": 81775329
+      },
+      {
+        "batch": 20,
+        "n_parts": 6,
+        "wide_parts": 1,
+        "compact_parts": 5,
+        "disk_bytes": 81801348
+      }
+    ]
+  },
+  "financial_final_5pct": {
+    "parts": {
+      "parts": 2,
+      "total_rows": 1800000,
+      "disk_bytes": 42915566
+    },
+    "page42_no_final": {
+      "ans": {
+        "page_id": 42,
+        "rev": 166750
+      },
+      "median_ms": 8.526300500001582,
+      "p95_ms": 9.924180550007833
+    },
+    "page42_final": {
+      "ans": {
+        "page_id": 42,
+        "rev": 166750
+      },
+      "median_ms": 9.977763000001971,
+      "p95_ms": 10.805685250005581
+    },
+    "full_1_8m_final": {
+      "ans": {
+        "count()": 1799974,
+        "sum(revenue)": 169197550
+      },
+      "median_ms": 51.11911699999894,
+      "p95_ms": 94.22132899998985
+    }
+  }
+}
