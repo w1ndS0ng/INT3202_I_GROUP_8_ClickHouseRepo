@@ -10,3 +10,4 @@
 | [`4.3.4`](4.3.4/) | Chi phí nạp, tạo chỉ mục và sắp xếp vật lý / bảo trì (ver1: Xeon; ver2: Core i5 — Bảng 4.7) | Tài (Bảng 4.7 i5 — ver2) & Tuấn (hồ sơ Xeon đối chiếu — ver1) | [`scripts/`](4.3.4/scripts/) | [`results/`](4.3.4/results/) |
 | [`4.4`](4.4/) | Phân tích đánh đổi giữa tốc độ truy vấn, dung lượng và chi phí chuẩn bị | Tài | [`scripts/`](4.4/scripts/) | [`results/`](4.4/results/) |
 | [`4.5`](4.5/) | Kết luận đối chiếu theo từng workload và trả lời RQ5 | Tuấn | [`scripts/`](4.5/scripts/) | [`results/`](4.5/results/) |
+| [`4.6`](4.6/) | Đối chứng bổ sung cùng hệ cột: ClickHouse MergeTree vs DuckDB 2.0.1 | Hà | [`scripts/`](4.6/scripts/) | [`results/`](4.6/results/) |

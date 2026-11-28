@@ -24,3 +24,4 @@
 | [`3.6.3`](3.6.3/) | Kết quả estimated–actual, giải thích sai số và chẩn đoán EXPLAIN | Tài (ver1 E3) & Hà (ver2 SELECT E1) | [`scripts/`](3.6.3/scripts/) | [`results/`](3.6.3/results/) |
 | [`3.6.4`](3.6.4/) | Tổng hợp ba thực nghiệm E1–E3 và các yếu tố hạn chế tính tin cậy | Tài, Hà & Tuấn | [`scripts/`](3.6.4/scripts/) | [`results/`](3.6.4/results/) |
 | [`3.6.5`](3.6.5/) | Hồ sơ tái lập và nghiệm thu Chương 3 | Tuấn, Hà & Tài | [`scripts/`](3.6.5/scripts/) | [`results/`](3.6.5/results/) |
+| [`3.6.6`](3.6.6/) | Lọc ngoài khóa W4 (Skipping Index, Projection) và Bảo vệ RAM / External Spill | Hà | [`scripts/`](3.6.6/scripts/) | [`results/`](3.6.6/results/) |

@@ -6,8 +6,8 @@ Các nội dung thực nghiệm gồm:
 - **E1 (`3.3`):** Thứ tự khóa sắp xếp (`ORDER BY`) và khả năng cắt tỉa của chỉ mục chính thưa (*sparse primary index*).
 - **E2 (`3.4`):** Độ mịn chỉ mục (`index_granularity`) và đánh đổi giữa lượng dữ liệu đọc, độ trễ và kích thước chỉ mục/marks.
 - **E3 (`3.5`):** Kích thước lô `Batch INSERT`, tốc độ nạp và áp lực hợp nhất nền (*background merges*).
-- **Mô hình ước lượng (`3.6`):** Đánh giá sai số dự đoán thời gian thực thi theo quy mô dữ liệu và đối chiếu hồi cứu.
-- **Đối chiếu PostgreSQL (`Chương 4`):** So sánh trực diện MergeTree với PostgreSQL Heap kết hợp chỉ mục BRIN và B-tree trên cùng tập dữ liệu và tải truy vấn.
+- **Mô hình ước lượng & mở rộng (`3.6`):** Đánh giá sai số dự đoán thời gian thực thi theo quy mô dữ liệu, đối chiếu hồi cứu và kiểm chứng Skipping Index, Projection, External Spill (`3.6.6`).
+- **Đối chiếu đa hệ quản trị (`Chương 4`):** So sánh trực diện MergeTree với PostgreSQL Heap kết hợp chỉ mục BRIN/B-tree (`4.1–4.5`) và hệ cột nhúng DuckDB `2.0.1` (`4.6`) trên cùng tập dữ liệu 30M dòng.
 - **Case Study nâng cao (`Chương 5`):** Kiến trúc luồng clickstream 3 tầng (`Kafka Engine → Streaming MV → AggregatingMergeTree`), kiểm chứng hợp nhất `Compact → Wide Part` song song 16 luồng đọc và `ReplacingMergeTree FINAL`.
 
 ## Môi trường và bộ dữ liệu
@@ -20,7 +20,7 @@ Các nội dung thực nghiệm gồm:
 
 - [`chapter-2/`](chapter-2/README.md), [`chapter-3/`](chapter-3/README.md), [`chapter-4/`](chapter-4/README.md), [`chapter-5/`](chapter-5/README.md): Cấu trúc lưu trữ hình vẽ, mã kiểm chứng (`scripts/`) và kết quả đo (`results/` kèm `files.sha256.json`) tương ứng với từng mục báo cáo. Các đợt đo hoặc bản cập nhật bổ sung theo thời gian được gắn hậu tố `_ver1`, `_ver2`, ...
 - [`src/mtstudy/`](src/mtstudy/): Thư viện lõi chạy thực nghiệm MergeTree, đối chiếu PostgreSQL, tính thống kê và xuất đồ thị.
-- [`scripts/`](scripts/): Kịch bản chạy đầu cuối (`study.py`, `run_member.sh`, `compare_databases.py`, `audit_comparison.py`, `audit_e3_sources.py`, `exp_ch5_compact_wide_and_final.py`, ...).
+- [`scripts/`](scripts/): Kịch bản chạy đầu cuối (`study.py`, `run_member.sh`, `compare_databases.py`, `audit_comparison.py`, `audit_e3_sources.py`, `exp_mergetree_features.py`, `exp_duckdb_vs_clickhouse.py`, `exp_ch5_compact_wide_and_final.py`, ...).
 - [`configs/`](configs/): Cấu hình protocol (`protocol.json`, `protocol.e3.v2.json`, `comparison.json`).
 - [`manifests/`](manifests/): Danh sách nguồn Parquet/RowBinary, kiểm toán schema, phân bố mẫu và tệp khóa SHA-256.
 - [`tests/`](tests/): Bộ kiểm thử đơn vị (*unit tests*).
@@ -30,7 +30,7 @@ Các nội dung thực nghiệm gồm:
 
 | Thành viên | Phạm vi phụ trách | Mục lục chi tiết |
 |---|---|---|
-| **Hà** | Cơ sở lý thuyết `2.1–2.2`; Thực nghiệm **E1** (`3.1`, `3.3`); Mô hình SELECT (`3.6`); Chương 5 | [`chapter-3/3.3.3`](chapter-3/3.3.3/), [`chapter-3/3.6.3`](chapter-3/3.6.3/), [`chapter-5/`](chapter-5/README.md) |
+| **Hà** | Cơ sở lý thuyết `2.1–2.2`; Thực nghiệm **E1** (`3.1`, `3.3`); Mô hình SELECT & mở rộng (`3.6`); DuckDB (`4.6`); Chương 5 | [`chapter-3/3.3.3`](chapter-3/3.3.3/), [`chapter-3/3.6.6`](chapter-3/3.6.6/), [`chapter-4/4.6`](chapter-4/4.6/), [`chapter-5/`](chapter-5/README.md) |
 | **Tuấn** | Dataset chung & cơ sở lý thuyết `2.3–2.4`; Thiết lập chung & **E2** (`3.2`, `3.4`); Đối chiếu PG (`4.2`, `4.3.1–4.3.2`, `4.5`) | [`chapter-2/`](chapter-2/README.md), [`chapter-3/3.4.3`](chapter-3/3.4.3/), [`chapter-4/`](chapter-4/README.md) |
 | **Tài** | Cơ sở lý thuyết `2.5–2.6`; Thực nghiệm **E3** (`3.5`); Mô hình nạp (`3.6`); Dung lượng & chi phí PG (`4.1`, `4.3.3–4.3.4`, `4.4`) | [`chapter-3/3.5.3`](chapter-3/3.5.3/), [`chapter-4/4.3.3`](chapter-4/4.3.3/), [`chapter-4/4.3.4`](chapter-4/4.3.4/) |
 
